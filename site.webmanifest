@@ -1,0 +1,13 @@
+{
+  "name": "Magia Fit Almería",
+  "short_name": "Magia Fit",
+  "description": "Gimnasio y entrenamiento personal en Almería. Transformaciones reales.",
+  "lang": "es-ES",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06070c",
+  "theme_color": "#06070c",
+  "icons": [
+    { "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

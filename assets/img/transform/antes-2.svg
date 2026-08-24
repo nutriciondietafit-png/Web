@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Foto ANTES 2 - sustituir">
+ <defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="hsl(220 70% 16%)"/>
+    <stop offset="55%" stop-color="hsl(220 45% 8%)"/>
+    <stop offset="100%" stop-color="hsl(230 65% 12%)"/>
+  </linearGradient>
+  <radialGradient id="gl" cx="72%" cy="22%" r="65%">
+    <stop offset="0%" stop-color="hsl(230 90% 60% / .55)"/>
+    <stop offset="100%" stop-color="hsl(230 90% 60% / 0)"/>
+  </radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#F7E7A6"/><stop offset="100%" stop-color="#B8862F"/>
+  </linearGradient>
+  <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse">
+    <path d="M46 0H0V46" fill="none" stroke="#ffffff" stroke-opacity=".05" stroke-width="1"/>
+  </pattern>
+ </defs>
+ <rect width="800" height="1000" fill="url(#bg)"/>
+ <rect width="800" height="1000" fill="url(#grid)"/>
+ <rect width="800" height="1000" fill="url(#gl)"/>
+ <g opacity=".18" stroke="url(#gold)" fill="none" stroke-width="2">
+   <circle cx="600" cy="333" r="200"/>
+   <circle cx="200" cy="750" r="125"/>
+ </g>
+ <text x="50%" y="494" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" letter-spacing="6" fill="url(#gold)">ANTES</text>
+ <text x="50%" y="540" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="23" letter-spacing="2" fill="#ffffff" fill-opacity=".55">Foto ANTES 2 - sustituir</text>
+</svg>
