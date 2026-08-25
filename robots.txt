@@ -4,4 +4,4 @@ Disallow: /aviso-legal.html
 Disallow: /privacidad.html
 Disallow: /cookies.html
 
-Sitemap: https://magiafitalmeria.es/sitemap.xml
+Sitemap: https://magia-fit-almeria.vercel.app/sitemap.xml

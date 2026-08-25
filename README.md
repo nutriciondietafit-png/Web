@@ -18,7 +18,7 @@ Estos puntos están rellenos con **contenido provisional** y hay que revisarlos:
 | **Cifras del hero** (500+, 12 semanas…) | `index.html` → `.hero__stats` | Son estimaciones de marketing: ajústalas a datos reales. |
 | **Textos de las transformaciones** | `index.html` → sección `#transformaciones` | Añade datos reales y consigue el consentimiento por escrito de cada cliente para publicar sus fotos. |
 | **Datos fiscales** | `aviso-legal.html`, `privacidad.html` | Sustituye `[RAZÓN SOCIAL]`, `[NIF/CIF]` y `[DIRECCIÓN COMPLETA]`. |
-| **Dominio** | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` | Ahora apuntan a `https://magiafitalmeria.es/`. |
+| **Dominio** | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` | Ahora apuntan a `https://magia-fit-almeria.vercel.app`. Cuando tengas el dominio propio, cámbialo con `./cambiar-dominio.sh https://tu-dominio.es`. |
 
 ---
 
@@ -111,15 +111,51 @@ sustituye `match(text)` por una llamada a tu backend (nunca pongas una API key e
 
 ---
 
-## 🚀 Publicar
+## 🚀 Publicar en Vercel
 
-No hay que compilar nada. Sube la carpeta a cualquier hosting estático:
+No hay que compilar nada: es HTML estático y `vercel.json` ya lo deja configurado
+(sin build, cabeceras de seguridad y caché en el CDN que se limpia en cada despliegue).
 
-- **Netlify / Vercel / Cloudflare Pages:** arrastra la carpeta o conecta el repositorio.
-- **GitHub Pages:** Settings → Pages → Deploy from branch.
-- **Hosting clásico (Hostinger, IONOS…):** sube todo por FTP a `public_html`.
+### Primera vez
 
-Para probar en local:
+1. Entra en [vercel.com](https://vercel.com) y crea la cuenta con **Continue with GitHub**.
+2. **Add New… → Project** y busca el repositorio **`nutriciondietafit-png/Web`**.
+   Si no aparece, pulsa *Adjust GitHub App Permissions* y dale acceso al repo.
+3. En la pantalla de configuración:
+   - **Project Name:** `magia-fit-almeria` ← ponlo exactamente así, es lo que
+     determina la URL `magia-fit-almeria.vercel.app` que ya está en las etiquetas SEO.
+   - **Framework Preset:** `Other`
+   - **Root Directory:** `./`
+   - Build y Output: **déjalos vacíos**, `vercel.json` se encarga.
+4. **Deploy**. En menos de un minuto la web está online.
+
+La rama `claude/magia-fit-almeria-website-4kdrca` es la rama por defecto del repositorio,
+así que Vercel la usa como **producción** automáticamente. A partir de ahí, cada `git push`
+vuelve a desplegar solo.
+
+> Si Vercel te asigna una URL distinta (porque el nombre estuviera ocupado), ejecútalo
+> con la URL real para que las etiquetas SEO coincidan:
+> ```bash
+> ./cambiar-dominio.sh https://la-url-que-te-dio.vercel.app
+> git add -A && git commit -m "Actualizar dominio" && git push
+> ```
+
+### Conectar el dominio propio (cuando lo tengas)
+
+1. En Vercel: **Settings → Domains → Add**, escribe el dominio y sigue las instrucciones
+   de DNS que te dé (un registro `A` o `CNAME` en tu proveedor). El HTTPS es automático.
+2. Actualiza las URLs del código y súbelo:
+   ```bash
+   ./cambiar-dominio.sh https://magiafitalmeria.es
+   git add -A && git commit -m "Actualizar dominio" && git push
+   ```
+
+⚠️ **Sobre el SEO:** posicionar en `.vercel.app` y mudarse después a un dominio propio
+obliga a rehacer buena parte del trabajo (Google trata cada dominio por separado).
+Si el dominio definitivo ya lo tienes decidido, compensa conectarlo antes de empezar a
+promocionar la web y de dar de alta el Perfil de Empresa de Google.
+
+### Probar en local
 
 ```bash
 python3 -m http.server 8080   # y abre http://localhost:8080
@@ -136,6 +172,8 @@ privacidad.html          Política de privacidad (RGPD)
 cookies.html             Política de cookies
 404.html                 Página de error
 robots.txt · sitemap.xml · site.webmanifest
+vercel.json              Configuración de despliegue en Vercel
+cambiar-dominio.sh       Cambia el dominio en todas las URLs de golpe
 assets/
   css/style.css          Estilos completos
   js/config.js           ⭐ Teléfono, tarifas, horarios, zonas (edita solo esto)
