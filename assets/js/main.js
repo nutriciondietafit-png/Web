@@ -148,13 +148,21 @@
   }
 
   /* ── Fondo animado del hero (partículas + red) ───────────── */
+  const oscuro = window.matchMedia('(prefers-color-scheme: dark)');
   const cv = $('#heroCanvas');
   if (cv && !reduce) {
     const ctx = cv.getContext('2d');
-    let w, h, dots = [], raf = null;
+    let w, h, dots = [], raf = null, tinta;
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
+    // Las partículas se oscurecen en tema claro para que se vean sobre el crema
+    const PALETAS = {
+      oscuro: { colores: ['232,196,106', '124,58,237', '34,211,238'], punto: .75, linea: .16 },
+      claro:  { colores: ['184,134,47', '109,40,217', '14,116,144'],  punto: .55, linea: .13 }
+    };
+
     function size() {
+      tinta = oscuro.matches ? PALETAS.oscuro : PALETAS.claro;
       w = cv.clientWidth; h = cv.clientHeight;
       cv.width = w * DPR; cv.height = h * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
@@ -163,7 +171,7 @@
         x: Math.random() * w, y: Math.random() * h,
         vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28,
         r: Math.random() * 1.6 + .5,
-        c: Math.random() > .72 ? '232,196,106' : (Math.random() > .5 ? '124,58,237' : '34,211,238')
+        c: tinta.colores[Math.random() > .72 ? 0 : (Math.random() > .5 ? 1 : 2)]
       }));
     }
 
@@ -176,14 +184,14 @@
         if (d.y < 0 || d.y > h) d.vy *= -1;
         ctx.beginPath();
         ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${d.c},.75)`;
+        ctx.fillStyle = `rgba(${d.c},${tinta.punto})`;
         ctx.fill();
         for (let j = i + 1; j < dots.length; j++) {
           const o = dots[j], dx = d.x - o.x, dy = d.y - o.y, dist = dx * dx + dy * dy;
           if (dist < 18000) {
             ctx.beginPath();
             ctx.moveTo(d.x, d.y); ctx.lineTo(o.x, o.y);
-            ctx.strokeStyle = `rgba(${d.c},${.16 * (1 - dist / 18000)})`;
+            ctx.strokeStyle = `rgba(${d.c},${tinta.linea * (1 - dist / 18000)})`;
             ctx.lineWidth = .7;
             ctx.stroke();
           }
@@ -192,8 +200,10 @@
       raf = requestAnimationFrame(draw);
     }
 
+    const repintar = () => { cancelAnimationFrame(raf); size(); draw(); };
     size(); draw();
-    window.addEventListener('resize', () => { cancelAnimationFrame(raf); size(); draw(); });
+    window.addEventListener('resize', repintar);
+    oscuro.addEventListener('change', repintar);
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) cancelAnimationFrame(raf);
       else { cancelAnimationFrame(raf); draw(); }
