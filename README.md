@@ -12,10 +12,10 @@ Estos puntos están rellenos con **contenido provisional** y hay que revisarlos:
 
 | Qué | Dónde | Nota |
 |---|---|---|
-| **Tarifas** (34,90 / 59,90 / 129 €) | `assets/js/config.js` → `tarifas` | Precios de ejemplo. Cámbialos por los reales. También aparecen en el JSON-LD de `index.html` (`hasOfferCatalog` y `FAQPage`). |
+| **Tarifas** (34,90 / 59,90 / 129 €) | `assets/js/config.js` → `tarifas` | ⚠️ **Conflicto sin resolver.** Los precios son inventados y, además, una publicación de Instagram dice *«NO cobramos por hora. Cobramos por objetivo»*, que no encaja con tres cuotas mensuales fijas. Hay que decidir el modelo real y rehacer la sección. También aparecen en el JSON-LD de `index.html` (`hasOfferCatalog` y `FAQPage`) y en las respuestas del bot. |
 | **Horario** | `assets/js/config.js` → `horario` | Ejemplo. Actualiza texto y `openingHoursSpecification` en `index.html`. |
 | **Dirección y coordenadas** | `assets/js/config.js` → `direccion`, y `geo` en el JSON-LD | Ahora mismo solo pone “Almería, España”. |
-| **Cifras del hero** (500+, 12 semanas…) | `index.html` → `.hero__stats` | Son estimaciones de marketing: ajústalas a datos reales. |
+| **Cifras del hero** | `index.html` → `.hero__stats` | Ya son las reales, tomadas de vuestra publicación «Los números no mienten»: 100+ transformaciones, 8 años de experiencia, 5,0 en Google y seguimiento 24 h. Actualízalas cuando cambien. |
 | **Consentimiento de imagen** | sección `#transformaciones` | La foto y los datos (−8 kg / +2 kg) salen de vuestro Instagram. Asegúrate de tener el consentimiento por escrito de la socia. |
 | **Datos fiscales** | `aviso-legal.html`, `privacidad.html` | Sustituye `[RAZÓN SOCIAL]`, `[NIF/CIF]` y `[DIRECCIÓN COMPLETA]`. |
 | **Dominio** | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` | Ahora apuntan a `https://magia-fit-almeria.vercel.app`. Cuando tengas el dominio propio, cámbialo con `./cambiar-dominio.sh https://tu-dominio.es`. |
@@ -30,15 +30,27 @@ cabecera, barra de acciones y pie) y la insignia de carrusel, y se exportaron en
 como JPEG progresivo.
 
 ```
-assets/img/logo.png                                  Escudo oficial, fondo transparente
-assets/img/favicon.png                               Icono de pestaña
-assets/img/og-cover.jpg                              Vista previa al compartir el enlace
-assets/img/instagram/01-analizamos.jpg               Galería (900x1125)
-assets/img/instagram/02-avanzas.jpg
-assets/img/instagram/03-objetivos.jpg
-assets/img/instagram/04-siete-meses.jpg
+assets/img/logo.png                                     Escudo oficial, fondo transparente
+assets/img/favicon.png                                  Icono de pestaña
+assets/img/og-cover.jpg                                 Vista previa al compartir el enlace
+assets/img/instagram/01-analizamos.jpg                  Galería, 9 publicaciones (900x1125)
+assets/img/instagram/02-hacerlo-bien.jpg
+assets/img/instagram/03-esto-es-magiafit.jpg
+assets/img/instagram/04-avanzas.jpg
+assets/img/instagram/05-readaptacion.jpg
+assets/img/instagram/06-numeros.jpg
+assets/img/instagram/07-objetivos.jpg
+assets/img/instagram/08-por-objetivo.jpg
+assets/img/instagram/09-siete-meses.jpg
 assets/img/transformaciones/recomposicion-3-meses.jpg   Caso real (1100x1375)
 ```
+
+Además de recortar el interfaz, en dos publicaciones hubo que retocar:
+en `05-readaptacion` la insignia «1/7» del carrusel tapaba el escudo de la marca de
+agua, así que se limpió la esquina y se repintó el escudo con `logo.png` al 55 % de
+opacidad; en `06-numeros` había avatares del interfaz de Instagram sobre la franja
+inferior, que se rellenó clonando el bokeh limpio del lado derecho.
+
 
 ### Añadir más publicaciones a la galería
 
