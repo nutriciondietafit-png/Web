@@ -210,18 +210,6 @@
     });
   }
 
-  /* ── Comparador antes / después ──────────────────────────── */
-  $$('[data-ba]').forEach(fig => {
-    const range = $('.ba__range', fig), wrap = $('.ba__before-wrap', fig), handle = $('.ba__handle', fig);
-    const apply = () => {
-      const v = range.value;
-      wrap.style.width = v + '%';
-      handle.style.left = v + '%';
-    };
-    range.addEventListener('input', apply);
-    apply();
-  });
-
   /* ── Tarifas dinámicas ───────────────────────────────────── */
   const plansEl = $('#plans');
   const periodos = {

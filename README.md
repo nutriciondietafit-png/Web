@@ -16,40 +16,59 @@ Estos puntos están rellenos con **contenido provisional** y hay que revisarlos:
 | **Horario** | `assets/js/config.js` → `horario` | Ejemplo. Actualiza texto y `openingHoursSpecification` en `index.html`. |
 | **Dirección y coordenadas** | `assets/js/config.js` → `direccion`, y `geo` en el JSON-LD | Ahora mismo solo pone “Almería, España”. |
 | **Cifras del hero** (500+, 12 semanas…) | `index.html` → `.hero__stats` | Son estimaciones de marketing: ajústalas a datos reales. |
-| **Textos de las transformaciones** | `index.html` → sección `#transformaciones` | Añade datos reales y consigue el consentimiento por escrito de cada cliente para publicar sus fotos. |
+| **Consentimiento de imagen** | sección `#transformaciones` | La foto y los datos (−8 kg / +2 kg) salen de vuestro Instagram. Asegúrate de tener el consentimiento por escrito de la socia. |
 | **Datos fiscales** | `aviso-legal.html`, `privacidad.html` | Sustituye `[RAZÓN SOCIAL]`, `[NIF/CIF]` y `[DIRECCIÓN COMPLETA]`. |
 | **Dominio** | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` | Ahora apuntan a `https://magia-fit-almeria.vercel.app`. Cuando tengas el dominio propio, cámbialo con `./cambiar-dominio.sh https://tu-dominio.es`. |
 
 ---
 
-## 📸 Poner las fotos reales de Instagram
+## 📸 Imágenes
 
-Las imágenes actuales son **marcadores SVG** generados a medida (no se pudo acceder a Instagram desde el entorno de desarrollo). Sustituirlas es directo:
+Todas las imágenes de la web son **material real de @magiafitalmeria**, recortado a
+partir de capturas del perfil: se eliminó el interfaz de Instagram (barra de estado,
+cabecera, barra de acciones y pie) y la insignia de carrusel, y se exportaron en 4:5
+como JPEG progresivo.
 
-1. **Logo** → reemplaza `assets/img/logo.svg` por el logo real de `@magiafitalmeria`.
-   Si lo tienes en PNG/JPG, guárdalo como `assets/img/logo.png` y cambia las 4 referencias:
-   ```bash
-   grep -rl "assets/img/logo.svg" . | xargs sed -i 's#assets/img/logo.svg#assets/img/logo.png#g'
-   ```
-2. **Galería de Instagram** → sustituye `assets/img/gallery/01.svg` … `09.svg` por las fotos reales
-   (recomendado: JPG/WebP, formato vertical 4:5, ~1080×1350 px). Si cambias la extensión,
-   actualiza el `src` en la sección `#instagram` de `index.html`.
-3. **Transformaciones** → `assets/img/transform/antes-1.svg` / `despues-1.svg` (y 2, 3).
-   Usa el mismo encuadre, distancia y luz en el antes y el después: el comparador funciona mucho mejor.
-4. **Imagen para compartir en redes** → `assets/img/og-cover.svg` (1200×630).
+```
+assets/img/logo.png                                  Escudo oficial, fondo transparente
+assets/img/favicon.png                               Icono de pestaña
+assets/img/og-cover.jpg                              Vista previa al compartir el enlace
+assets/img/instagram/01-analizamos.jpg               Galería (900x1125)
+assets/img/instagram/02-avanzas.jpg
+assets/img/instagram/03-objetivos.jpg
+assets/img/instagram/04-siete-meses.jpg
+assets/img/transformaciones/recomposicion-3-meses.jpg   Caso real (1100x1375)
+```
 
-Las frases motivadoras y las etiquetas «Transformación» de cada foto se editan en el HTML,
-dentro de cada `<figcaption>`.
+### Añadir más publicaciones a la galería
 
-> **Importante:** publica únicamente fotos propias o con permiso, y con el consentimiento
-> firmado del cliente en el caso de las transformaciones (dato de salud según el RGPD).
+1. Guarda la imagen en `assets/img/instagram/` como `05-loquesea.jpg`, en 4:5 (900x1125).
+2. Duplica un bloque `<a class="ig-card">` en la sección `#instagram` de `index.html`
+   y cambia `src` y `alt`. La rejilla es de 4 columnas: van bien de 4 en 4.
 
-### Opción B: feed de Instagram automático
-Si prefieres que la galería se actualice sola, usa un widget de terceros (Elfsight, LightWidget,
-Behold, SnapWidget) o la *Instagram Basic Display API*, y sustituye el `<div class="ig-grid">`
-por el embed correspondiente. La estética de la sección se mantiene.
+### Añadir más transformaciones
 
----
+La sección `#transformaciones` muestra **un caso destacado** con la imagen compuesta
+tal y como se publica en Instagram. Para añadir otro, duplica el bloque `.transform`
+y cambia la imagen y los datos.
+
+> Si algún día tienes **pares de fotos sueltas** de antes y después (mismo encuadre,
+> misma distancia y misma luz), se puede recuperar el comparador deslizante que había
+> antes: es mucho más vistoso, pero necesita las dos fotos por separado, no la
+> composición ya montada.
+
+**Importante:** las fotos de transformaciones son datos de salud según el RGPD.
+Publica solo con el consentimiento por escrito de la persona.
+
+### Feed automático de Instagram
+Si prefieres que la galería se actualice sola, usa un widget de terceros (Elfsight,
+LightWidget, Behold, SnapWidget) o la *Instagram Basic Display API*, y sustituye el
+`<div class="ig-grid">` por el embed correspondiente.
+
+### Sobre el logo
+`assets/img/logo.png` es el escudo oficial con **fondo transparente**: en tema oscuro
+se muestra en blanco y en tema claro el CSS lo invierte a negro (`--logo-filter`).
+Si lo cambias, mantén el fondo transparente y la marca en blanco.
 
 ## ☎️ Teléfono y enlaces de WhatsApp
 
