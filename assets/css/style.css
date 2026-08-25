@@ -272,17 +272,23 @@ ul,ol{margin:0;padding:0;list-style:none}
 .feature h3{margin-bottom:.4rem;font-size:1.06rem}
 .feature p{color:var(--muted);font-size:.94rem;margin:0}
 
-/* ── Transformación destacada ────────────────────────────────── */
-.transform{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr);gap:clamp(1.6rem,4vw,3rem);align-items:center;max-width:1020px;margin-inline:auto}
-@media (max-width:860px){.transform{grid-template-columns:1fr}}
-.transform__card{margin:0;padding:.6rem;overflow:hidden}
-.transform__card img{width:100%;height:auto;border-radius:var(--radius-s)}
-.transform__data h3{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:800;margin-bottom:1.2rem}
-.transform__data p{color:var(--muted);font-size:.97rem}
-.transform__data .ticks{margin-bottom:1.4rem}
-.transform__data .ticks li{color:var(--ink-soft)}
-.transform__data .ticks b{color:var(--gold-text);font-size:1.05rem}
-.transform__data .btn{margin-top:.6rem}
+/* ── Casos de transformación ─────────────────────────────────── */
+.casos{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;align-items:start}
+@media (max-width:900px){.casos{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.casos{grid-template-columns:1fr}}
+.caso{margin:0;padding:.6rem .6rem 0;overflow:hidden;transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .45s}
+.caso:hover{transform:translateY(-6px);border-color:var(--accent-line)}
+.caso--top{border-color:var(--gold-3);background:var(--plan-top-bg)}
+.caso__img{border-radius:var(--radius-s);overflow:hidden;aspect-ratio:4/5}
+.caso__img img{width:100%;height:100%;object-fit:cover}
+.caso figcaption{padding:1.1rem .8rem 1.3rem;text-align:center}
+.caso__tiempo{display:inline-block;font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold-text);border:1px solid var(--accent-line);background:var(--accent-soft);
+  border-radius:100px;padding:.3rem .8rem;margin-bottom:.7rem}
+.caso figcaption h3{font-size:1.1rem;margin-bottom:.35rem}
+.caso__cifra{margin:0;color:var(--muted);font-size:.9rem}
+.caso__cifra b{display:block;font-family:var(--font-d);font-size:1.55rem;font-weight:800;
+  background:var(--grad-gold-text);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:.15rem}
 
 .quote{text-align:center;font-family:var(--font-d);font-size:clamp(1.25rem,3vw,2rem);font-weight:600;max-width:22ch;margin:3.4rem auto 2.4rem;line-height:1.35}
 

@@ -30,20 +30,26 @@ cabecera, barra de acciones y pie) y la insignia de carrusel, y se exportaron en
 como JPEG progresivo.
 
 ```
-assets/img/logo.png                                     Escudo oficial, fondo transparente
-assets/img/favicon.png                                  Icono de pestaña
-assets/img/og-cover.jpg                                 Vista previa al compartir el enlace
-assets/img/instagram/01-analizamos.jpg                  Galería, 9 publicaciones (900x1125)
-assets/img/instagram/02-hacerlo-bien.jpg
-assets/img/instagram/03-esto-es-magiafit.jpg
-assets/img/instagram/04-avanzas.jpg
-assets/img/instagram/05-readaptacion.jpg
-assets/img/instagram/06-numeros.jpg
-assets/img/instagram/07-objetivos.jpg
-assets/img/instagram/08-por-objetivo.jpg
-assets/img/instagram/09-siete-meses.jpg
-assets/img/transformaciones/recomposicion-3-meses.jpg   Caso real (1100x1375)
+assets/img/logo.png                                        Escudo oficial, fondo transparente
+assets/img/favicon.png                                     Icono de pestaña
+assets/img/og-cover.jpg                                    Vista previa al compartir el enlace
+assets/img/instagram/01-analizamos.jpg  …  11-siete-meses.jpg   Galería, 11 publicaciones (900x1125)
+assets/img/transformaciones/01-menos-100kg.jpg                  Casos reales (900x1125)
+assets/img/transformaciones/02-recomposicion-4-meses.jpg
+assets/img/transformaciones/03-recomposicion-3-meses.jpg
 ```
+
+Retoques que hubo que hacer más allá de recortar el interfaz:
+
+- `08-readaptacion`: la insignia «1/7» del carrusel tapaba el escudo de la marca de
+  agua. Se limpió la esquina y se repintó el escudo con `logo.png` al 55 % de opacidad.
+- `06-numeros`: había avatares del interfaz de Instagram sobre la franja inferior.
+  Se rellenó clonando el bokeh limpio del lado derecho, con los bordes difuminados.
+- `07-salud-lesiones`: los avatares caían encima del botón «¡envíanos tu mensaje!»,
+  y no se podía reconstruir el texto tapado. Se recortó por encima del botón y se
+  extendió el suelo hacia abajo, muy desenfocado y oscurecido, hasta recuperar el 4:5.
+  El resultado se lee como una sombra de profundidad de campo.
+
 
 Además de recortar el interfaz, en dos publicaciones hubo que retocar:
 en `05-readaptacion` la insignia «1/7» del carrusel tapaba el escudo de la marca de
@@ -60,9 +66,9 @@ inferior, que se rellenó clonando el bokeh limpio del lado derecho.
 
 ### Añadir más transformaciones
 
-La sección `#transformaciones` muestra **un caso destacado** con la imagen compuesta
-tal y como se publica en Instagram. Para añadir otro, duplica el bloque `.transform`
-y cambia la imagen y los datos.
+La sección `#transformaciones` muestra **tres casos** con la imagen compuesta tal y
+como se publica en Instagram. Para añadir otro, duplica un bloque `<figure class="caso">`
+y cambia la imagen, el tiempo y las cifras. La clase `caso--top` marca el destacado.
 
 > Si algún día tienes **pares de fotos sueltas** de antes y después (mismo encuadre,
 > misma distancia y misma luz), se puede recuperar el comparador deslizante que había
