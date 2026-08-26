@@ -35,7 +35,7 @@ como JPEG progresivo.
 assets/img/logo.png                                        Escudo oficial, fondo transparente
 assets/img/favicon.png                                     Icono de pestaña
 assets/img/og-cover.jpg                                    Vista previa al compartir el enlace
-assets/img/instagram/01-analizamos.jpg  …  11-siete-meses.jpg   Galería, 11 publicaciones (900x1125)
+assets/img/instagram/01-analizamos.jpg  …  11-siete-meses.jpg   11 publicaciones (900x1125)
 assets/img/transformaciones/01-menos-100kg.jpg                  Casos reales (900x1125)
 assets/img/transformaciones/02-recomposicion-4-meses.jpg
 assets/img/transformaciones/03-recomposicion-3-meses.jpg
@@ -60,11 +60,23 @@ opacidad; en `06-numeros` había avatares del interfaz de Instagram sobre la fra
 inferior, que se rellenó clonando el bokeh limpio del lado derecho.
 
 
-### Añadir más publicaciones a la galería
+### Cambiar las publicaciones de la galería
 
-1. Guarda la imagen en `assets/img/instagram/` como `05-loquesea.jpg`, en 4:5 (900x1125).
-2. Duplica un bloque `<a class="ig-card">` en la sección `#instagram` de `index.html`
-   y cambia `src` y `alt`. La rejilla es de 4 columnas: van bien de 4 en 4.
+La galería muestra **6 de las 11 publicaciones** preparadas, en una rejilla de 3x2
+(3 / 2 / 1 columnas según el ancho). Las otras cinco siguen en `assets/img/instagram/`
+listas para entrar: no pesan nada porque la página no las carga.
+
+En pantalla ahora mismo: `01-analizamos`, `02-hacerlo-bien`, `03-esto-es-magiafit`,
+`06-numeros`, `07-salud-lesiones` y `11-siete-meses`.
+En reserva: `04-entrenas-solo`, `05-avanzas`, `08-readaptacion`, `09-objetivos`
+y `10-por-objetivo`.
+
+Para intercambiar una, cambia el `src` y el `alt` de su bloque `<a class="ig-card">`
+en la sección `#instagram` de `index.html`. Si añades o quitas tarjetas, procura
+dejar un múltiplo de 3 para que no queden huecos en la última fila.
+
+Para meter una publicación nueva, guárdala en `assets/img/instagram/` en 4:5
+(900x1125) y duplica un bloque `<a class="ig-card">`.
 
 ### Añadir más transformaciones
 
