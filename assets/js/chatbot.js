@@ -36,7 +36,7 @@
     {
       id: 'saludo',
       keys: ['hola', 'buenas', 'hey', 'saludos', 'buenos dias', 'buenas tardes', 'buenas noches', 'que tal'],
-      reply: () => `¡Hola! 👋 Soy <b>MAGI</b>, el asistente de Magia Fit Almería.<br>Puedo resolverte dudas de <b>tarifas, horarios, entrenador personal, nutrición o clase de prueba</b>. ¿Qué te cuento?`
+      reply: () => `¡Hola! 👋 Soy <b>MAGI</b>, el asistente de Magia Fit Almería.<br>Puedo resolverte dudas de <b>tarifas, horarios, entrenador personal, lesiones o clase de prueba</b>. ¿Qué te cuento?`
     },
     {
       id: 'precio',
@@ -84,22 +84,16 @@
       reply: () => `${CFG.extras.pago} 💳 Si necesitas fraccionar el plan anual, coméntanoslo y lo vemos: ${waBtn('hablar de formas de pago', 'Hola, tengo una duda sobre las formas de pago')}`
     },
     {
-      id: 'nutricion',
-      keys: ['nutricion', 'dieta', 'nutricionista', 'comida', 'alimentacion', 'menu', 'suplementos', 'proteina'],
-      reply: () => `Los planes <b>MAGIA</b> y <b>ÉLITE</b> incluyen <b>asesoramiento nutricional</b> adaptado a tus horarios y a lo que realmente comes 🥗<br>
-        Nada de dietas imposibles: pautas flexibles que puedas mantener.<br><br>¿Te preparamos una valoración? <a href="#agenda">Agendar llamada</a>`
-    },
-    {
       id: 'adelgazar',
       keys: ['adelgazar', 'perder peso', 'perder grasa', 'bajar peso', 'definir', 'definicion', 'barriga', 'michelines', 'kilos'],
-      reply: () => `Es nuestro objetivo más trabajado 🔥 Combinamos entrenamiento de fuerza + trabajo cardiovascular + nutrición sostenible.<br>
+      reply: () => `Es nuestro objetivo más trabajado 🔥 Entrenamiento de fuerza, trabajo cardiovascular y un plan que se ajusta cada mes.<br>
         La mayoría de socios nota cambios de energía en 3-4 semanas y cambios visibles entre la semana 8 y la 12.<br><br>
         Mira las <a href="#transformaciones">transformaciones reales</a> y ${waBtn('cuéntanos tu caso', 'Hola, mi objetivo es perder grasa. ¿Cómo empezamos?')}`
     },
     {
       id: 'musculo',
       keys: ['masa muscular', 'ganar musculo', 'volumen', 'hipertrofia', 'fuerza', 'musculacion', 'engordar'],
-      reply: () => `Para <b>ganar masa muscular</b> trabajamos progresión de cargas, técnica corregida sesión a sesión y un superávit calórico bien calculado 💪<br>
+      reply: () => `Para <b>ganar masa muscular</b> trabajamos progresión de cargas y técnica corregida sesión a sesión, midiendo el avance cada mes 💪<br>
         El plan <b>MAGIA</b> suele ser el ideal para esto. <a href="#tarifas">Ver planes</a>`
     },
     {
@@ -126,6 +120,13 @@
       keys: ['clases', 'clase dirigida', 'dirigidas', 'hiit', 'grupo', 'colectivas', 'spinning', 'funcional'],
       reply: () => `Tenemos <b>clases dirigidas</b> de fuerza, HIIT, movilidad y core en grupos reducidos (para no perder la técnica) ⚡<br>
         Están incluidas de forma ilimitada en los planes MAGIA y ÉLITE. <a href="#tarifas">Ver planes</a>`
+    },
+    {
+      id: 'resenas',
+      keys: ['resenas', 'resena', 'opiniones', 'opinion', 'valoracion', 'valoraciones', 'estrellas', 'google', 'fiable', 'confianza', 'referencias'],
+      reply: () => `Tenemos <b>${CFG.google.nota} estrellas</b> de media con <b>${CFG.google.resenas} reseñas</b> en Google ⭐<br>
+        Son de socios reales, puedes leerlas todas antes de decidirte.<br><br>
+        ¿Quieres ser el siguiente? <a href="#agenda">Agendar llamada gratuita</a>`
     },
     {
       id: 'transformaciones',
@@ -170,7 +171,7 @@
 
   const FALLBACK = () => `Esa no me la sé todavía 🤔 pero el equipo te la resuelve en un minuto.<br><br>
     ${waBtn('Preguntar por WhatsApp', 'Hola, tengo una duda sobre Magia Fit Almería')} · <a href="#agenda">Agendar llamada</a><br><br>
-    También puedo ayudarte con: <b>tarifas</b>, <b>horarios</b>, <b>clase de prueba</b>, <b>entrenador personal</b>, <b>nutrición</b> o <b>ubicación</b>.`;
+    También puedo ayudarte con: <b>tarifas</b>, <b>horarios</b>, <b>clase de prueba</b>, <b>entrenador personal</b>, <b>lesiones</b> o <b>ubicación</b>.`;
 
   function match(text) {
     const t = ' ' + norm(text) + ' ';
@@ -213,6 +214,7 @@
     { t: '🕖 Horarios',        q: '¿Qué horario tenéis?' },
     { t: '🔥 Perder grasa',    q: 'Quiero perder grasa' },
     { t: '💪 Entrenador personal', q: 'Info del entrenador personal' },
+    { t: '⭐ Reseñas',          q: '¿Qué valoración tenéis?' },
     { t: '📍 Dónde estáis',    q: '¿Dónde estáis?' },
     { t: '📞 Agendar llamada', q: 'Quiero agendar una llamada' }
   ];
@@ -258,7 +260,7 @@
     if (!started) {
       started = true;
       renderQuicks();
-      botSay(`¡Hola! 👋 Soy <b>MAGI</b>, el asistente de <b>Magia Fit Almería</b>.<br>Resuelvo dudas de tarifas, horarios, clase de prueba, nutrición… y te ayudo a agendar tu llamada gratuita.`, 500);
+      botSay(`¡Hola! 👋 Soy <b>MAGI</b>, el asistente de <b>Magia Fit Almería</b>.<br>Resuelvo dudas de tarifas, horarios, clase de prueba, lesiones… y te ayudo a agendar tu llamada gratuita.`, 500);
       setTimeout(() => { if (!turnos) botSay('¿Por dónde empezamos? Puedes tocar una de las opciones de abajo 👇', 500); }, 1500);
     }
     setTimeout(() => input.focus(), 300);

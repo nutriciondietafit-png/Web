@@ -226,6 +226,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .hero__stats li{background:var(--stat-bg);backdrop-filter:blur(8px);padding:1.35rem 1.1rem;display:flex;flex-direction:column;gap:.15rem}
 .hero__stats b{font-family:var(--font-d);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;background:var(--grad-gold-text);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero__stats span{font-size:.76rem;color:var(--muted);line-height:1.45}
+.hero__stats span em{font-style:normal;font-weight:700;color:var(--gold-text)}
 @media (max-width:760px){.hero__stats{grid-template-columns:repeat(2,1fr)}}
 
 .hero__scroll{display:flex;flex-direction:column;align-items:center;gap:.55rem;width:max-content;margin:2.8rem auto 0;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);transition:color .3s}

@@ -15,7 +15,8 @@ Estos puntos están rellenos con **contenido provisional** y hay que revisarlos:
 | **Tarifas** (34,90 / 59,90 / 129 €) | `assets/js/config.js` → `tarifas` | ⚠️ **Conflicto sin resolver.** Los precios son inventados y, además, una publicación de Instagram dice *«NO cobramos por hora. Cobramos por objetivo»*, que no encaja con tres cuotas mensuales fijas. Hay que decidir el modelo real y rehacer la sección. También aparecen en el JSON-LD de `index.html` (`hasOfferCatalog` y `FAQPage`) y en las respuestas del bot. |
 | **Horario** | `assets/js/config.js` → `horario` | Ejemplo. Actualiza texto y `openingHoursSpecification` en `index.html`. |
 | **Dirección y coordenadas** | `assets/js/config.js` → `direccion`, y `geo` en el JSON-LD | Ahora mismo solo pone “Almería, España”. |
-| **Cifras del hero** | `index.html` → `.hero__stats` | Ya son las reales, tomadas de vuestra publicación «Los números no mienten»: 100+ transformaciones, 8 años de experiencia, 5,0 en Google y seguimiento 24 h. Actualízalas cuando cambien. |
+| **Cifras del hero** | `index.html` → `.hero__stats` | Reales: 100+ transformaciones, 8 años, 5,0 con 142 reseñas en Google y seguimiento 24 h. Actualiza el número de reseñas cuando crezca (también en `config.js` → `google`, que es lo que cita el bot). |
+| **Nutrición** | — | Retirada de toda la web *por ahora*, a petición del cliente: método, planes, FAQ, textos SEO, datos estructurados, servicios del pie y respuestas del bot. Para recuperarla habría que reponerla en esos mismos sitios. |
 | **Consentimiento de imagen** | sección `#transformaciones` | La foto y los datos (−8 kg / +2 kg) salen de vuestro Instagram. Asegúrate de tener el consentimiento por escrito de la socia. |
 | **Datos fiscales** | `aviso-legal.html`, `privacidad.html` | Sustituye `[RAZÓN SOCIAL]`, `[NIF/CIF]` y `[DIRECCIÓN COMPLETA]`. |
 | **Dominio** | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` | Ahora apuntan a `https://magia-fit-almeria.vercel.app`. Cuando tengas el dominio propio, cámbialo con `./cambiar-dominio.sh https://tu-dominio.es`. |
@@ -90,11 +91,11 @@ Si lo cambias, mantén el fondo transparente y la marca en blanco.
 
 ## ☎️ Teléfono y enlaces de WhatsApp
 
-El número **+34 682 546 257** (provisional) está centralizado en `assets/js/config.js`:
+El número **+34 637 254 347** está centralizado en `assets/js/config.js`:
 
 ```js
-whatsapp: "34682546257",        // sin +, sin espacios
-telefonoBonito: "+34 682 546 257"
+whatsapp: "34637254347",        // sin +, sin espacios
+telefonoBonito: "+34 637 254 347"
 ```
 
 Cambiarlo ahí actualiza automáticamente: botón flotante, botones del hero, tarifas, formulario,

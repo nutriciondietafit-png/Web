@@ -13,11 +13,14 @@ window.MAGIAFIT = {
   claim: "Tu transformación empieza hoy",
 
   // --- Contacto ---
-  whatsapp: "34682546257",            // número provisional facilitado
-  telefonoBonito: "+34 682 546 257",
+  whatsapp: "34637254347",
+  telefonoBonito: "+34 637 254 347",
   instagram: "magiafitalmeria",
   instagramUrl: "https://www.instagram.com/magiafitalmeria/",
   email: "nutriciondietafit@gmail.com",
+
+  // --- Reseñas oficiales de Google ---
+  google: { nota: "5,0", resenas: 142 },
 
   // --- Localización (REVISAR: dirección y coordenadas exactas) ---
   ciudad: "Almería",
@@ -60,7 +63,6 @@ window.MAGIAFIT = {
       incluye: [
         "Todo lo del plan START",
         "Plan de entrenamiento personalizado mensual",
-        "Asesoramiento nutricional adaptado",
         "Clases dirigidas ilimitadas",
         "Revisión de progreso cada 30 días"
       ]
@@ -74,7 +76,6 @@ window.MAGIAFIT = {
       incluye: [
         "Todo lo del plan MAGIA",
         "8 sesiones de entrenador personal al mes",
-        "Nutrición y suplementación a medida",
         "Contacto directo por WhatsApp con tu coach",
         "Seguimiento de fotos y métricas semanal"
       ]
@@ -91,7 +92,7 @@ window.MAGIAFIT = {
 
   servicios: [
     "Entrenamiento personal", "Musculación y fuerza", "Pérdida de grasa",
-    "Ganancia de masa muscular", "Asesoramiento nutricional",
+    "Ganancia de masa muscular", "Readaptación de lesiones",
     "Clases dirigidas", "Entrenamiento online", "Recomposición corporal"
   ]
 };
