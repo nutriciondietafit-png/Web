@@ -316,17 +316,13 @@ ul,ol{margin:0;padding:0;list-style:none}
 .ig-card__ig svg{display:block}
 
 /* ── Tarifas ─────────────────────────────────────────────────── */
-.switch{display:inline-flex;gap:.25rem;margin-top:1.6rem;padding:.3rem;border:1px solid var(--line);border-radius:100px;background:var(--glass);backdrop-filter:blur(10px)}
-.switch__b{border:0;background:none;color:var(--muted);font-family:var(--font-b);font-weight:600;font-size:.86rem;padding:.6rem 1.15rem;border-radius:100px;cursor:pointer;transition:.3s;white-space:nowrap}
-.switch__b em{font-style:normal;font-size:.66rem;color:var(--accent-2);margin-left:.3rem}
-.switch__b.is-on{background:var(--grad-gold);color:#0a0a0a}
-.switch__b.is-on em{color:#6a4a00}
-
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.3rem;align-items:start}
-.plan{padding:2rem 1.7rem;position:relative;transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .45s}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;align-items:start}
+@media (max-width:1080px){.plans{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.plans{grid-template-columns:1fr}}
+.plan{padding:1.9rem 1.4rem;position:relative;transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .45s}
 .plan:hover{transform:translateY(-8px);border-color:var(--accent-line)}
 .plan--top{border-color:var(--gold-3);background:var(--plan-top-bg)}
-.plan--top::before{content:"EL MÁS ELEGIDO";position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.2em;
+.plan--top::before{content:"MEJOR PRECIO POR HORA";position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:.6rem;letter-spacing:.2em;
   background:var(--grad-gold);color:#0a0a0a;padding:.32rem .9rem;border-radius:100px;font-weight:800;white-space:nowrap}
 .plan__name{font-family:var(--font-d);font-size:1.35rem;font-weight:800;letter-spacing:.12em;background:var(--grad-gold-text);-webkit-background-clip:text;background-clip:text;color:transparent}
 .plan__res{color:var(--muted);font-size:.88rem;margin:.15rem 0 1.2rem}
@@ -339,6 +335,22 @@ ul,ol{margin:0;padding:0;list-style:none}
 .plan li{position:relative;padding-left:1.7rem;font-size:.93rem;color:var(--ink-soft)}
 .plan li::before{content:"";position:absolute;left:0;top:.5em;width:11px;height:6px;border-left:2px solid var(--gold-text);border-bottom:2px solid var(--gold-text);transform:rotate(-45deg)}
 .note{text-align:center;margin-top:2.4rem;color:var(--muted);font-size:.92rem}
+
+/* Servicios complementarios */
+.sub-head{text-align:center;margin:3.4rem 0 1.6rem;font-size:1.15rem;letter-spacing:.02em;color:var(--ink)}
+.extras-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;align-items:stretch}
+@media (max-width:860px){.extras-grid{grid-template-columns:1fr}}
+.extra{display:flex;flex-direction:column;padding:1.6rem 1.4rem;transition:transform .45s cubic-bezier(.2,.7,.2,1),border-color .45s}
+.extra .btn{margin-top:auto}
+.extra:hover{transform:translateY(-6px);border-color:var(--accent-line)}
+.extra h4{font-family:var(--font-d);font-size:1.05rem;font-weight:700;margin:0 0 .2rem;color:var(--gold-text)}
+.extra__res{color:var(--muted);font-size:.86rem;margin:0 0 1.1rem}
+.extra__lineas{display:grid;gap:.55rem;margin-bottom:1rem}
+.extra__lineas li{display:flex;align-items:baseline;justify-content:space-between;gap:.6rem;flex-wrap:wrap;
+  border-bottom:1px dashed var(--line);padding-bottom:.5rem;font-size:.92rem;color:var(--ink-soft)}
+.extra__lineas b{font-family:var(--font-d);font-size:1.15rem;font-weight:800;color:var(--ink)}
+.extra__lineas em{flex-basis:100%;font-style:normal;font-size:.72rem;color:var(--muted)}
+.extra__nota{font-size:.78rem;color:var(--gold-text);margin:0 0 1.1rem}
 
 /* ── Bloque SEO ──────────────────────────────────────────────── */
 .seo-block{display:grid;grid-template-columns:1.55fr .95fr;gap:2.6rem;align-items:start}

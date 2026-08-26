@@ -17,7 +17,7 @@ window.MAGIAFIT = {
   telefonoBonito: "+34 637 254 347",
   instagram: "magiafitalmeria",
   instagramUrl: "https://www.instagram.com/magiafitalmeria/",
-  email: "nutriciondietafit@gmail.com",
+  email: "magiafitalmeria2017@gmail.com",
 
   // --- Reseñas oficiales de Google ---
   google: { nota: "5,0", resenas: 142 },
@@ -39,55 +39,45 @@ window.MAGIAFIT = {
     ]
   },
 
-  // --- Tarifas (REVISAR antes de publicar) ---
-  tarifas: [
+  // --- Tarifas reales (Tabla de Servicios de Magia Fit) ---
+  // El precio del grupo reducido es por cada 4 semanas.
+  grupoReducido: [
+    { id: "basic",         nombre: "BASIC",      horas: 2, precio: 88,  destacado: false },
+    { id: "standard",      nombre: "STANDARD",   horas: 3, precio: 129, destacado: false },
+    { id: "standard-plus", nombre: "STANDARD +", horas: 4, precio: 150, destacado: false },
+    { id: "premium",       nombre: "PREMIUM",    horas: 5, precio: 160, destacado: true  }
+  ],
+
+  complementos: [
     {
-      id: "start",
-      nombre: "START",
-      resumen: "Empieza sin excusas",
-      mensual: 34.90, trimestral: 94.90, anual: 349,
-      destacado: false,
-      incluye: [
-        "Acceso libre a sala de musculación y cardio",
-        "Rutina inicial personalizada",
-        "Medición corporal de bienvenida",
-        "App de seguimiento de entrenos"
-      ]
+      id: "bonos",
+      nombre: "Bonos de sesiones",
+      resumen: "Sesiones sueltas, a tu ritmo",
+      lineas: [ { concepto: "5 sesiones", precio: 200 }, { concepto: "10 sesiones", precio: 370 } ],
+      nota: "Primera valoración gratuita"
     },
     {
-      id: "magia",
-      nombre: "MAGIA",
-      resumen: "El plan que más transforma",
-      mensual: 59.90, trimestral: 159.90, anual: 599,
-      destacado: true,
-      incluye: [
-        "Todo lo del plan START",
-        "Plan de entrenamiento personalizado mensual",
-        "Clases dirigidas ilimitadas",
-        "Revisión de progreso cada 30 días"
-      ]
+      id: "online",
+      nombre: "Entrenamiento online",
+      resumen: "Entrenes donde entrenes",
+      lineas: [ { concepto: "12 semanas", precio: 180 } ],
+      nota: "Incluye 15 min de videollamada cada semana"
     },
     {
-      id: "elite",
-      nombre: "ÉLITE",
-      resumen: "Entrenamiento personal 1 a 1",
-      mensual: 129, trimestral: 349, anual: 1290,
-      destacado: false,
-      incluye: [
-        "Todo lo del plan MAGIA",
-        "8 sesiones de entrenador personal al mes",
-        "Contacto directo por WhatsApp con tu coach",
-        "Seguimiento de fotos y métricas semanal"
-      ]
+      id: "masaje",
+      nombre: "Masaje deportivo",
+      resumen: "Sesiones de 1 hora",
+      lineas: [ { concepto: "Sesión suelta", precio: 35 },
+                { concepto: "Bono de 5 sesiones", precio: 150, unidad: 30 },
+                { concepto: "Bono de 10 sesiones", precio: 280, unidad: 28 } ],
+      nota: "Masaje deportivo específico"
     }
   ],
 
-  // Extras que el bot puede citar (REVISAR)
+  // Datos que figuran en la tabla de servicios
   extras: {
-    matricula: "Matrícula 0 € durante la promoción de bienvenida.",
-    prueba: "Primera clase de prueba y asesoramiento inicial GRATIS.",
-    permanencia: "Sin permanencia en las cuotas mensuales.",
-    pago: "Pago con tarjeta, Bizum, domiciliación o efectivo."
+    prueba: "La primera valoración es GRATUITA.",
+    grupo: "Se entrena en grupo reducido, de 4 a 6 personas."
   },
 
   servicios: [

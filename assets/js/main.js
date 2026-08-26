@@ -210,43 +210,46 @@
     });
   }
 
-  /* ── Tarifas dinámicas ───────────────────────────────────── */
-  const plansEl = $('#plans');
-  const periodos = {
-    mensual:    { div: 1,  etiqueta: '/mes',  meta: p => 'Pago mensual · sin permanencia' },
-    trimestral: { div: 3,  etiqueta: '/mes',  meta: p => `Un pago de ${eur(p.trimestral)} cada 3 meses` },
-    anual:      { div: 12, etiqueta: '/mes',  meta: p => `Un pago de ${eur(p.anual)} al año · ahorras ${eur(p.mensual * 12 - p.anual)}` }
-  };
+  /* ── Tarifas ─────────────────────────────────────────────── */
   const eur = n => n.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', minimumFractionDigits: (n % 1 ? 2 : 0) });
 
-  function renderPlans(period) {
-    if (!plansEl) return;
-    const cfgP = periodos[period];
-    plansEl.innerHTML = (CFG.tarifas || []).map(p => {
-      const precio = p[period] / cfgP.div;
+  const plansEl = $('#plans');
+  if (plansEl) {
+    plansEl.innerHTML = (CFG.grupoReducido || []).map(p => {
+      const porHora = p.precio / (p.horas * 4);   // 4 semanas
       return `<article class="plan glass reveal${p.destacado ? ' plan--top' : ''}">
         <h3 class="plan__name">${p.nombre}</h3>
-        <p class="plan__res">${p.resumen}</p>
-        <p class="plan__price"><b data-plan="${p.id}">${eur(Math.round(precio * 100) / 100)}</b><i>${cfgP.etiqueta}</i></p>
-        <p class="plan__meta">${cfgP.meta(p)}</p>
-        <ul>${p.incluye.map(i => `<li>${i}</li>`).join('')}</ul>
+        <p class="plan__res">${p.horas} h por semana</p>
+        <p class="plan__price"><b>${eur(p.precio)}</b><i>/ 4 semanas</i></p>
+        <p class="plan__meta">Salen ${eur(Math.round(porHora * 100) / 100)} la hora · ${p.horas * 4} sesiones</p>
+        <ul>
+          <li>Grupo reducido de 4 a 6 personas</li>
+          <li>Entrenador corrigiendo tu técnica</li>
+          <li>Plan adaptado a tu objetivo</li>
+          <li>Seguimiento de tu progreso</li>
+        </ul>
         <a class="btn ${p.destacado ? 'btn--gold' : 'btn--ghost'} btn--full magnetic" target="_blank" rel="noopener"
-           href="${waLink(`Hola, me interesa el plan ${p.nombre} (${period}) de Magia Fit Almería. ¿Me contáis más?`)}">Lo quiero</a>
+           href="${waLink(`Hola, me interesa el plan ${p.nombre} (${p.horas} h por semana) de Magia Fit Almería. ¿Me contáis más?`)}">Lo quiero</a>
       </article>`;
     }).join('');
-    observeReveals();
-    // pequeño retardo para que la animación de entrada se aprecie
-    requestAnimationFrame(() => $$('.plan', plansEl).forEach(el => el.classList.add('is-in')));
   }
-  renderPlans('mensual');
 
-  $$('.switch__b').forEach(b => {
-    b.addEventListener('click', () => {
-      $$('.switch__b').forEach(x => { x.classList.remove('is-on'); x.setAttribute('aria-selected', 'false'); });
-      b.classList.add('is-on'); b.setAttribute('aria-selected', 'true');
-      renderPlans(b.dataset.period);
-    });
-  });
+  const extrasEl = $('#complementos');
+  if (extrasEl) {
+    extrasEl.innerHTML = (CFG.complementos || []).map(c => `
+      <article class="extra glass reveal">
+        <h4>${c.nombre}</h4>
+        <p class="extra__res">${c.resumen}</p>
+        <ul class="extra__lineas">
+          ${c.lineas.map(l => `<li><span>${l.concepto}</span><b>${eur(l.precio)}</b>${l.unidad ? `<em>${eur(l.unidad)} la sesión</em>` : ''}</li>`).join('')}
+        </ul>
+        <p class="extra__nota">${c.nota}</p>
+        <a class="btn btn--ghost btn--full btn--sm magnetic" target="_blank" rel="noopener"
+           href="${waLink(`Hola, quiero información sobre ${c.nombre.toLowerCase()} en Magia Fit Almería`)}">Más información</a>
+      </article>`).join('');
+  }
+
+  observeReveals();
 
   /* ── Formulario multipaso → WhatsApp ─────────────────────── */
   const form = $('#booking');

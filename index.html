@@ -302,19 +302,19 @@
 <section class="section section--alt" id="tarifas">
   <div class="container">
     <header class="sec-head reveal">
-      <p class="kicker">Tarifas transparentes</p>
-      <h2>Invierte en el único cuerpo <span class="grad">que vas a tener</span></h2>
-      <p class="sec-sub">Sin letra pequeña y sin permanencia. Elige cómo quieres pagarlo.</p>
-      <div class="switch" role="tablist" aria-label="Periodicidad de las tarifas">
-        <button role="tab" class="switch__b is-on" data-period="mensual" aria-selected="true">Mensual</button>
-        <button role="tab" class="switch__b" data-period="trimestral" aria-selected="false">Trimestral</button>
-        <button role="tab" class="switch__b" data-period="anual" aria-selected="false">Anual <em>-2 meses</em></button>
-      </div>
+      <p class="kicker">Tarifas</p>
+      <h2>Elige <span class="grad">cuántas horas</span> quieres entrenar</h2>
+      <p class="sec-sub">Entrenamiento en <b>grupo reducido de 4 a 6 personas</b>, con tu entrenador encima
+        en cada serie. Precio cerrado cada 4 semanas.</p>
     </header>
 
     <div class="plans" id="plans"><!-- generado por JS desde config.js --></div>
 
-    <p class="note reveal">✨ <b>Promoción de bienvenida:</b> matrícula 0 € y primera sesión de valoración gratuita para nuevos socios en Almería.</p>
+    <h3 class="sub-head reveal">¿Prefieres otra fórmula?</h3>
+    <div class="extras-grid" id="complementos"><!-- generado por JS desde config.js --></div>
+
+    <p class="note reveal">✨ <b>La primera valoración es gratuita.</b> Analizamos tu punto de partida y te
+      decimos qué opción encaja contigo, sin compromiso.</p>
   </div>
 </section>
 
@@ -359,9 +359,9 @@
     </header>
 
     <div class="faq" id="faq-list">
-      <details class="faq__i reveal"><summary>¿Cuánto cuesta entrenar en Magia Fit Almería?</summary><div><p>Tenemos tres planes: <b>START</b>, <b>MAGIA</b> y <b>ÉLITE</b>, con opción mensual, trimestral o anual. Puedes ver los precios actualizados en la <a href="#tarifas">sección de tarifas</a> o preguntarle directamente al asistente MAGI.</p></div></details>
-      <details class="faq__i reveal"><summary>¿Hay permanencia o matrícula?</summary><div><p>No hay permanencia en las cuotas mensuales y, durante la promoción de bienvenida, la matrícula es de 0 €.</p></div></details>
-      <details class="faq__i reveal"><summary>¿Puedo probar antes de apuntarme?</summary><div><p>Sí. La primera sesión de valoración y asesoramiento es gratuita: analizamos tu punto de partida y te contamos exactamente cómo sería tu plan.</p></div></details>
+      <details class="faq__i reveal"><summary>¿Cuánto cuesta entrenar en Magia Fit Almería?</summary><div><p>El entrenamiento en grupo reducido va desde <b>88 € cada 4 semanas</b> (2 h por semana) hasta <b>160 €</b> (5 h por semana). También hay bonos de sesiones sueltas, plan online y masaje deportivo. Lo tienes todo en la <a href="#tarifas">sección de tarifas</a>.</p></div></details>
+      <details class="faq__i reveal"><summary>¿Cuánta gente hay en cada grupo?</summary><div><p>Entre <b>4 y 6 personas</b>. Lo justo para que el entrenador pueda corregirte a ti, no para llenar la sala.</p></div></details>
+      <details class="faq__i reveal"><summary>¿Puedo probar antes de apuntarme?</summary><div><p>Sí. La <b>primera valoración es gratuita</b>: analizamos tu punto de partida y te contamos exactamente cómo sería tu plan.</p></div></details>
       <details class="faq__i reveal"><summary>Nunca he pisado un gimnasio, ¿es para mí?</summary><div><p>Especialmente para ti. Empezamos por técnica y progresión suave, con un coach al lado corrigiendo cada movimiento. Aquí nadie te va a mirar raro.</p></div></details>
       <details class="faq__i reveal"><summary>¿Qué valoración tenéis?</summary><div><p><b>5,0 estrellas</b> de media con <b>142 reseñas</b> en Google. Puedes leerlas todas antes de decidirte.</p></div></details>
       <details class="faq__i reveal"><summary>¿En cuánto tiempo se ven resultados?</summary><div><p>Con constancia, los primeros cambios de fuerza y energía llegan en 3-4 semanas; los cambios visibles suelen notarse a partir de la semana 8-12.</p></div></details>
@@ -524,10 +524,9 @@
       "logo": "https://magia-fit-almeria.vercel.app/assets/img/logo.png",
       "image": "https://magia-fit-almeria.vercel.app/assets/img/og-cover.jpg",
       "telephone": "+34637254347",
-      "email": "nutriciondietafit@gmail.com",
+      "email": "magiafitalmeria2017@gmail.com",
       "priceRange": "€€",
       "currenciesAccepted": "EUR",
-      "paymentAccepted": "Efectivo, Tarjeta, Bizum, Domiciliación",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Almería",
@@ -551,11 +550,16 @@
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Planes de entrenamiento Magia Fit Almería",
+        "name": "Servicios de Magia Fit Almería",
         "itemListElement": [
-          {"@type":"Offer","name":"Plan START","priceCurrency":"EUR","price":"34.90","description":"Acceso libre a sala, rutina inicial y medición corporal."},
-          {"@type":"Offer","name":"Plan MAGIA","priceCurrency":"EUR","price":"59.90","description":"Entrenamiento personalizado y clases dirigidas ilimitadas."},
-          {"@type":"Offer","name":"Plan ÉLITE","priceCurrency":"EUR","price":"129.00","description":"Entrenamiento personal 1 a 1 con seguimiento semanal."}
+          {"@type":"Offer","name":"Grupo reducido BASIC","priceCurrency":"EUR","price":"88","description":"2 horas por semana en grupo reducido de 4 a 6 personas, cada 4 semanas."},
+          {"@type":"Offer","name":"Grupo reducido STANDARD","priceCurrency":"EUR","price":"129","description":"3 horas por semana en grupo reducido de 4 a 6 personas, cada 4 semanas."},
+          {"@type":"Offer","name":"Grupo reducido STANDARD +","priceCurrency":"EUR","price":"150","description":"4 horas por semana en grupo reducido de 4 a 6 personas, cada 4 semanas."},
+          {"@type":"Offer","name":"Grupo reducido PREMIUM","priceCurrency":"EUR","price":"160","description":"5 horas por semana en grupo reducido de 4 a 6 personas, cada 4 semanas."},
+          {"@type":"Offer","name":"Bono de 5 sesiones","priceCurrency":"EUR","price":"200","description":"Bono de 5 sesiones de entrenamiento."},
+          {"@type":"Offer","name":"Bono de 10 sesiones","priceCurrency":"EUR","price":"370","description":"Bono de 10 sesiones de entrenamiento."},
+          {"@type":"Offer","name":"Entrenamiento online","priceCurrency":"EUR","price":"180","description":"12 semanas de entrenamiento online con 15 minutos de videollamada semanal."},
+          {"@type":"Offer","name":"Masaje deportivo","priceCurrency":"EUR","price":"35","description":"Sesión de una hora de masaje deportivo específico. Bonos de 5 sesiones por 150 € y de 10 por 280 €."}
         ]
       },
       "potentialAction": {
@@ -576,9 +580,9 @@
       "@type": "FAQPage",
       "@id": "https://magia-fit-almeria.vercel.app/#faq",
       "mainEntity": [
-        {"@type":"Question","name":"¿Cuánto cuesta entrenar en Magia Fit Almería?","acceptedAnswer":{"@type":"Answer","text":"Magia Fit Almería tiene tres planes: START desde 34,90 €/mes, MAGIA desde 59,90 €/mes y ÉLITE desde 129 €/mes, con opción mensual, trimestral o anual."}},
-        {"@type":"Question","name":"¿Hay permanencia o matrícula en el gimnasio?","acceptedAnswer":{"@type":"Answer","text":"No hay permanencia en las cuotas mensuales y durante la promoción de bienvenida la matrícula es de 0 €."}},
-        {"@type":"Question","name":"¿Puedo probar el gimnasio antes de apuntarme?","acceptedAnswer":{"@type":"Answer","text":"Sí. La primera sesión de valoración y asesoramiento es gratuita para conocer tu punto de partida y explicarte tu plan."}},
+        {"@type":"Question","name":"¿Cuánto cuesta entrenar en Magia Fit Almería?","acceptedAnswer":{"@type":"Answer","text":"El entrenamiento en grupo reducido de 4 a 6 personas cuesta desde 88 € cada 4 semanas por 2 horas semanales hasta 160 € por 5 horas semanales. También hay bonos de sesiones desde 200 €, plan online de 12 semanas por 180 € y masaje deportivo desde 35 €."}},
+        {"@type":"Question","name":"¿Cuántas personas hay en cada grupo?","acceptedAnswer":{"@type":"Answer","text":"Los grupos de Magia Fit Almería son reducidos, de 4 a 6 personas, para que el entrenador pueda corregir la técnica de cada socio."}},
+        {"@type":"Question","name":"¿Puedo probar el gimnasio antes de apuntarme?","acceptedAnswer":{"@type":"Answer","text":"Sí. La primera valoración es gratuita: se analiza el punto de partida y se explica el plan sin compromiso."}},
         {"@type":"Question","name":"¿Qué valoración tiene Magia Fit Almería?","acceptedAnswer":{"@type":"Answer","text":"Magia Fit Almería tiene una media de 5,0 estrellas con 142 reseñas en Google."}},
         {"@type":"Question","name":"¿En cuánto tiempo se ven resultados?","acceptedAnswer":{"@type":"Answer","text":"Con constancia, los cambios de fuerza y energía llegan en 3-4 semanas y los cambios visibles suelen notarse entre la semana 8 y la 12."}},
         {"@type":"Question","name":"¿Magia Fit ofrece entrenamiento online?","acceptedAnswer":{"@type":"Answer","text":"Sí, ofrecemos planes online con seguimiento por vídeo para quienes viven fuera de Almería o viajan con frecuencia."}}

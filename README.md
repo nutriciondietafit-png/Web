@@ -12,11 +12,12 @@ Estos puntos están rellenos con **contenido provisional** y hay que revisarlos:
 
 | Qué | Dónde | Nota |
 |---|---|---|
-| **Tarifas** (34,90 / 59,90 / 129 €) | `assets/js/config.js` → `tarifas` | ⚠️ **Conflicto sin resolver.** Los precios son inventados y, además, una publicación de Instagram dice *«NO cobramos por hora. Cobramos por objetivo»*, que no encaja con tres cuotas mensuales fijas. Hay que decidir el modelo real y rehacer la sección. También aparecen en el JSON-LD de `index.html` (`hasOfferCatalog` y `FAQPage`) y en las respuestas del bot. |
+| **Tarifas** | `assets/js/config.js` → `grupoReducido` y `complementos` | ✅ Ya son las reales, tomadas de la Tabla de Servicios. Si cambian, actualiza también el JSON-LD de `index.html` (`hasOfferCatalog` y `FAQPage`), que no se genera solo. |
 | **Horario** | `assets/js/config.js` → `horario` | Ejemplo. Actualiza texto y `openingHoursSpecification` en `index.html`. |
 | **Dirección y coordenadas** | `assets/js/config.js` → `direccion`, y `geo` en el JSON-LD | Ahora mismo solo pone “Almería, España”. |
 | **Cifras del hero** | `index.html` → `.hero__stats` | Reales: 100+ transformaciones, 8 años, 5,0 con 142 reseñas en Google y seguimiento 24 h. Actualiza el número de reseñas cuando crezca (también en `config.js` → `google`, que es lo que cita el bot). |
 | **Nutrición** | — | Retirada de toda la web *por ahora*, a petición del cliente: método, planes, FAQ, textos SEO, datos estructurados, servicios del pie y respuestas del bot. Para recuperarla habría que reponerla en esos mismos sitios. |
+| **Horario y dirección** | `assets/js/config.js` → `horario`, `direccion` | ⚠️ Siguen siendo de ejemplo. También hay que actualizar `openingHoursSpecification` y `geo` en el JSON-LD de `index.html`. |
 | **Consentimiento de imagen** | sección `#transformaciones` | La foto y los datos (−8 kg / +2 kg) salen de vuestro Instagram. Asegúrate de tener el consentimiento por escrito de la socia. |
 | **Datos fiscales** | `aviso-legal.html`, `privacidad.html` | Sustituye `[RAZÓN SOCIAL]`, `[NIF/CIF]` y `[DIRECCIÓN COMPLETA]`. |
 | **Dominio** | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` | Ahora apuntan a `https://magia-fit-almeria.vercel.app`. Cuando tengas el dominio propio, cámbialo con `./cambiar-dominio.sh https://tu-dominio.es`. |
@@ -106,6 +107,25 @@ Todos los enlaces se generan con `https://wa.me/<número>?text=<mensaje precarga
 botón lleva un mensaje distinto para saber de qué sección viene el contacto.
 
 ---
+
+## 💶 Tarifas
+
+Todas salen de la **Tabla de Servicios** y viven en `assets/js/config.js`:
+
+| Grupo reducido (4-6 personas) | Horas/semana | Cada 4 semanas | Sale a |
+|---|---|---|---|
+| BASIC | 2 h | 88 € | 11,00 €/h |
+| STANDARD | 3 h | 129 € | 10,75 €/h |
+| STANDARD + | 4 h | 150 € | 9,38 €/h |
+| PREMIUM | 5 h | 160 € | 8,00 €/h |
+
+- **Bonos de sesiones:** 5 por 200 € · 10 por 370 € · primera valoración gratuita
+- **Online:** 180 € las 12 semanas, con 15 min de videollamada semanal
+- **Masaje deportivo (1 h):** suelta 35 € · bono de 5 por 150 € (30 €/ud) · bono de 10 por 280 € (28 €/ud)
+
+El precio por hora y el número de sesiones se calculan solos, no hay que escribirlos.
+La etiqueta «mejor precio por hora» del PREMIUM es un hecho derivado de sus propios
+números, no una afirmación de marketing.
 
 ## 🤖 MAGI, el asistente virtual
 

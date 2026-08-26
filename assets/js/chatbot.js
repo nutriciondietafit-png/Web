@@ -29,8 +29,8 @@
     `<a href="${wa(msg)}" target="_blank" rel="noopener">${txt}</a>`;
 
   /* ── Respuestas ──────────────────────────────────────────── */
-  const tarifasTexto = () => (CFG.tarifas || []).map(p =>
-    `<li><b>${p.nombre}</b> · ${eur(p.mensual)}/mes — ${p.resumen}</li>`).join('');
+  const tarifasTexto = () => (CFG.grupoReducido || []).map(p =>
+    `<li><b>${p.nombre}</b> · ${p.horas} h/semana — <b>${eur(p.precio)}</b> cada 4 semanas</li>`).join('');
 
   const INTENTS = [
     {
@@ -41,19 +41,29 @@
     {
       id: 'precio',
       keys: ['precio', 'precios', 'tarifa', 'tarifas', 'cuota', 'cuanto cuesta', 'cuanto vale', 'coste', 'cuesta', 'vale', 'pagar', 'mensualidad', 'euros', 'barato', 'caro', 'presupuesto'],
-      reply: () => `Estas son nuestras tarifas mensuales 💳<ul>${tarifasTexto()}</ul>
-        Con <b>trimestral</b> o <b>anual</b> sale bastante más económico (el anual te ahorra unos 2 meses).<br>
-        ${CFG.extras.matricula} ${CFG.extras.permanencia}<br><br>
-        👉 <a href="#tarifas">Ver el detalle de los planes</a> · ${waBtn('Preguntar por WhatsApp', 'Hola, quiero información detallada de las tarifas de Magia Fit 💪')}`
+      reply: () => `Entrenamos en <b>grupo reducido de 4 a 6 personas</b>, y eliges cuántas horas por semana 💳<ul>${tarifasTexto()}</ul>
+        Cuantas más horas, más barata sale la hora: el PREMIUM sale a 8 € la hora.<br>
+        También hay <b>bonos de sesiones</b>, <b>plan online</b> y <b>masaje deportivo</b>.<br><br>
+        ${CFG.extras.prueba}<br><br>
+        👉 <a href="#tarifas">Ver todas las tarifas</a> · ${waBtn('Preguntar por WhatsApp', 'Hola, quiero información sobre las tarifas de Magia Fit 💪')}`
     },
     {
-      id: 'plan-elite',
-      keys: ['entrenador personal', 'personal trainer', 'entrenamiento personal', 'elite', '1 a 1', 'uno a uno', 'coach'],
-      reply: () => {
-        const e = (CFG.tarifas || []).find(p => p.id === 'elite') || {};
-        return `El plan <b>ÉLITE</b> es entrenamiento personal 1 a 1 (${eur(e.mensual || 0)}/mes) e incluye:<ul>${(e.incluye || []).map(i => `<li>${i}</li>`).join('')}</ul>
-        Es el plan con el que más rápido se ven cambios. ¿Te reservo una llamada para valorarlo? <a href="#agenda">Agendar llamada</a>`;
-      }
+      id: 'grupo',
+      keys: ['entrenador personal', 'personal trainer', 'entrenamiento personal', 'grupo', 'cuantas personas', 'gente', 'individual', '1 a 1', 'uno a uno', 'coach', 'clases', 'clase dirigida', 'dirigidas'],
+      reply: () => `Se entrena en <b>grupo reducido de 4 a 6 personas</b>, con el entrenador encima corrigiendo técnica y cargas 💪<br>
+        No es una clase dirigida masiva: cada uno lleva su plan.<br><br>
+        Desde <b>${eur(CFG.grupoReducido[0].precio)} cada 4 semanas</b> (2 h/semana) hasta <b>${eur(CFG.grupoReducido[3].precio)}</b> (5 h/semana).<br>
+        Si prefieres ir a tu aire, hay <b>bonos de sesiones sueltas</b>: 5 por 200 € o 10 por 370 €.<br><br>
+        <a href="#tarifas">Ver tarifas</a>`
+    },
+    {
+      id: 'masaje',
+      keys: ['masaje', 'masajes', 'fisio', 'descarga', 'recuperacion', 'contractura'],
+      reply: () => `Sí, tenemos <b>masaje deportivo específico</b> de 1 hora 💆<ul>
+        <li>Sesión suelta — <b>35 €</b></li>
+        <li>Bono de 5 sesiones — <b>150 €</b> (30 € la sesión)</li>
+        <li>Bono de 10 sesiones — <b>280 €</b> (28 € la sesión)</li></ul>
+        ${waBtn('Reservar masaje', 'Hola, quiero reservar un masaje deportivo en Magia Fit')}`
     },
     {
       id: 'horario',
@@ -70,18 +80,14 @@
     {
       id: 'prueba',
       keys: ['prueba', 'probar', 'gratis', 'gratuita', 'primera clase', 'visita', 'conocer', 'ver el gimnasio', 'sin compromiso'],
-      reply: () => `Sí 🎁 <b>${CFG.extras.prueba}</b><br>Analizamos tu punto de partida, te enseñamos las instalaciones y te contamos cómo sería tu plan. Sin compromiso.<br><br>
+      reply: () => `Sí 🎁 <b>${CFG.extras.prueba}</b><br>Analizamos tu punto de partida, te enseñamos las instalaciones y te contamos qué opción encaja contigo. Sin compromiso.<br><br>
         👉 <a href="#agenda">Reservar mi sesión gratuita</a> o ${waBtn('reservarla por WhatsApp', 'Hola, quiero reservar la sesión de valoración gratuita 🎁')}`
     },
     {
-      id: 'permanencia',
-      keys: ['permanencia', 'matricula', 'darme de baja', 'baja', 'contrato', 'cancelar', 'compromiso', 'letra pequena'],
-      reply: () => `Tranquilo: <b>${CFG.extras.permanencia}</b> ${CFG.extras.matricula}<br>Puedes darte de baja avisando antes de la siguiente renovación, sin penalizaciones.`
-    },
-    {
-      id: 'pago',
-      keys: ['pago', 'pagar con', 'tarjeta', 'bizum', 'efectivo', 'domiciliacion', 'transferencia', 'financiar'],
-      reply: () => `${CFG.extras.pago} 💳 Si necesitas fraccionar el plan anual, coméntanoslo y lo vemos: ${waBtn('hablar de formas de pago', 'Hola, tengo una duda sobre las formas de pago')}`
+      id: 'condiciones',
+      keys: ['permanencia', 'matricula', 'darme de baja', 'baja', 'contrato', 'cancelar', 'compromiso', 'letra pequena', 'condiciones', 'pago', 'pagar con', 'tarjeta', 'bizum', 'efectivo', 'financiar'],
+      reply: () => `El grupo reducido se paga por <b>bloques de 4 semanas</b> y los bonos son de 5 o 10 sesiones, así que no te atas a nada largo.<br>
+        Para condiciones concretas y formas de pago te lo confirma el equipo al momento: ${waBtn('preguntar por WhatsApp', 'Hola, tengo una duda sobre condiciones y formas de pago')}`
     },
     {
       id: 'adelgazar',
@@ -94,7 +100,7 @@
       id: 'musculo',
       keys: ['masa muscular', 'ganar musculo', 'volumen', 'hipertrofia', 'fuerza', 'musculacion', 'engordar'],
       reply: () => `Para <b>ganar masa muscular</b> trabajamos progresión de cargas y técnica corregida sesión a sesión, midiendo el avance cada mes 💪<br>
-        El plan <b>MAGIA</b> suele ser el ideal para esto. <a href="#tarifas">Ver planes</a>`
+        Para esto conviene entrenar al menos <b>3 h por semana</b>: el plan STANDARD o superior. <a href="#tarifas">Ver tarifas</a>`
     },
     {
       id: 'principiante',
@@ -112,21 +118,8 @@
     {
       id: 'online',
       keys: ['online', 'a distancia', 'fuera de almeria', 'desde casa', 'viajo', 'remoto'],
-      reply: () => `Sí ✅ Tenemos <b>entrenamiento online</b>: plan personalizado, revisión de técnica por vídeo y seguimiento periódico. Ideal si vives fuera de Almería o viajas mucho.<br><br>
+      reply: () => `Sí ✅ <b>Entrenamiento online</b>: <b>180 € las 12 semanas</b>, con 15 min de videollamada cada semana y plan personalizado. Ideal si vives fuera de Almería o viajas mucho.<br><br>
         ${waBtn('Quiero info del plan online', 'Hola, me interesa el entrenamiento online de Magia Fit')}`
-    },
-    {
-      id: 'clases',
-      keys: ['clases', 'clase dirigida', 'dirigidas', 'hiit', 'grupo', 'colectivas', 'spinning', 'funcional'],
-      reply: () => `Tenemos <b>clases dirigidas</b> de fuerza, HIIT, movilidad y core en grupos reducidos (para no perder la técnica) ⚡<br>
-        Están incluidas de forma ilimitada en los planes MAGIA y ÉLITE. <a href="#tarifas">Ver planes</a>`
-    },
-    {
-      id: 'resenas',
-      keys: ['resenas', 'resena', 'opiniones', 'opinion', 'valoracion', 'valoraciones', 'estrellas', 'google', 'fiable', 'confianza', 'referencias'],
-      reply: () => `Tenemos <b>${CFG.google.nota} estrellas</b> de media con <b>${CFG.google.resenas} reseñas</b> en Google ⭐<br>
-        Son de socios reales, puedes leerlas todas antes de decidirte.<br><br>
-        ¿Quieres ser el siguiente? <a href="#agenda">Agendar llamada gratuita</a>`
     },
     {
       id: 'transformaciones',
@@ -215,6 +208,7 @@
     { t: '🔥 Perder grasa',    q: 'Quiero perder grasa' },
     { t: '💪 Entrenador personal', q: 'Info del entrenador personal' },
     { t: '⭐ Reseñas',          q: '¿Qué valoración tenéis?' },
+    { t: '💆 Masaje',         q: '¿Tenéis masaje deportivo?' },
     { t: '📍 Dónde estáis',    q: '¿Dónde estáis?' },
     { t: '📞 Agendar llamada', q: 'Quiero agendar una llamada' }
   ];
