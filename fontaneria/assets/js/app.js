@@ -1319,6 +1319,7 @@
       '<div class="cabecera__acciones">' +
         '<button class="btn btn--primario" data-accion="copia-descargar" type="button">Descargar copia</button>' +
         '<button class="btn" data-accion="copia-restaurar" type="button">Restaurar copia</button>' +
+        '<button class="btn" data-accion="copia-pegar" type="button">Pegar copia</button>' +
         '<button class="btn" data-accion="exportar-csv" type="button">Exportar facturas a CSV</button>' +
         '<button class="btn btn--peligro" data-accion="borrar-todo" type="button">Borrar todos los datos</button>' +
       '</div>' +
@@ -1413,7 +1414,7 @@
     capacidadDescargas().then(function (dl) {
       if (!dl) {
         if (window.claude && typeof window.claude.use === 'function') {
-          brindis('Este visor no deja guardar archivos: abre la aplicación en la web para descargar la copia.');
+          mostrarTexto(nombre, contenido);
           return;
         }
         descargaDirecta(nombre, contenido, tipo);
@@ -1429,12 +1430,68 @@
         if (codigo === 'extension_not_enabled' || codigo === 'rejected_extension') {
           dl.save({ filename: nombre.replace(/\.[a-z]+$/i, '.txt'), data: contenido }).then(function () {
             if (mensaje) brindis(mensaje);
-          }).catch(function () { brindis('No se ha podido guardar el archivo.'); });
+          }).catch(function () { mostrarTexto(nombre, contenido); });
           return;
         }
-        descargaDirecta(nombre, contenido, tipo);
-        if (mensaje) brindis(mensaje);
+        mostrarTexto(nombre, contenido);
       });
+    });
+  }
+
+  /* Cuando no se puede guardar un archivo, se enseña el contenido para copiarlo. */
+  function mostrarTexto(nombre, contenido) {
+    var fondo = abrirModal({
+      titulo: 'Copia de seguridad: ' + nombre,
+      ancho: true,
+      sinFoco: true,
+      cuerpo: '<div class="info" style="margin-bottom:12px">Aquí no se pueden guardar archivos. ' +
+        'Copia todo este texto y pégalo en una nota, un correo o un archivo de texto. ' +
+        'Para volver a cargarlo, usa <strong>Pegar copia</strong> en Ajustes.</div>' +
+        '<textarea id="txtCopia" readonly style="min-height:260px;font-family:var(--mono);font-size:.78rem">' +
+        esc(contenido) + '</textarea>',
+      pie: '<button class="btn" data-cerrar type="button">Cerrar</button>' +
+           '<button class="btn btn--primario" id="btnCopiarTexto" type="button">Copiar todo</button>'
+    });
+    fondo.querySelector('#btnCopiarTexto').addEventListener('click', function () {
+      var area = fondo.querySelector('#txtCopia');
+      area.focus();
+      area.select();
+      var hecho = false;
+      try { hecho = document.execCommand('copy'); } catch (err) { hecho = false; }
+      if (hecho) { brindis('Copiado al portapapeles.'); return; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(area.value).then(function () {
+          brindis('Copiado al portapapeles.');
+        }).catch(function () { brindis('Selecciona el texto y cópialo a mano.'); });
+        return;
+      }
+      brindis('Selecciona el texto y cópialo a mano.');
+    });
+  }
+
+  function dialogoPegarCopia() {
+    var fondo = abrirModal({
+      titulo: 'Pegar copia de seguridad',
+      ancho: true,
+      cuerpo: '<div class="aviso" style="margin-bottom:12px">Al restaurar se sustituyen todos los datos actuales ' +
+        '(clientes, presupuestos, facturas y tarifa) por los de la copia.</div>' +
+        '<div class="campo"><label for="txtPegarCopia">Pega aquí el contenido de la copia</label>' +
+        '<textarea id="txtPegarCopia" style="min-height:220px;font-family:var(--mono);font-size:.78rem" ' +
+        'placeholder="{ &quot;version&quot;: 1, ... }"></textarea></div>',
+      pie: '<button class="btn" data-cerrar type="button">Cancelar</button>' +
+           '<button class="btn btn--primario" id="btnRestaurarPegado" type="button">Restaurar</button>'
+    });
+    fondo.querySelector('#btnRestaurarPegado').addEventListener('click', function () {
+      var texto = fondo.querySelector('#txtPegarCopia').value.trim();
+      if (!texto) { brindis('Pega primero el contenido de la copia.'); return; }
+      try {
+        d = D.importar(texto);
+        cerrarModal();
+        render();
+        brindis('Copia restaurada.');
+      } catch (err) {
+        brindis('Ese texto no es una copia válida.');
+      }
     });
   }
 
@@ -1571,6 +1628,7 @@
         descargar('fontaneria-macael-copia-' + D.hoy() + '.json', D.exportar(), 'application/json', 'Copia descargada.');
         break;
       case 'copia-restaurar': $('#ficheroCopia').click(); break;
+      case 'copia-pegar': dialogoPegarCopia(); break;
       case 'borrar-todo':
         confirmar('Se borrarán clientes, presupuestos y facturas de este navegador. Descarga antes una copia. ¿Seguro?', function () {
           d = D.borrarTodo();
