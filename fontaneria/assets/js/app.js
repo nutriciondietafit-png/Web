@@ -1386,7 +1386,19 @@
 
   /* ── Descargas ──────────────────────────────────────────────────────── */
 
-  function descargar(nombre, contenido, tipo) {
+  /* Guardar un archivo. En el navegador se descarga directamente; dentro del
+     visor de Claude hay que pedirle permiso al usuario con la capacidad de descargas. */
+  var promesaDescargas = null;
+  function capacidadDescargas() {
+    if (!promesaDescargas) {
+      promesaDescargas = (window.claude && typeof window.claude.use === 'function')
+        ? Promise.resolve(window.claude.use('downloads')).catch(function () { return null; })
+        : Promise.resolve(null);
+    }
+    return promesaDescargas;
+  }
+
+  function descargaDirecta(nombre, contenido, tipo) {
     var blob = new Blob([contenido], { type: (tipo || 'text/plain') + ';charset=utf-8' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
@@ -1395,6 +1407,35 @@
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 800);
+  }
+
+  function descargar(nombre, contenido, tipo, mensaje) {
+    capacidadDescargas().then(function (dl) {
+      if (!dl) {
+        if (window.claude && typeof window.claude.use === 'function') {
+          brindis('Este visor no deja guardar archivos: abre la aplicación en la web para descargar la copia.');
+          return;
+        }
+        descargaDirecta(nombre, contenido, tipo);
+        if (mensaje) brindis(mensaje);
+        return;
+      }
+      dl.save({ filename: nombre, data: contenido }).then(function () {
+        if (mensaje) brindis(mensaje);
+      }).catch(function (err) {
+        var codigo = err && err.code;
+        if (codigo === 'declined') { brindis('Descarga cancelada.'); return; }
+        if (codigo === 'rate_limited') { brindis('Espera un momento y vuelve a intentarlo.'); return; }
+        if (codigo === 'extension_not_enabled' || codigo === 'rejected_extension') {
+          dl.save({ filename: nombre.replace(/\.[a-z]+$/i, '.txt'), data: contenido }).then(function () {
+            if (mensaje) brindis(mensaje);
+          }).catch(function () { brindis('No se ha podido guardar el archivo.'); });
+          return;
+        }
+        descargaDirecta(nombre, contenido, tipo);
+        if (mensaje) brindis(mensaje);
+      });
+    });
   }
 
   function exportarCSV() {
@@ -1414,8 +1455,7 @@
         return '"' + s.replace(/"/g, '""') + '"';
       }).join(';');
     }).join('\r\n');
-    descargar('facturas-' + D.hoy() + '.csv', '﻿' + csv, 'text/csv');
-    brindis('CSV descargado.');
+    descargar('facturas-' + D.hoy() + '.csv', '﻿' + csv, 'text/csv', 'CSV descargado.');
   }
 
   /* ── Eventos globales ───────────────────────────────────────────────── */
@@ -1528,8 +1568,7 @@
       case 'quitar-logo': d.empresa.logo = ''; guardar(); render(); break;
       case 'exportar-csv': exportarCSV(); break;
       case 'copia-descargar':
-        descargar('fontaneria-macael-copia-' + D.hoy() + '.json', D.exportar(), 'application/json');
-        brindis('Copia descargada.');
+        descargar('fontaneria-macael-copia-' + D.hoy() + '.json', D.exportar(), 'application/json', 'Copia descargada.');
         break;
       case 'copia-restaurar': $('#ficheroCopia').click(); break;
       case 'borrar-todo':
@@ -1550,6 +1589,7 @@
 
   /* ── Arranque ───────────────────────────────────────────────────────── */
 
+  capacidadDescargas();   // se resuelve en segundo plano para que el botón responda al instante
   var inicial = location.hash.slice(1);
   if (inicial && SECCIONES.some(function (s) { return s.id === inicial; })) vista = inicial;
   render();
