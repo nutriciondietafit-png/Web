@@ -263,3 +263,16 @@ assets/
 - Sin librerías externas: el único recurso de terceros son las tipografías de Google Fonts
   (si quieres 0 dependencias, descárgalas y sírvelas en local).
 - El canvas del hero se detiene al cambiar de pestaña.
+
+---
+
+## 🔧 Aplicación de Fontanería Macael
+
+Este repositorio aloja además una aplicación aparte, sin relación con la web de Magia Fit:
+**Fontanería Macael · presupuestos y facturas**, en `/fontaneria/`.
+
+- Se abre en `https://<dominio>/fontaneria/` y funciona sola en el navegador, sin servidor.
+- Sirve para organizar facturas y montar presupuestos pegando las mediciones de la obra.
+- Está marcada `noindex` y excluida en `robots.txt`, así que no aparece en Google ni se enlaza
+  desde la web de Magia Fit.
+- Instrucciones de uso y formato de las mediciones: [`fontaneria/README.md`](fontaneria/README.md).

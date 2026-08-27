@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fontanería Macael · Presupuestos y facturas</title>
+<meta name="description" content="Aplicación interna de Fontanería Macael para organizar facturas y crear presupuestos a partir de mediciones.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14202b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f6ea8'/%3E%3Cpath d='M20 8.5a4.6 4.6 0 1 0 3.4 3.4l-7 7-2.2-.5-.5-2.2 7-7ZM13.7 18.8 7 25.5' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<div class="movil-menu no-imprimir">
+  <button type="button" data-accion="menu" aria-label="Abrir menú">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <strong>Fontanería Macael</strong>
+</div>
+
+<div class="app">
+  <aside class="lateral no-imprimir">
+    <div class="marca">
+      <div class="marca__icono">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14.7 6.3a4 4 0 1 0 3 3l-6.1 6.1-1.9-.4-.4-1.9 6.1-6.1ZM9.3 14.7 3 21"/>
+        </svg>
+      </div>
+      <div class="marca__txt">
+        <strong>Fontanería Macael</strong>
+        <span>Presupuestos y facturas</span>
+      </div>
+    </div>
+
+    <nav class="menu" id="menu" aria-label="Secciones"></nav>
+
+    <div class="lateral__pie">
+      <strong>Los datos se guardan en este navegador.</strong>
+      Haz copia de seguridad desde Ajustes.
+    </div>
+  </aside>
+
+  <main class="principal" id="vista"></main>
+</div>
+
+<div class="brindis" id="brindis" role="status" aria-live="polite"></div>
+
+<noscript>
+  <p style="padding:24px">Esta aplicación necesita JavaScript activado para funcionar.</p>
+</noscript>
+
+<script src="assets/js/store.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

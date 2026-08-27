@@ -3,5 +3,6 @@ Allow: /
 Disallow: /aviso-legal.html
 Disallow: /privacidad.html
 Disallow: /cookies.html
+Disallow: /fontaneria/
 
 Sitemap: https://magia-fit-almeria.vercel.app/sitemap.xml
