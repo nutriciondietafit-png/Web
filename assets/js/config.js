@@ -1,88 +1,173 @@
 /* =====================================================================
-   MAGIA FIT ALMERÍA — CONFIGURACIÓN ÚNICA DEL SITIO
+   INDALODIVE — CONFIGURACIÓN ÚNICA DEL SITIO
    ---------------------------------------------------------------------
-   ⚠️  EDITA SOLO ESTE ARCHIVO para cambiar teléfono, tarifas, horarios,
-   dirección y textos del bot. Todo lo demás (web + chatbot + enlaces de
-   WhatsApp) lee estos datos automáticamente.
+   ⚠️  EDITA SOLO ESTE ARCHIVO para cambiar los enlaces de productos, los
+   textos del hero, el contacto y las cifras. La web (index.html) se
+   construye sola leyendo estos datos: no hace falta tocar el HTML para
+   añadir, quitar o reordenar un enlace.
 
-   ⚠️  DATOS PENDIENTES DE CONFIRMAR (marcados con REVISAR):
-       tarifas, horarios, dirección exacta y coordenadas.
+   ⚠️  TODO LO MARCADO CON «REVISAR» ES PROVISIONAL: son ejemplos puestos
+   para que la web se vea completa. Sustitúyelos por tus datos reales
+   antes de publicar.
    ===================================================================== */
-window.MAGIAFIT = {
-  marca: "Magia Fit Almería",
-  claim: "Tu transformación empieza hoy",
+window.INDALO = {
 
-  // --- Contacto ---
-  whatsapp: "34637254347",
-  telefonoBonito: "+34 637 254 347",
-  instagram: "magiafitalmeria",
-  instagramUrl: "https://www.instagram.com/magiafitalmeria/",
-  email: "magiafitalmeria2017@gmail.com",
+  /* ── Marca ──────────────────────────────────────────────────────── */
+  marca: "IndaloDive",
+  claim: "El azul empieza aquí",                       // REVISAR
+  subclaim: "Inmersiones, cursos y equipo. Todos mis enlaces, en un solo sitio.",
+  ubicacion: "Almería · Cabo de Gata",                 // REVISAR: tu zona real
 
-  // --- Reseñas oficiales de Google ---
-  google: { nota: "5,0", resenas: 142 },
-
-  // --- Localización (REVISAR: dirección y coordenadas exactas) ---
-  ciudad: "Almería",
-  direccion: "Almería, España",
-  codigoPostal: "04001",
-  zonas: ["Almería Centro", "El Zapillo", "Nueva Almería", "Retamar",
-          "Huércal de Almería", "Roquetas de Mar", "Aguadulce", "Vícar", "El Ejido"],
-  mapaUrl: "https://www.google.com/maps/search/?api=1&query=gimnasio+Almer%C3%ADa",
-
-  // --- Horarios (REVISAR) ---
-  horario: {
-    texto: "Lunes a viernes de 7:00 a 22:00 · Sábados de 9:00 a 14:00 · Domingos cerrado",
-    schema: [
-      { dias: ["Monday","Tuesday","Wednesday","Thursday","Friday"], abre: "07:00", cierra: "22:00" },
-      { dias: ["Saturday"], abre: "09:00", cierra: "14:00" }
-    ]
+  /* ── Instagram ──────────────────────────────────────────────────── */
+  instagram: {
+    usuario: "indalodive",
+    url: "https://www.instagram.com/indalodive/",
+    // Si usas un servicio de feed (Behold, EmbedSocial…), pega aquí la URL
+    // del JSON y la galería se actualizará sola en cada visita.
+    // Si lo dejas vacío, se usan las fotos de assets/js/feed.js, que genera
+    // el script scripts/sync-instagram.mjs. Ver README.
+    feedJson: ""
   },
 
-  // --- Tarifas reales (Tabla de Servicios de Magia Fit) ---
-  // El precio del grupo reducido es por cada 4 semanas.
-  grupoReducido: [
-    { id: "basic",         nombre: "BASIC",      horas: 2, precio: 88,  destacado: false },
-    { id: "standard",      nombre: "STANDARD",   horas: 3, precio: 129, destacado: false },
-    { id: "standard-plus", nombre: "STANDARD +", horas: 4, precio: 150, destacado: false },
-    { id: "premium",       nombre: "PREMIUM",    horas: 5, precio: 160, destacado: true  }
+  /* ── Contacto ───────────────────────────────────────────────────── */
+  whatsapp: "34600000000",                             // REVISAR: sin + ni espacios
+  telefonoBonito: "+34 600 000 000",                   // REVISAR
+  email: "hola@indalodive.com",                        // REVISAR
+  mapaUrl: "https://www.google.com/maps/search/?api=1&query=Cabo+de+Gata+buceo",  // REVISAR
+
+  /* ── Cifras del hero (REVISAR: pon las tuyas reales) ────────────── */
+  cifras: [
+    { valor: "+500", texto: "inmersiones guiadas" },
+    { valor: "12",   texto: "puntos de buceo" },
+    { valor: "5,0",  texto: "valoración media" }
   ],
 
-  complementos: [
+  /* ── Profundidad máxima del medidor lateral (efecto visual) ─────── */
+  profundidadMax: 40,
+
+  /* ── Categorías de los enlaces (los filtros de la sección) ──────── */
+  categorias: [
+    { id: "todos",       nombre: "Todos"       },
+    { id: "cursos",      nombre: "Cursos"      },
+    { id: "inmersiones", nombre: "Inmersiones" },
+    { id: "tienda",      nombre: "Tienda"      },
+    { id: "contacto",    nombre: "Contacto"    }
+  ],
+
+  /* ── ENLACES DE PRODUCTO ────────────────────────────────────────────
+     Esto es el corazón de la web. Cada objeto es una tarjeta.
+
+       id         identificador corto y único (se usa en las estadísticas)
+       categoria  una de las de arriba
+       titulo     nombre del producto
+       texto      una línea explicando qué es
+       precio     opcional; texto libre ("desde 60 €", "gratis"…)
+       etiqueta   opcional; distintivo de color ("Nuevo", "Últimas plazas"…)
+       destacado  true = tarjeta grande y resaltada (usa 1 o 2 como mucho)
+       icono      uno de: burbuja, bombona, olas, camara, tienda, whatsapp,
+                  instagram, mapa, calendario
+       url        ⚠️ REVISAR: aquí van TUS enlaces reales de reserva/compra
+       wa         true = el enlace se genera solo hacia tu WhatsApp con el
+                  texto de `mensaje`
+     ------------------------------------------------------------------ */
+  enlaces: [
     {
-      id: "bonos",
-      nombre: "Bonos de sesiones",
-      resumen: "Sesiones sueltas, a tu ritmo",
-      lineas: [ { concepto: "5 sesiones", precio: 200 }, { concepto: "10 sesiones", precio: 370 } ],
-      nota: "Primera valoración gratuita"
+      id: "bautismo",
+      categoria: "inmersiones",
+      titulo: "Bautismo de buceo",
+      texto: "Tu primera inmersión, sin experiencia previa y con instructor.",
+      precio: "desde 60 €",                            // REVISAR
+      etiqueta: "Más reservado",
+      destacado: true,
+      icono: "burbuja",
+      url: "#",                                        // REVISAR
+      wa: true,
+      mensaje: "¡Hola IndaloDive! Quiero reservar un bautismo de buceo 🤿"
     },
     {
-      id: "online",
-      nombre: "Entrenamiento online",
-      resumen: "Entrenes donde entrenes",
-      lineas: [ { concepto: "12 semanas", precio: 180 } ],
-      nota: "Incluye 15 min de videollamada cada semana"
+      id: "open-water",
+      categoria: "cursos",
+      titulo: "Curso Open Water",
+      texto: "Certifícate como buceador autónomo hasta 18 metros.",
+      precio: "desde 350 €",                           // REVISAR
+      icono: "bombona",
+      url: "#"                                         // REVISAR
     },
     {
-      id: "masaje",
-      nombre: "Masaje deportivo",
-      resumen: "Sesiones de 1 hora",
-      lineas: [ { concepto: "Sesión suelta", precio: 35 },
-                { concepto: "Bono de 5 sesiones", precio: 150, unidad: 30 },
-                { concepto: "Bono de 10 sesiones", precio: 280, unidad: 28 } ],
-      nota: "Masaje deportivo específico"
+      id: "advanced",
+      categoria: "cursos",
+      titulo: "Advanced y especialidades",
+      texto: "Profundidad, navegación, nocturna y buceo con nitrox.",
+      icono: "bombona",
+      url: "#"                                         // REVISAR
+    },
+    {
+      id: "inmersiones-guiadas",
+      categoria: "inmersiones",
+      titulo: "Inmersiones guiadas",
+      texto: "Para titulados: salidas a los mejores puntos de la zona.",
+      precio: "desde 40 €",                            // REVISAR
+      icono: "olas",
+      url: "#"                                         // REVISAR
+    },
+    {
+      id: "snorkel",
+      categoria: "inmersiones",
+      titulo: "Rutas de snorkel",
+      texto: "Plan en familia, sin botella y desde la superficie.",
+      etiqueta: "Familias",
+      icono: "mapa",
+      url: "#"                                         // REVISAR
+    },
+    {
+      id: "fotos",
+      categoria: "tienda",
+      titulo: "Fotos y vídeo de tu inmersión",
+      texto: "Te llevas el recuerdo editado el mismo día.",
+      icono: "camara",
+      url: "#"                                         // REVISAR
+    },
+    {
+      id: "equipo",
+      categoria: "tienda",
+      titulo: "Mi equipo de buceo",
+      texto: "Lo que uso y recomiendo, con enlaces directos.",
+      etiqueta: "Nuevo",
+      icono: "tienda",
+      url: "#"                                         // REVISAR
+    },
+    {
+      id: "reservar",
+      categoria: "contacto",
+      titulo: "Reserva por WhatsApp",
+      texto: "Cuéntame qué buscas y te propongo fecha y plan.",
+      destacado: true,
+      icono: "whatsapp",
+      wa: true,
+      mensaje: "¡Hola IndaloDive! Vengo de la web y quiero información 🤿"
+    },
+    {
+      id: "instagram",
+      categoria: "contacto",
+      titulo: "Sígueme en Instagram",
+      texto: "Fondos, fauna y cada salida, en @indalodive.",
+      icono: "instagram",
+      url: "https://www.instagram.com/indalodive/"
     }
   ],
 
-  // Datos que figuran en la tabla de servicios
-  extras: {
-    prueba: "La primera valoración es GRATUITA.",
-    grupo: "Se entrena en grupo reducido, de 4 a 6 personas."
+  /* ── Bloque «Sobre» (REVISAR: escríbelo con tus palabras) ───────── */
+  sobre: {
+    titulo: "Bajo la superficie",
+    texto: "IndaloDive nace de una idea sencilla: que cualquiera pueda asomarse a lo que hay debajo. Grupos pequeños, material revisado y un ritmo tranquilo para que la inmersión se disfrute, no se aguante.",
+    puntos: [
+      "Grupos reducidos",
+      "Material incluido",
+      "Instructor titulado",                            // REVISAR
+      "Fotos de recuerdo"
+    ]
   },
 
-  servicios: [
-    "Entrenamiento personal", "Musculación y fuerza", "Pérdida de grasa",
-    "Ganancia de masa muscular", "Readaptación de lesiones",
-    "Clases dirigidas", "Entrenamiento online", "Recomposición corporal"
-  ]
+  /* ── Pie ────────────────────────────────────────────────────────── */
+  aviso: "Las salidas están sujetas a las condiciones del mar y a la normativa vigente."
 };

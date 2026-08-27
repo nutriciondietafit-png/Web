@@ -1,265 +1,204 @@
-# Magia Fit Almería — web oficial
+# IndaloDive — web oficial
 
-Landing page de alto rendimiento para **gimnasio y entrenamiento personal en Almería**, con estética *lujo futurista*, SEO local, galería de Instagram, comparador de transformaciones, asistente virtual (**MAGI**) y un embudo cuyo único objetivo es **agendar llamadas** o **derivar a WhatsApp**.
+Página web de **@indalodive**: un *link in bio* con esteroides. Su único trabajo es
+llevar a quien llega desde Instagram al enlace del producto que le interesa
+(bautismos, cursos, inmersiones, snorkel, tienda) y, si tiene dudas, ponerlo en
+WhatsApp contigo en un toque.
 
-Sitio 100 % estático: HTML + CSS + JavaScript sin dependencias ni build. Se publica tal cual en cualquier hosting.
+Estética minimalista de fondo marino: la página **desciende** mientras haces
+scroll —el agua se oscurece, la luz se apaga y un medidor lateral marca los
+metros— con burbujas, galería de Instagram con visor a pantalla completa y
+filtros por tipo de actividad.
+
+Sitio 100 % estático: HTML + CSS + JavaScript, sin dependencias ni compilación.
+Se publica tal cual en cualquier hosting.
 
 ---
 
 ## ⚠️ Antes de publicar (obligatorio)
 
-Estos puntos están rellenos con **contenido provisional** y hay que revisarlos:
+Todo esto está relleno con **contenido de ejemplo** y hay que revisarlo. Está
+marcado con `REVISAR` dentro de `assets/js/config.js`.
 
 | Qué | Dónde | Nota |
 |---|---|---|
-| **Tarifas** | `assets/js/config.js` → `grupoReducido` y `complementos` | ✅ Ya son las reales, tomadas de la Tabla de Servicios. Si cambian, actualiza también el JSON-LD de `index.html` (`hasOfferCatalog` y `FAQPage`), que no se genera solo. |
-| **Horario** | `assets/js/config.js` → `horario` | Ejemplo. Actualiza texto y `openingHoursSpecification` en `index.html`. |
-| **Dirección y coordenadas** | `assets/js/config.js` → `direccion`, y `geo` en el JSON-LD | Ahora mismo solo pone “Almería, España”. |
-| **Cifras del hero** | `index.html` → `.hero__stats` | Reales: 100+ transformaciones, 8 años, 5,0 con 142 reseñas en Google y seguimiento 24 h. Actualiza el número de reseñas cuando crezca (también en `config.js` → `google`, que es lo que cita el bot). |
-| **Nutrición** | — | Retirada de toda la web *por ahora*, a petición del cliente: método, planes, FAQ, textos SEO, datos estructurados, servicios del pie y respuestas del bot. Para recuperarla habría que reponerla en esos mismos sitios. |
-| **Horario y dirección** | `assets/js/config.js` → `horario`, `direccion` | ⚠️ Siguen siendo de ejemplo. También hay que actualizar `openingHoursSpecification` y `geo` en el JSON-LD de `index.html`. |
-| **Consentimiento de imagen** | sección `#transformaciones` | La foto y los datos (−8 kg / +2 kg) salen de vuestro Instagram. Asegúrate de tener el consentimiento por escrito de la socia. |
-| **Datos fiscales** | `aviso-legal.html`, `privacidad.html` | Sustituye `[RAZÓN SOCIAL]`, `[NIF/CIF]` y `[DIRECCIÓN COMPLETA]`. |
-| **Dominio** | `index.html` (canonical, OG, JSON-LD), `robots.txt`, `sitemap.xml` | Ahora apuntan a `https://magia-fit-almeria.vercel.app`. Cuando tengas el dominio propio, cámbialo con `./cambiar-dominio.sh https://tu-dominio.es`. |
+| **Enlaces de producto** | `assets/js/config.js` → `enlaces` | Ahora mismo 6 apuntan a `"#"`. Pon las URLs reales de reserva/compra. Mientras haya alguno sin poner, al abrir la web en local sale un aviso naranja abajo a la izquierda. |
+| **WhatsApp** | `config.js` → `whatsapp`, `telefonoBonito` | Es `+34 600 000 000` de ejemplo. El número va sin `+` ni espacios: `34XXXXXXXXX`. |
+| **Correo** | `config.js` → `email` | Ejemplo: `hola@indalodive.com`. |
+| **Cifras del hero** | `config.js` → `cifras` | +500 inmersiones, 12 puntos, 5,0 de nota son inventadas. Pon las tuyas o quita las que no puedas justificar. |
+| **Ubicación y mapa** | `config.js` → `ubicacion`, `mapaUrl` | Pone «Almería · Cabo de Gata». Cámbialo por tu zona real y enlaza tu punto en Google Maps. |
+| **Precios** | `config.js` → `enlaces[].precio` | «desde 60 €», «desde 350 €»… son ejemplos. |
+| **Texto de «Sobre mí»** | `config.js` → `sobre` | Escríbelo con tus palabras: es lo que más convierte. |
+| **Fotos de Instagram** | `assets/img/instagram/` + `assets/js/feed.js` | Son ilustraciones de relleno. Ver [📸 Fotos de Instagram](#-fotos-de-instagram). |
+| **Datos fiscales** | `aviso-legal.html`, `privacidad.html` | Sustituye `[NOMBRE O RAZÓN SOCIAL]`, `[NIF/CIF]`, `[DIRECCIÓN COMPLETA]` y `[CORREO DE CONTACTO]`. En España son obligatorios para una web de actividad comercial. |
+| **Dominio** | `index.html` (canonical, Open Graph, JSON-LD), `robots.txt`, `sitemap.xml` | Ahora apuntan a `https://indalodive.vercel.app`. Cuando tengas dominio propio: `./cambiar-dominio.sh https://tu-dominio.es` |
 
 ---
 
-## 📸 Imágenes
+## 🔗 Cambiar los enlaces (lo que más vas a tocar)
 
-Todas las imágenes de la web son **material real de @magiafitalmeria**, recortado a
-partir de capturas del perfil: se eliminó el interfaz de Instagram (barra de estado,
-cabecera, barra de acciones y pie) y la insignia de carrusel, y se exportaron en 4:5
-como JPEG progresivo.
-
-```
-assets/img/logo.png                                        Escudo oficial, fondo transparente
-assets/img/favicon.png                                     Icono de pestaña
-assets/img/og-cover.jpg                                    Vista previa al compartir el enlace
-assets/img/instagram/01-analizamos.jpg  …  11-siete-meses.jpg   11 publicaciones (900x1125)
-assets/img/transformaciones/01-menos-100kg.jpg                  Casos reales (900x1125)
-assets/img/transformaciones/02-recomposicion-4-meses.jpg
-assets/img/transformaciones/03-recomposicion-3-meses.jpg
-```
-
-Retoques que hubo que hacer más allá de recortar el interfaz:
-
-- `08-readaptacion`: la insignia «1/7» del carrusel tapaba el escudo de la marca de
-  agua. Se limpió la esquina y se repintó el escudo con `logo.png` al 55 % de opacidad.
-- `06-numeros`: había avatares del interfaz de Instagram sobre la franja inferior.
-  Se rellenó clonando el bokeh limpio del lado derecho, con los bordes difuminados.
-- `07-salud-lesiones`: los avatares caían encima del botón «¡envíanos tu mensaje!»,
-  y no se podía reconstruir el texto tapado. Se recortó por encima del botón y se
-  extendió el suelo hacia abajo, muy desenfocado y oscurecido, hasta recuperar el 4:5.
-  El resultado se lee como una sombra de profundidad de campo.
-
-
-Además de recortar el interfaz, en dos publicaciones hubo que retocar:
-en `05-readaptacion` la insignia «1/7» del carrusel tapaba el escudo de la marca de
-agua, así que se limpió la esquina y se repintó el escudo con `logo.png` al 55 % de
-opacidad; en `06-numeros` había avatares del interfaz de Instagram sobre la franja
-inferior, que se rellenó clonando el bokeh limpio del lado derecho.
-
-
-### Cambiar las publicaciones de la galería
-
-La galería muestra **6 de las 11 publicaciones** preparadas, en una rejilla de 3x2
-(3 / 2 / 1 columnas según el ancho). Las otras cinco siguen en `assets/img/instagram/`
-listas para entrar: no pesan nada porque la página no las carga.
-
-En pantalla ahora mismo: `01-analizamos`, `02-hacerlo-bien`, `03-esto-es-magiafit`,
-`06-numeros`, `07-salud-lesiones` y `11-siete-meses`.
-En reserva: `04-entrenas-solo`, `05-avanzas`, `08-readaptacion`, `09-objetivos`
-y `10-por-objetivo`.
-
-Para intercambiar una, cambia el `src` y el `alt` de su bloque `<a class="ig-card">`
-en la sección `#instagram` de `index.html`. Si añades o quitas tarjetas, procura
-dejar un múltiplo de 3 para que no queden huecos en la última fila.
-
-Para meter una publicación nueva, guárdala en `assets/img/instagram/` en 4:5
-(900x1125) y duplica un bloque `<a class="ig-card">`.
-
-### Añadir más transformaciones
-
-La sección `#transformaciones` muestra **tres casos** con la imagen compuesta tal y
-como se publica en Instagram. Para añadir otro, duplica un bloque `<figure class="caso">`
-y cambia la imagen, el tiempo y las cifras. La clase `caso--top` marca el destacado.
-
-> Si algún día tienes **pares de fotos sueltas** de antes y después (mismo encuadre,
-> misma distancia y misma luz), se puede recuperar el comparador deslizante que había
-> antes: es mucho más vistoso, pero necesita las dos fotos por separado, no la
-> composición ya montada.
-
-**Importante:** las fotos de transformaciones son datos de salud según el RGPD.
-Publica solo con el consentimiento por escrito de la persona.
-
-### Feed automático de Instagram
-Si prefieres que la galería se actualice sola, usa un widget de terceros (Elfsight,
-LightWidget, Behold, SnapWidget) o la *Instagram Basic Display API*, y sustituye el
-`<div class="ig-grid">` por el embed correspondiente.
-
-### Sobre el logo
-`assets/img/logo.png` es el escudo oficial con **fondo transparente**: en tema oscuro
-se muestra en blanco y en tema claro el CSS lo invierte a negro (`--logo-filter`).
-Si lo cambias, mantén el fondo transparente y la marca en blanco.
-
-## ☎️ Teléfono y enlaces de WhatsApp
-
-El número **+34 637 254 347** está centralizado en `assets/js/config.js`:
-
-```js
-whatsapp: "34637254347",        // sin +, sin espacios
-telefonoBonito: "+34 637 254 347"
-```
-
-Cambiarlo ahí actualiza automáticamente: botón flotante, botones del hero, tarifas, formulario,
-pie de página, FAQ y todas las respuestas del bot. La única referencia adicional está en el
-JSON-LD de `index.html` (`"telephone"`).
-
-Todos los enlaces se generan con `https://wa.me/<número>?text=<mensaje precargado>`, y cada
-botón lleva un mensaje distinto para saber de qué sección viene el contacto.
-
----
-
-## 💶 Tarifas
-
-Todas salen de la **Tabla de Servicios** y viven en `assets/js/config.js`:
-
-| Grupo reducido (4-6 personas) | Horas/semana | Cada 4 semanas | Sale a |
-|---|---|---|---|
-| BASIC | 2 h | 88 € | 11,00 €/h |
-| STANDARD | 3 h | 129 € | 10,75 €/h |
-| STANDARD + | 4 h | 150 € | 9,38 €/h |
-| PREMIUM | 5 h | 160 € | 8,00 €/h |
-
-- **Bonos de sesiones:** 5 por 200 € · 10 por 370 € · primera valoración gratuita
-- **Online:** 180 € las 12 semanas, con 15 min de videollamada semanal
-- **Masaje deportivo (1 h):** suelta 35 € · bono de 5 por 150 € (30 €/ud) · bono de 10 por 280 € (28 €/ud)
-
-El precio por hora y el número de sesiones se calculan solos, no hay que escribirlos.
-La etiqueta «mejor precio por hora» del PREMIUM es un hecho derivado de sus propios
-números, no una afirmación de marketing.
-
-## 🤖 MAGI, el asistente virtual
-
-`assets/js/chatbot.js` — bot por reglas, sin servidor, sin coste y sin dependencias.
-
-- Entiende ~20 intenciones: tarifas, horarios, ubicación, clase de prueba, permanencia,
-  formas de pago, nutrición, perder grasa, ganar músculo, principiantes, lesiones, online,
-  clases dirigidas, transformaciones, Instagram, contacto, agendar…
-- Normaliza acentos y signos, así que «¿cuanto cuesta?» y «¿Cuánto cuesta?» funcionan igual.
-- Lee las tarifas de `config.js`: si cambias los precios, el bot los cambia solos.
-- Botones de respuesta rápida + salida a WhatsApp siempre visible.
-- Tras 3 preguntas recuerda el CTA de la llamada.
-
-**Añadir una respuesta nueva:** añade un objeto al array `INTENTS`:
+Todo vive en `assets/js/config.js`. **No hace falta tocar el HTML**: la web se
+construye sola con esa lista. Añadir un producto es añadir un objeto:
 
 ```js
 {
-  id: 'ducha',
-  keys: ['ducha', 'duchas', 'vestuario', 'taquilla'],
-  reply: () => `Sí, tenemos vestuarios con duchas y taquillas 🚿`
+  id: "nocturna",                 // identificador corto y único
+  categoria: "inmersiones",       // cursos · inmersiones · tienda · contacto
+  titulo: "Inmersión nocturna",
+  texto: "Otro mar completamente distinto, con linterna.",
+  precio: "55 €",                 // opcional
+  etiqueta: "Últimas plazas",     // opcional, se ve como distintivo naranja
+  destacado: false,               // true = tarjeta grande (usa 1 o 2 como mucho)
+  icono: "burbuja",               // burbuja bombona olas camara tienda
+                                  // whatsapp instagram mapa calendario correo
+  url: "https://…"                // el enlace real
 }
 ```
 
-Si algún día quieres un bot con IA real, el punto de enganche es la función `send()`:
-sustituye `match(text)` por una llamada a tu backend (nunca pongas una API key en el front).
+Si en vez de una URL quieres que el botón abra WhatsApp con un mensaje escrito,
+cambia `url` por:
+
+```js
+  wa: true,
+  mensaje: "¡Hola! Quiero información sobre la inmersión nocturna 🤿"
+```
+
+Los filtros de arriba (`Todos`, `Cursos`, `Inmersiones`…) se generan solos con
+las categorías que estén en uso y llevan el contador al día. Si añades una
+categoría nueva, apúntala también en `categorias`.
+
+**Medir qué enlace funciona:** cada tarjeta manda un evento `clic_enlace` con su
+`id`. Si algún día pones Google Analytics o Meta Pixel, verás sin tocar nada
+qué producto es el que más clics recibe.
 
 ---
 
-## 🔍 SEO incluido
+## 📸 Fotos de Instagram
 
-- `<title>` y meta description orientados a **«gimnasio en Almería»**.
-- Datos estructurados JSON-LD: `ExerciseGym` + `LocalBusiness`, `WebSite`, `FAQPage`,
-  `BreadcrumbList` y `OfferCatalog` con los tres planes.
-- Metadatos geográficos (`geo.region`, `geo.position`, `ICBM`) y `areaServed` con los municipios.
-- Bloque de texto local con palabras clave y las zonas de la provincia.
-- Open Graph + Twitter Card, canonical, `hreflang`, `robots.txt`, `sitemap.xml` y `site.webmanifest`.
-- HTML semántico, jerarquía de encabezados correcta, `alt` descriptivos, `loading="lazy"`.
+Instagram **no deja que una web lea el perfil directamente**: hay que pasar por
+su API con un token, o por un servicio que lo haga por ti. Por eso la galería
+sale de `assets/js/feed.js`. Tienes tres caminos, de más a menos automático.
 
-**Siguientes pasos recomendados fuera del código:** dar de alta el **Perfil de Empresa de Google**
-(el factor nº 1 en búsquedas locales), enlazar la web desde la bio de Instagram y pedir reseñas.
+### Opción A — Sincronizar con la API de Instagram (recomendada)
 
----
-
-## 🚀 Publicar en Vercel
-
-No hay que compilar nada: es HTML estático y `vercel.json` ya lo deja configurado
-(sin build, cabeceras de seguridad y caché en el CDN que se limpia en cada despliegue).
-
-### Primera vez
-
-1. Entra en [vercel.com](https://vercel.com) y crea la cuenta con **Continue with GitHub**.
-2. **Add New… → Project** y busca el repositorio **`nutriciondietafit-png/Web`**.
-   Si no aparece, pulsa *Adjust GitHub App Permissions* y dale acceso al repo.
-3. En la pantalla de configuración:
-   - **Project Name:** `magia-fit-almeria` ← ponlo exactamente así, es lo que
-     determina la URL `magia-fit-almeria.vercel.app` que ya está en las etiquetas SEO.
-   - **Framework Preset:** `Other`
-   - **Root Directory:** `./`
-   - Build y Output: **déjalos vacíos**, `vercel.json` se encarga.
-4. **Deploy**. En menos de un minuto la web está online.
-
-La rama `claude/magia-fit-almeria-website-4kdrca` es la rama por defecto del repositorio,
-así que Vercel la usa como **producción** automáticamente. A partir de ahí, cada `git push`
-vuelve a desplegar solo.
-
-> Si Vercel te asigna una URL distinta (porque el nombre estuviera ocupado), ejecútalo
-> con la URL real para que las etiquetas SEO coincidan:
-> ```bash
-> ./cambiar-dominio.sh https://la-url-que-te-dio.vercel.app
-> git add -A && git commit -m "Actualizar dominio" && git push
-> ```
-
-### Conectar el dominio propio (cuando lo tengas)
-
-1. En Vercel: **Settings → Domains → Add**, escribe el dominio y sigue las instrucciones
-   de DNS que te dé (un registro `A` o `CNAME` en tu proveedor). El HTTPS es automático.
-2. Actualiza las URLs del código y súbelo:
-   ```bash
-   ./cambiar-dominio.sh https://magiafitalmeria.es
-   git add -A && git commit -m "Actualizar dominio" && git push
-   ```
-
-⚠️ **Sobre el SEO:** posicionar en `.vercel.app` y mudarse después a un dominio propio
-obliga a rehacer buena parte del trabajo (Google trata cada dominio por separado).
-Si el dominio definitivo ya lo tienes decidido, compensa conectarlo antes de empezar a
-promocionar la web y de dar de alta el Perfil de Empresa de Google.
-
-### Probar en local
+Descarga tus últimas publicaciones al repositorio: la web sigue siendo estática
+y rápida, y las fotos no dependen de que Instagram esté disponible.
 
 ```bash
-python3 -m http.server 8080   # y abre http://localhost:8080
+INSTAGRAM_TOKEN=EAAG… node scripts/sync-instagram.mjs
+```
+
+El script baja las fotos a `assets/img/instagram/` (`ig-01.jpg`, `ig-02.jpg`…),
+les quita los hashtags a los pies de foto y reescribe `assets/js/feed.js`.
+Después, `git add -A && git commit && git push` y la web queda actualizada.
+
+**Cómo conseguir el token** (unos 10 minutos, una sola vez):
+
+1. Entra en [developers.facebook.com](https://developers.facebook.com/) con la
+   cuenta que administra @indalodive y crea una app.
+2. Añade el producto **Instagram** → *API con inicio de sesión de Instagram*.
+3. En *Configuración de la API*, vincula la cuenta de @indalodive.
+   La cuenta tiene que ser **profesional** (de empresa o creador); si es
+   personal, cámbiala desde la app de Instagram: es gratis y no cambia nada
+   de cara al público.
+4. Genera un **token de acceso de larga duración** con el permiso
+   `instagram_business_basic` y cópialo.
+
+El token caduca a los 60 días. Se renueva sin volver a pasar por el panel:
+
+```bash
+curl "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=TU_TOKEN"
+```
+
+> ⚠️ El token es una contraseña: no lo subas nunca a Git ni lo pegues en
+> `config.js`. Se pasa como variable de entorno, como en el ejemplo de arriba.
+
+### Opción B — Servicio de feed (sin tocar la terminal)
+
+Servicios como [Behold](https://behold.so), EmbedSocial o LightWidget conectan
+tu cuenta y publican un JSON. Pega esa URL en `config.js`:
+
+```js
+instagram: {
+  usuario: "indalodive",
+  feedJson: "https://feeds.behold.so/XXXXXXXX"
+}
+```
+
+La galería se actualizará sola en cada visita. Si el servicio falla, la web
+enseña las fotos guardadas: nunca se queda en blanco. Contra: la página depende
+de un tercero y algunos planes son de pago.
+
+### Opción C — A mano
+
+Copia tus fotos en `assets/img/instagram/` y edita la lista `publicaciones` de
+`assets/js/feed.js` con el nombre del archivo, el texto y el enlace a la
+publicación. Formato ideal: **4:5 (900 × 1125 px)**, JPEG.
+
+### Mientras tanto
+
+Las ocho imágenes que hay ahora son **ilustraciones generadas** (SVG de rayos de
+luz, bancos de peces y medusas), no fotos reales de nadie: sirven para ver la
+web terminada y se pueden borrar sin más. La galería avisa debajo con
+«Imágenes provisionales · pendiente de conectar el perfil» hasta que sincronices.
+
+**La foto de perfil** (`assets/img/avatar.svg`) también es provisional: sustitúyela
+por la de tu cuenta, cuadrada, y actualiza la ruta en `index.html` (`#heroAvatar`).
+
+---
+
+## 🗂️ Archivos
+
+```
+index.html                  Toda la página (una sola pantalla, secciones ancladas)
+404.html                    Página de error
+aviso-legal.html            Textos legales (⚠️ con datos por rellenar)
+privacidad.html
+cookies.html
+
+assets/css/style.css        Estilos
+assets/js/config.js         ⭐ ENLACES Y TEXTOS — es el archivo que vas a editar
+assets/js/feed.js           Galería de Instagram (lo genera el script)
+assets/js/main.js           Interacciones: filtros, visor, burbujas, descenso
+
+assets/img/logo.svg         Indalo estilizado, la marca
+assets/img/favicon.svg      Icono de pestaña
+assets/img/apple-touch-icon.png
+assets/img/avatar.svg       Foto de perfil provisional
+assets/img/og-cover.png     Vista previa al compartir el enlace (1200×630)
+assets/img/instagram/       Fotos de la galería
+
+scripts/sync-instagram.mjs  Trae las publicaciones reales de Instagram
+cambiar-dominio.sh          Cambia el dominio en canonical, OG, sitemap y robots
+vercel.json                 Cabeceras de seguridad y caché
 ```
 
 ---
 
-## 📁 Estructura
+## 💻 Verlo en local
 
-```
-index.html               Página principal (todas las secciones)
-aviso-legal.html         Aviso legal
-privacidad.html          Política de privacidad (RGPD)
-cookies.html             Política de cookies
-404.html                 Página de error
-robots.txt · sitemap.xml · site.webmanifest
-vercel.json              Configuración de despliegue en Vercel
-cambiar-dominio.sh       Cambia el dominio en todas las URLs de golpe
-assets/
-  css/style.css          Estilos completos
-  js/config.js           ⭐ Teléfono, tarifas, horarios, zonas (edita solo esto)
-  js/main.js             Interacciones: hero animado, scroll, tarifas, formulario
-  js/chatbot.js          Asistente MAGI
-  img/logo.svg           Logo (sustituir por el real)
-  img/gallery/           9 fotos de Instagram (sustituir)
-  img/transform/         Pares antes/después (sustituir)
+No hace falta compilar nada, pero conviene servirlo por HTTP:
+
+```bash
+python3 -m http.server 8000    # y abre http://localhost:8000
 ```
 
----
+En local aparece un aviso naranja si quedan enlaces sin configurar. En el
+dominio publicado no se muestra nunca.
 
-## ♿ Accesibilidad y rendimiento
+## 🚀 Publicar
 
-- Contraste alto sobre fondo oscuro, foco visible, `skip-link`, `aria-*` en menú, bot y formulario.
-- Respeta `prefers-reduced-motion`: desactiva partículas, parallax y animaciones.
-- Sin librerías externas: el único recurso de terceros son las tipografías de Google Fonts
-  (si quieres 0 dependencias, descárgalas y sírvelas en local).
-- El canvas del hero se detiene al cambiar de pestaña.
+Sirve cualquier hosting estático. Con **Vercel**: importa el repositorio, sin
+comando de build y con la raíz del proyecto como directorio de salida.
+`vercel.json` ya trae las cabeceras de seguridad y la caché de `assets/`.
+También vale Netlify, GitHub Pages o el hosting que ya tengas.
+
+## ♿ Detalles que ya están resueltos
+
+- Se respeta `prefers-reduced-motion`: quien tenga las animaciones desactivadas
+  en su móvil no verá burbujas ni transiciones.
+- Navegación con teclado en el visor de fotos (`Esc`, `←`, `→`) y con el dedo
+  (deslizar) en el móvil.
+- Etiquetas `alt`, `aria-label` y contraste revisado sobre fondo oscuro.
+- SEO: título y descripción orientados a *buceo en Almería*, Open Graph con
+  imagen propia, datos estructurados (`Organization` + `WebSite`) y sitemap.

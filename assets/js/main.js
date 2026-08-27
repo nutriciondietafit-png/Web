@@ -1,318 +1,410 @@
 /* =====================================================================
-   MAGIA FIT ALMERÍA — interacciones
+   INDALODIVE — interacciones
+   La página se construye leyendo config.js (enlaces, textos, contacto) y
+   feed.js (fotos de Instagram). Para cambiar contenido no hace falta
+   tocar este archivo.
    ===================================================================== */
 (function () {
   'use strict';
-  const CFG = window.MAGIAFIT || {};
-  const $  = (s, c) => (c || document).querySelector(s);
-  const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
+
+  const CFG   = window.INDALO || {};
+  const FEED  = window.INDALO_FEED || { publicaciones: [] };
+  const $     = (s, c) => (c || document).querySelector(s);
+  const $$    = (s, c) => Array.from((c || document).querySelectorAll(s));
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const esc = (t) => String(t == null ? '' : t).replace(/[&<>"']/g, (m) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 
-  /* ── Enlaces de WhatsApp ─────────────────────────────────── */
+  const icono = (nombre) => `<svg aria-hidden="true"><use href="#i-${esc(nombre || 'burbuja')}"/></svg>`;
   const waLink = (msg) =>
-    'https://wa.me/' + CFG.whatsapp + '?text=' + encodeURIComponent(msg || 'Hola 👋');
-  window.MF_waLink = waLink;
+    'https://wa.me/' + (CFG.whatsapp || '') + '?text=' + encodeURIComponent(msg || 'Hola 👋');
 
-  $$('[data-wa]').forEach(el => {
-    el.setAttribute('href', waLink(el.dataset.wa));
-    el.setAttribute('target', '_blank');
-    el.setAttribute('rel', 'noopener');
+  /* Aviso opcional para analítica: si algún día añades Google Analytics o
+     el píxel de Meta, cada clic en un enlace de producto llega solo. */
+  const registrarClic = (id) => {
+    if (window.dataLayer) window.dataLayer.push({ event: 'clic_enlace', enlace: id });
+    if (typeof window.gtag === 'function') window.gtag('event', 'select_content', { content_id: id });
+  };
+
+  /* ── Textos de marca ─────────────────────────────────────────────── */
+  const ig = CFG.instagram || {};
+  const igUrl = ig.url || ('https://www.instagram.com/' + (ig.usuario || '') + '/');
+
+  if (CFG.claim) {
+    const p = CFG.claim.split(' ');
+    const corte = Math.max(1, Math.ceil(p.length / 2));
+    $('#heroTitulo').innerHTML =
+      esc(p.slice(0, corte).join(' ')) + ' <span class="grad">' + esc(p.slice(corte).join(' ')) + '</span>';
+  }
+  if (CFG.subclaim) $('#heroSub').textContent = CFG.subclaim;
+  if (ig.usuario) {
+    $('#heroUsuario').innerHTML = icono('instagram') + '@' + esc(ig.usuario);
+    $('#heroUsuario').href = igUrl;
+    $('#heroInstagram').href = igUrl;
+    $('#galeriaCta').href = igUrl;
+    $('#galeriaEntradilla').textContent =
+      'Cada salida, cada fondo y cada bicho que se deja ver, en @' + ig.usuario + '.';
+  }
+  $$('#brandUbicacion, #footerUbicacion').forEach(el => { el.textContent = CFG.ubicacion || 'Buceo'; });
+  $('#anio').textContent = new Date().getFullYear();
+  $('#footerAviso').textContent = CFG.aviso || '';
+
+  $('#heroCifras').innerHTML = (CFG.cifras || [])
+    .map(c => `<li class="hero__cifra"><strong>${esc(c.valor)}</strong><span>${esc(c.texto)}</span></li>`).join('');
+
+  /* ── Enlaces de producto ─────────────────────────────────────────── */
+  const lista = $('#listaEnlaces');
+  const enlaces = CFG.enlaces || [];
+
+  lista.innerHTML = enlaces.map(e => {
+    const url = e.wa ? waLink(e.mensaje) : (e.url || '#');
+    const externo = /^https?:/i.test(url);
+    return `
+    <a class="enlace${e.destacado ? ' enlace--destacado' : ''}" href="${esc(url)}"
+       data-categoria="${esc(e.categoria || '')}" data-enlace="${esc(e.id || '')}"
+       ${externo ? 'target="_blank" rel="noopener"' : ''}>
+      <span class="enlace__icono">${icono(e.icono)}</span>
+      <span class="enlace__cuerpo">
+        <span class="enlace__titulo">${esc(e.titulo)}${e.etiqueta ? `<span class="etiqueta">${esc(e.etiqueta)}</span>` : ''}</span>
+        <span class="enlace__texto">${esc(e.texto || '')}</span>
+        ${e.precio ? `<span class="enlace__precio">${esc(e.precio)}</span>` : ''}
+      </span>
+      <span class="enlace__flecha">${icono('flecha')}</span>
+    </a>`;
+  }).join('');
+
+  lista.addEventListener('click', (ev) => {
+    const a = ev.target.closest('.enlace');
+    if (a) registrarClic(a.dataset.enlace);
   });
 
-  /* ── Datos dinámicos desde config.js ─────────────────────── */
-  const tel = $('#napTel'), faqTel = $('#faqTel');
-  [tel, faqTel].forEach(a => {
-    if (!a) return;
-    a.href = waLink('Hola, quiero información sobre Magia Fit Almería');
-    a.target = '_blank'; a.rel = 'noopener';
-    a.textContent = CFG.telefonoBonito;
-  });
-  if ($('#napDireccion')) $('#napDireccion').textContent = CFG.direccion;
-  if ($('#napHorario'))   $('#napHorario').textContent   = CFG.horario.texto;
-  if ($('#year'))         $('#year').textContent         = new Date().getFullYear();
-
-  const zonas = $('#zonas');
-  if (zonas) zonas.innerHTML = (CFG.zonas || []).map(z => `<li>${z}</li>`).join('');
-
-  const fs = $('#footerServicios');
-  if (fs) fs.innerHTML = (CFG.servicios || []).map(s => `<li>${s}</li>`).join('');
-
-  const nap = $('#footerNap');
-  if (nap) nap.innerHTML =
-    `${CFG.direccion}<br><a href="${waLink('Hola 👋')}" target="_blank" rel="noopener">${CFG.telefonoBonito}</a><br>` +
-    `<a href="mailto:${CFG.email}">${CFG.email}</a><br><span style="font-size:.82rem">${CFG.horario.texto}</span>`;
-
-  /* ── Preloader ───────────────────────────────────────────── */
-  window.addEventListener('load', () => {
-    const p = $('#preloader');
-    if (p) setTimeout(() => p.classList.add('is-done'), 420);
-  });
-  setTimeout(() => { const p = $('#preloader'); if (p) p.classList.add('is-done'); }, 3500);
-
-  /* ── Header + progreso de scroll + nav activa ────────────── */
-  const header = $('#header'), bar = $('#scrollProgress');
-  const secs = $$('main section[id]');
-  const navLinks = $$('.nav a[href^="#"]');
-  let ticking = false;
-
-  function onScroll() {
-    const y = window.scrollY;
-    if (header) header.classList.toggle('is-stuck', y > 40);
-    if (bar) {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
-    }
-    let cur = '';
-    secs.forEach(s => { if (y >= s.offsetTop - 140) cur = s.id; });
-    navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + cur));
-    ticking = false;
-  }
-  window.addEventListener('scroll', () => {
-    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
-  }, { passive: true });
-  onScroll();
-
-  /* ── Menú móvil ──────────────────────────────────────────── */
-  const burger = $('#burger'), nav = $('#nav');
-  if (burger && nav) {
-    const close = () => {
-      nav.classList.remove('is-open'); burger.classList.remove('is-on');
-      burger.setAttribute('aria-expanded', 'false'); document.body.classList.remove('is-locked');
-    };
-    burger.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
-      burger.classList.toggle('is-on', open);
-      burger.setAttribute('aria-expanded', String(open));
-      document.body.classList.toggle('is-locked', open);
-    });
-    $$('a', nav).forEach(a => a.addEventListener('click', close));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-  }
-
-  /* ── Reveal al hacer scroll ──────────────────────────────── */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px' });
-  const observeReveals = () => $$('.reveal:not(.is-in)').forEach(el => io.observe(el));
-  observeReveals();
-  window.MF_observeReveals = observeReveals;
-
-  /* ── Contadores ──────────────────────────────────────────── */
-  const cio = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target, to = parseFloat(el.dataset.to), sfx = el.dataset.suffix || '';
-      const dur = 1500, t0 = performance.now();
-      (function step(t) {
-        const k = Math.min((t - t0) / dur, 1);
-        el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))) + sfx;
-        if (k < 1) requestAnimationFrame(step);
-      })(t0);
-      cio.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  $$('.count').forEach(el => cio.observe(el));
-
-  /* ── Máquina de escribir del hero ────────────────────────── */
-  const tw = $('#typewriter');
-  if (tw) {
-    const words = ['entrena.', 'suda.', 'mide.', 'repite.', 'nota.'];
-    let w = 0, i = 0, del = false;
-    (function tick() {
-      const word = words[w];
-      tw.textContent = del ? word.slice(0, --i) : word.slice(0, ++i);
-      let wait = del ? 45 : 95;
-      if (!del && i === word.length) { wait = 1700; del = true; }
-      else if (del && i === 0) { del = false; w = (w + 1) % words.length; wait = 260; }
-      setTimeout(tick, wait);
-    })();
-  }
-
-  /* ── Halo que sigue al cursor + botones magnéticos ───────── */
-  const glow = $('#cursorGlow');
-  if (glow && !reduce && matchMedia('(hover:hover)').matches) {
-    window.addEventListener('pointermove', e => {
-      glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    }, { passive: true });
-
-    $$('.magnetic').forEach(btn => {
-      btn.addEventListener('pointermove', e => {
-        const r = btn.getBoundingClientRect();
-        btn.style.transform =
-          `translate(${(e.clientX - r.left - r.width / 2) * .18}px, ${(e.clientY - r.top - r.height / 2) * .28}px)`;
-      });
-      btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+  /* Brillo que sigue al puntero (solo con ratón) */
+  if (window.matchMedia('(pointer: fine)').matches && !reduce) {
+    lista.addEventListener('pointermove', (ev) => {
+      const a = ev.target.closest('.enlace');
+      if (!a) return;
+      const r = a.getBoundingClientRect();
+      a.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+      a.style.setProperty('--my', (ev.clientY - r.top) + 'px');
     });
   }
 
-  /* ── Fondo animado del hero (partículas + red) ───────────── */
-  const oscuro = window.matchMedia('(prefers-color-scheme: dark)');
-  const cv = $('#heroCanvas');
-  if (cv && !reduce) {
-    const ctx = cv.getContext('2d');
-    let w, h, dots = [], raf = null, tinta;
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+  /* ── Filtros por categoría ───────────────────────────────────────── */
+  const cajaFiltros = $('#filtros');
+  const usadas = new Set(enlaces.map(e => e.categoria));
+  const cats = (CFG.categorias || []).filter(c => c.id === 'todos' || usadas.has(c.id));
 
-    // Las partículas se oscurecen en tema claro para que se vean sobre el crema
-    const PALETAS = {
-      oscuro: { colores: ['232,196,106', '124,58,237', '34,211,238'], punto: .75, linea: .16 },
-      claro:  { colores: ['184,134,47', '109,40,217', '14,116,144'],  punto: .55, linea: .13 }
-    };
+  cajaFiltros.innerHTML = cats.map((c, i) => {
+    const n = c.id === 'todos' ? enlaces.length : enlaces.filter(e => e.categoria === c.id).length;
+    return `<button class="chip${i === 0 ? ' is-activo' : ''}" role="tab" aria-selected="${i === 0}"
+             data-filtro="${esc(c.id)}">${esc(c.nombre)} <span style="opacity:.55">${n}</span></button>`;
+  }).join('');
 
-    function size() {
-      tinta = oscuro.matches ? PALETAS.oscuro : PALETAS.claro;
-      w = cv.clientWidth; h = cv.clientHeight;
-      cv.width = w * DPR; cv.height = h * DPR;
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      const n = Math.min(Math.round((w * h) / 15000), 110);
-      dots = Array.from({ length: n }, () => ({
-        x: Math.random() * w, y: Math.random() * h,
-        vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28,
-        r: Math.random() * 1.6 + .5,
-        c: tinta.colores[Math.random() > .72 ? 0 : (Math.random() > .5 ? 1 : 2)]
-      }));
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      for (let i = 0; i < dots.length; i++) {
-        const d = dots[i];
-        d.x += d.vx; d.y += d.vy;
-        if (d.x < 0 || d.x > w) d.vx *= -1;
-        if (d.y < 0 || d.y > h) d.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${d.c},${tinta.punto})`;
-        ctx.fill();
-        for (let j = i + 1; j < dots.length; j++) {
-          const o = dots[j], dx = d.x - o.x, dy = d.y - o.y, dist = dx * dx + dy * dy;
-          if (dist < 18000) {
-            ctx.beginPath();
-            ctx.moveTo(d.x, d.y); ctx.lineTo(o.x, o.y);
-            ctx.strokeStyle = `rgba(${d.c},${tinta.linea * (1 - dist / 18000)})`;
-            ctx.lineWidth = .7;
-            ctx.stroke();
-          }
+  cajaFiltros.addEventListener('click', (ev) => {
+    const chip = ev.target.closest('.chip');
+    if (!chip) return;
+    const filtro = chip.dataset.filtro;
+    $$('.chip', cajaFiltros).forEach(c => {
+      const activo = c === chip;
+      c.classList.toggle('is-activo', activo);
+      c.setAttribute('aria-selected', activo);
+    });
+    let visibles = 0;
+    $$('.enlace', lista).forEach(card => {
+      const mostrar = filtro === 'todos' || card.dataset.categoria === filtro;
+      card.classList.toggle('is-oculto', !mostrar);
+      if (mostrar) {
+        visibles++;
+        if (!reduce) {
+          card.classList.remove('is-entrando');
+          void card.offsetWidth;                       // reinicia la animación
+          card.classList.add('is-entrando');
         }
       }
-      raf = requestAnimationFrame(draw);
-    }
-
-    const repintar = () => { cancelAnimationFrame(raf); size(); draw(); };
-    size(); draw();
-    window.addEventListener('resize', repintar);
-    oscuro.addEventListener('change', repintar);
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) cancelAnimationFrame(raf);
-      else { cancelAnimationFrame(raf); draw(); }
     });
+    $('#sinResultados').hidden = visibles > 0;
+  });
+
+  /* ── Galería de Instagram ────────────────────────────────────────── */
+  const galeria = $('#listaGaleria');
+  let fotos = [];
+
+  const normaliza = (datos) => {
+    const arr = Array.isArray(datos) ? datos
+      : (datos.publicaciones || datos.posts || datos.data || datos.media || []);
+    return arr.map(p => ({
+      img:   p.img || p.mediaUrl || p.media_url || p.thumbnailUrl || p.thumbnail_url || '',
+      alt:   p.alt || 'Publicación de @' + (ig.usuario || 'indalodive'),
+      texto: p.texto || p.caption || '',
+      url:   p.url || p.permalink || igUrl
+    })).filter(p => p.img);
+  };
+
+  const pintarGaleria = () => {
+    galeria.innerHTML = fotos.map((f, i) => `
+      <button class="foto" data-i="${i}" aria-label="Ampliar foto ${i + 1}">
+        <img src="${esc(f.img)}" alt="${esc(f.alt)}" loading="lazy" decoding="async" width="900" height="1125">
+        <span class="foto__capa"><span>${esc((f.texto || '').slice(0, 90))}</span></span>
+      </button>`).join('');
+  };
+
+  const notaGaleria = () => {
+    const nota = $('#galeriaNota');
+    if (FEED.fuente === 'instagram' && FEED.actualizado) {
+      nota.textContent = 'Actualizado el ' + FEED.actualizado;
+    } else if (FEED.fuente !== 'instagram') {
+      nota.textContent = 'Imágenes provisionales · pendiente de conectar el perfil';
+    }
+  };
+
+  fotos = normaliza(FEED);
+  pintarGaleria();
+  notaGaleria();
+
+  /* Si hay un servicio de feed configurado, se pide en vivo y sustituye
+     a las fotos guardadas en feed.js. */
+  if (ig.feedJson) {
+    fetch(ig.feedJson, { mode: 'cors' })
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(datos => {
+        const frescas = normaliza(datos);
+        if (!frescas.length) return;
+        fotos = frescas.slice(0, 12);
+        pintarGaleria();
+        $('#galeriaNota').textContent = 'Directo desde Instagram';
+      })
+      .catch(() => { /* si falla, se quedan las fotos guardadas */ });
   }
 
-  /* ── Tarifas ─────────────────────────────────────────────── */
-  const eur = n => n.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', minimumFractionDigits: (n % 1 ? 2 : 0) });
+  /* ── Sobre ───────────────────────────────────────────────────────── */
+  const sobre = CFG.sobre || {};
+  if (sobre.titulo) $('#sobreTitulo').textContent = sobre.titulo;
+  if (sobre.texto)  $('#sobreTexto').textContent  = sobre.texto;
+  $('#sobrePuntos').innerHTML = (sobre.puntos || []).map(p => `<li>${esc(p)}</li>`).join('');
 
-  const plansEl = $('#plans');
-  if (plansEl) {
-    plansEl.innerHTML = (CFG.grupoReducido || []).map(p => {
-      const porHora = p.precio / (p.horas * 4);   // 4 semanas
-      return `<article class="plan glass reveal${p.destacado ? ' plan--top' : ''}">
-        <h3 class="plan__name">${p.nombre}</h3>
-        <p class="plan__res">${p.horas} h por semana</p>
-        <p class="plan__price"><b>${eur(p.precio)}</b><i>/ 4 semanas</i></p>
-        <p class="plan__meta">Salen ${eur(Math.round(porHora * 100) / 100)} la hora · ${p.horas * 4} sesiones</p>
-        <ul>
-          <li>Grupo reducido de 4 a 6 personas</li>
-          <li>Entrenador corrigiendo tu técnica</li>
-          <li>Plan adaptado a tu objetivo</li>
-          <li>Seguimiento de tu progreso</li>
-        </ul>
-        <a class="btn ${p.destacado ? 'btn--gold' : 'btn--ghost'} btn--full magnetic" target="_blank" rel="noopener"
-           href="${waLink(`Hola, me interesa el plan ${p.nombre} (${p.horas} h por semana) de Magia Fit Almería. ¿Me contáis más?`)}">Lo quiero</a>
-      </article>`;
-    }).join('');
+  /* ── Contacto y pie ──────────────────────────────────────────────── */
+  $('#ctaWhatsapp').href = waLink('¡Hola ' + (CFG.marca || '') + '! Vengo de la web 🤿');
+  const email = $('#ctaEmail');
+  if (CFG.email) {
+    email.href = 'mailto:' + CFG.email;
+    $('#ctaEmailTexto').textContent = CFG.email;
+  } else {
+    email.hidden = true;
   }
+  $('#datoUbicacion').textContent = CFG.ubicacion || '';
+  const tel = $('#datoTelefono');
+  if (CFG.telefonoBonito) {
+    tel.textContent = CFG.telefonoBonito;
+    tel.href = 'tel:' + (CFG.telefonoBonito || '').replace(/\s/g, '');
+  } else { tel.hidden = true; }
+  const mapa = $('#datoMapa');
+  if (CFG.mapaUrl) mapa.href = CFG.mapaUrl; else mapa.hidden = true;
 
-  const extrasEl = $('#complementos');
-  if (extrasEl) {
-    extrasEl.innerHTML = (CFG.complementos || []).map(c => `
-      <article class="extra glass reveal">
-        <h4>${c.nombre}</h4>
-        <p class="extra__res">${c.resumen}</p>
-        <ul class="extra__lineas">
-          ${c.lineas.map(l => `<li><span>${l.concepto}</span><b>${eur(l.precio)}</b>${l.unidad ? `<em>${eur(l.unidad)} la sesión</em>` : ''}</li>`).join('')}
-        </ul>
-        <p class="extra__nota">${c.nota}</p>
-        <a class="btn btn--ghost btn--full btn--sm magnetic" target="_blank" rel="noopener"
-           href="${waLink(`Hola, quiero información sobre ${c.nombre.toLowerCase()} en Magia Fit Almería`)}">Más información</a>
-      </article>`).join('');
-  }
+  $('#redes').innerHTML = [
+    { url: igUrl, icono: 'instagram', nombre: 'Instagram' },
+    { url: waLink('¡Hola! Vengo de la web 🤿'), icono: 'whatsapp', nombre: 'WhatsApp' },
+    CFG.email ? { url: 'mailto:' + CFG.email, icono: 'correo', nombre: 'Correo' } : null
+  ].filter(Boolean).map(r =>
+    `<a href="${esc(r.url)}" target="_blank" rel="noopener" aria-label="${esc(r.nombre)}">${icono(r.icono)}</a>`
+  ).join('');
 
-  observeReveals();
+  /* ── Compartir la página ─────────────────────────────────────────── */
+  const btnCompartir = $('#ctaCompartir');
+  btnCompartir.addEventListener('click', async () => {
+    const datos = { title: CFG.marca || document.title, text: CFG.claim || '', url: location.href };
+    try {
+      if (navigator.share) { await navigator.share(datos); return; }
+      await navigator.clipboard.writeText(location.href);
+    } catch (e) { return; }
+    const original = btnCompartir.innerHTML;
+    btnCompartir.innerHTML = '¡Enlace copiado!';
+    setTimeout(() => { btnCompartir.innerHTML = original; }, 1800);
+  });
 
-  /* ── Formulario multipaso → WhatsApp ─────────────────────── */
-  const form = $('#booking');
-  if (form) {
-    const steps = $$('.bstep', form), dots = $$('.booking__steps span', form), err = $('#formErr');
-    let cur = 0;
+  /* ── Menú móvil ──────────────────────────────────────────────────── */
+  const toggle = $('#navToggle'), links = $('#navLinks');
+  toggle.addEventListener('click', () => {
+    const abierto = links.classList.toggle('is-abierto');
+    toggle.setAttribute('aria-expanded', abierto);
+    toggle.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+  });
+  links.addEventListener('click', (ev) => {
+    if (ev.target.tagName !== 'A') return;
+    links.classList.remove('is-abierto');
+    toggle.setAttribute('aria-expanded', 'false');
+  });
 
-    const show = n => {
-      cur = n;
-      steps.forEach((s, i) => s.classList.toggle('is-on', i === n));
-      dots.forEach((d, i) => d.classList.toggle('is-on', i <= n));
-      const y = form.getBoundingClientRect().top + window.scrollY - 110;
-      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
-    };
+  /* ── Descenso: cabecera, profundidad y medidor ───────────────────── */
+  const header = $('#header'), medidor = $('#medidor'), valor = $('#medidorValor');
+  const maxProf = CFG.profundidadMax || 40;
+  let ultimoY = 0, pendiente = false;
 
-    const valid = n => {
-      const step = steps[n];
-      if (n < 2) {
-        const name = $('input[type=radio]', step).name;
-        if (!$(`input[name="${name}"]:checked`, step)) { flash('Elige una opción para continuar.'); return false; }
-        return true;
-      }
-      let ok = true;
-      $$('input[required], textarea[required]', step).forEach(f => {
-        const bad = f.type === 'checkbox' ? !f.checked : !f.value.trim();
-        f.classList.toggle('is-bad', bad);
-        if (bad) ok = false;
+  const alScroll = () => {
+    const y = window.scrollY;
+    const alcance = document.documentElement.scrollHeight - window.innerHeight;
+    const prof = alcance > 0 ? Math.min(1, Math.max(0, y / alcance)) : 0;
+
+    document.documentElement.style.setProperty('--prof', prof.toFixed(4));
+    valor.textContent = Math.round(prof * maxProf) + ' m';
+    medidor.classList.toggle('is-visible', y > window.innerHeight * 0.5);
+
+    header.classList.toggle('is-fija', y > 12);
+    header.classList.toggle('is-oculta', y > 320 && y > ultimoY && !links.classList.contains('is-abierto'));
+    ultimoY = y;
+    pendiente = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (pendiente) return;
+    pendiente = true;
+    requestAnimationFrame(alScroll);
+  }, { passive: true });
+  alScroll();
+
+  /* ── Enlace activo del menú ──────────────────────────────────────── */
+  const secciones = $$('main section[id]');
+  if ('IntersectionObserver' in window) {
+    const espia = new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        if (!e.isIntersecting) return;
+        $$('#navLinks a').forEach(a =>
+          a.classList.toggle('is-activo', a.getAttribute('href') === '#' + e.target.id));
       });
-      const t = $('input[name=telefono]', step);
-      if (t && t.value.trim() && t.value.replace(/\D/g, '').length < 9) { t.classList.add('is-bad'); ok = false; }
-      if (!ok) flash('Revisa los campos marcados: nombre, teléfono válido y aceptar la privacidad.');
-      return ok;
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    secciones.forEach(s => espia.observe(s));
+
+    /* ── Revelado al entrar en pantalla ────────────────────────────── */
+    const revelador = new IntersectionObserver((entradas, obs) => {
+      entradas.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-visible');
+        obs.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: .08 });
+    $$('.revelar').forEach(el => revelador.observe(el));
+  } else {
+    $$('.revelar').forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* ── Visor de fotos ──────────────────────────────────────────────── */
+  const visor = $('#visor'), visorImg = $('#visorImg'), visorPie = $('#visorPie'),
+        contador = $('#visorContador');
+  let indice = 0, ultimoFoco = null;
+
+  const mostrar = (i) => {
+    indice = (i + fotos.length) % fotos.length;
+    const f = fotos[indice];
+    visorImg.src = f.img;
+    visorImg.alt = f.alt;
+    visorPie.innerHTML = (f.texto ? esc(f.texto) + ' · ' : '') +
+      `<a href="${esc(f.url)}" target="_blank" rel="noopener" style="color:var(--aqua-claro)">ver en Instagram</a>`;
+    contador.textContent = (indice + 1) + ' / ' + fotos.length;
+  };
+
+  const abrir = (i) => {
+    ultimoFoco = document.activeElement;
+    mostrar(i);
+    visor.classList.add('is-abierto');
+    document.body.classList.add('is-bloqueado');
+    $('#visorCerrar').focus();
+  };
+
+  const cerrar = () => {
+    visor.classList.remove('is-abierto');
+    document.body.classList.remove('is-bloqueado');
+    if (ultimoFoco) ultimoFoco.focus();
+  };
+
+  galeria.addEventListener('click', (ev) => {
+    const f = ev.target.closest('.foto');
+    if (f) abrir(Number(f.dataset.i));
+  });
+  $('#visorCerrar').addEventListener('click', cerrar);
+  $('#visorPrev').addEventListener('click', () => mostrar(indice - 1));
+  $('#visorSig').addEventListener('click', () => mostrar(indice + 1));
+  visor.addEventListener('click', (ev) => { if (ev.target === visor) cerrar(); });
+  document.addEventListener('keydown', (ev) => {
+    if (!visor.classList.contains('is-abierto')) return;
+    if (ev.key === 'Escape') cerrar();
+    if (ev.key === 'ArrowLeft') mostrar(indice - 1);
+    if (ev.key === 'ArrowRight') mostrar(indice + 1);
+  });
+
+  /* Deslizar con el dedo */
+  let inicioX = null;
+  visor.addEventListener('pointerdown', (ev) => { inicioX = ev.clientX; });
+  visor.addEventListener('pointerup', (ev) => {
+    if (inicioX === null) return;
+    const d = ev.clientX - inicioX;
+    if (Math.abs(d) > 45) mostrar(indice + (d < 0 ? 1 : -1));
+    inicioX = null;
+  });
+
+  /* ── Burbujas de fondo ───────────────────────────────────────────── */
+  const lienzo = $('#burbujas');
+  if (lienzo && !reduce) {
+    const ctx = lienzo.getContext('2d');
+    let ancho = 0, alto = 0, burbujas = [], animando = true;
+
+    const crear = () => {
+      const cuantas = Math.round(Math.min(46, Math.max(14, ancho / 34)));
+      burbujas = Array.from({ length: cuantas }, () => ({
+        x: Math.random() * ancho,
+        y: Math.random() * alto,
+        r: 1 + Math.random() * 3.4,
+        v: .18 + Math.random() * .55,
+        vaiven: Math.random() * Math.PI * 2,
+        alfa: .12 + Math.random() * .3
+      }));
     };
 
-    function flash(m) {
-      if (!err) return;
-      err.textContent = m; err.hidden = false;
-      clearTimeout(flash.t); flash.t = setTimeout(() => { err.hidden = true; }, 5000);
-    }
+    const medir = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      ancho = window.innerWidth; alto = window.innerHeight;
+      lienzo.width = ancho * dpr; lienzo.height = alto * dpr;
+      lienzo.style.width = ancho + 'px'; lienzo.style.height = alto + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      crear();
+    };
 
-    $$('.nextStep', form).forEach(b => b.addEventListener('click', () => { if (valid(cur)) show(cur + 1); }));
-    $$('.prevStep', form).forEach(b => b.addEventListener('click', () => show(Math.max(cur - 1, 0))));
-    $$('input, textarea', form).forEach(f => f.addEventListener('input', () => f.classList.remove('is-bad')));
+    const pintar = () => {
+      if (!animando) return;
+      ctx.clearRect(0, 0, ancho, alto);
+      burbujas.forEach(b => {
+        b.y -= b.v;
+        b.vaiven += .012;
+        const x = b.x + Math.sin(b.vaiven) * 12;
+        if (b.y + b.r < 0) { b.y = alto + b.r; b.x = Math.random() * ancho; }
+        ctx.beginPath();
+        ctx.arc(x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(210,250,255,' + b.alfa + ')';
+        ctx.fill();
+      });
+      requestAnimationFrame(pintar);
+    };
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      if (!valid(2)) return;
-      const d = new FormData(form);
-      const msg =
-        '¡Hola Magia Fit Almería! Quiero agendar mi llamada gratuita 📞\n\n' +
-        '• Nombre: ' + d.get('nombre') + '\n' +
-        '• Teléfono: ' + d.get('telefono') + '\n' +
-        '• Objetivo: ' + d.get('objetivo') + '\n' +
-        '• Mejor franja: ' + d.get('franja') + '\n' +
-        (d.get('mensaje') ? '• Nota: ' + d.get('mensaje') + '\n' : '') +
-        '\n(Enviado desde la web)';
-      window.open(waLink(msg), '_blank', 'noopener');
-      form.innerHTML =
-        '<div class="center" style="padding:1.6rem 0">' +
-        '<p style="font-size:2.4rem;margin:0">✅</p>' +
-        '<h3 style="margin:.6rem 0">¡Solicitud lista, ' + String(d.get('nombre')).split(' ')[0] + '!</h3>' +
-        '<p style="color:var(--muted)">Se ha abierto WhatsApp con tu solicitud. Pulsa <b>enviar</b> y te confirmamos la hora de la llamada en minutos.</p>' +
-        '<a class="btn btn--gold" target="_blank" rel="noopener" href="' + waLink(msg) + '">Abrir WhatsApp de nuevo</a></div>';
+    let temporizador;
+    window.addEventListener('resize', () => {
+      clearTimeout(temporizador);
+      temporizador = setTimeout(medir, 180);
     });
+    document.addEventListener('visibilitychange', () => {
+      animando = !document.hidden;
+      if (animando) requestAnimationFrame(pintar);
+    });
+    medir();
+    requestAnimationFrame(pintar);
+  }
+
+  /* ── Recordatorio de configuración (solo en pruebas locales) ─────── */
+  const local = ['localhost', '127.0.0.1', ''].includes(location.hostname);
+  const sinConfigurar = enlaces.filter(e => !e.wa && (!e.url || e.url === '#')).length;
+  if (local && sinConfigurar) {
+    const caja = document.createElement('div');
+    caja.className = 'aviso-dev';
+    caja.innerHTML = `<button aria-label="Cerrar aviso">✕</button>⚠️ ${sinConfigurar} enlace(s) todavía apuntan a «#».
+      Ponlos en <code>assets/js/config.js</code> antes de publicar.`;
+    caja.querySelector('button').addEventListener('click', () => caja.remove());
+    document.body.appendChild(caja);
   }
 })();

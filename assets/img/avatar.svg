@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="IndaloDive">
+<defs>
+<linearGradient id="a" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="400">
+<stop offset="0" stop-color="#1E9FB8"/><stop offset=".55" stop-color="#0B5C7E"/><stop offset="1" stop-color="#04202F"/>
+</linearGradient>
+<linearGradient id="m" gradientUnits="userSpaceOnUse" x1="100" y1="90" x2="300" y2="350">
+<stop offset="0" stop-color="#BFFFF6"/><stop offset="1" stop-color="#7ADFF8"/>
+</linearGradient>
+<linearGradient id="r" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="400">
+<stop offset="0" stop-color="#dffcff" stop-opacity=".45"/><stop offset="1" stop-color="#dffcff" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<rect width="400" height="400" fill="url(#a)"/>
+<path d="M60,-10 L96,-10 L150,410 L92,410 Z" fill="url(#r)" opacity=".7"/>
+<path d="M250,-10 L272,-10 L338,410 L296,410 Z" fill="url(#r)" opacity=".5"/>
+<g fill="none" stroke="url(#m)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round">
+<path d="M112 232 Q200 100 288 232"/>
+<path d="M122 232 L278 232"/>
+<path d="M200 232 L200 296"/>
+<path d="M200 296 L160 342 M200 296 L240 342"/>
+</g>
+<circle cx="200" cy="196" r="19" fill="url(#m)"/>
+<g fill="#eafcff" opacity=".5"><circle cx="322" cy="120" r="9"/><circle cx="346" cy="82" r="5"/><circle cx="76" cy="318" r="7"/></g>
+</svg>

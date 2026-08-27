@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="IndaloDive">
+<defs>
+<linearGradient id="g" gradientUnits="userSpaceOnUse" x1="110" y1="100" x2="400" y2="470">
+<stop offset="0" stop-color="#6EF3E4"/><stop offset=".55" stop-color="#2DD4BF"/><stop offset="1" stop-color="#38BDF8"/>
+</linearGradient>
+</defs>
+<g fill="none" stroke="url(#g)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+<path d="M132 300 Q256 108 380 300"/>
+<path d="M144 300 L368 300"/>
+<path d="M256 300 L256 392"/>
+<path d="M256 392 L198 458 M256 392 L314 458"/>
+</g>
+<circle cx="256" cy="252" r="25" fill="url(#g)"/>
+<g fill="#6EF3E4">
+<circle cx="424" cy="188" r="15" opacity=".95"/><circle cx="458" cy="132" r="9" opacity=".7"/><circle cx="430" cy="88" r="5.5" opacity=".5"/>
+</g>
+</svg>

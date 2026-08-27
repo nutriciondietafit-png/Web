@@ -2,19 +2,19 @@
 # Cambia el dominio en todas las URLs absolutas de la web
 # (canonical, Open Graph, Twitter Card, JSON-LD, sitemap.xml y robots.txt).
 #
-#   ./cambiar-dominio.sh https://magiafitalmeria.es
+#   ./cambiar-dominio.sh https://indalodive.es
 #
 set -euo pipefail
 
 NUEVO="${1:-}"
 if [ -z "$NUEVO" ]; then
-  echo "Uso: ./cambiar-dominio.sh https://tu-dominio.com"
+  echo "Uso: ./cambiar-dominio.sh https://tu-dominio.es"
   exit 1
 fi
 
 NUEVO="${NUEVO%/}"                                   # quita la barra final
 if [[ ! "$NUEVO" =~ ^https?:// ]]; then
-  echo "El dominio debe empezar por https:// — ejemplo: https://magiafitalmeria.es"
+  echo "El dominio debe empezar por https:// — ejemplo: https://indalodive.es"
   exit 1
 fi
 

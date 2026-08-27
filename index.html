@@ -3,580 +3,281 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Gimnasio en Almería | Magia Fit · Entrenador personal y transformaciones reales</title>
-<meta name="description" content="Magia Fit Almería: gimnasio y entrenamiento personal en Almería. Fuerza, pérdida de grasa y readaptación de lesiones con transformaciones reales y 142 reseñas de 5 estrellas. Primera sesión de valoración gratis. Agenda tu llamada o escríbenos por WhatsApp.">
-<meta name="keywords" content="gimnasio en Almería, gimnasios Almería, entrenador personal Almería, entrenamiento personal Almería, perder peso Almería, ganar masa muscular Almería, readaptación de lesiones Almería, gimnasio Zapillo, gimnasio Nueva Almería, Magia Fit">
-<meta name="author" content="Magia Fit Almería">
+<title>IndaloDive | Buceo en Almería · Cursos, inmersiones y reservas</title>
+<meta name="description" content="Todos los enlaces de @indalodive en un solo sitio: bautismos de buceo, cursos de certificación, inmersiones guiadas, snorkel y equipo. Reserva por WhatsApp en un toque.">
+<meta name="keywords" content="buceo Almería, bautismo de buceo, curso Open Water, inmersiones guiadas, snorkel, Cabo de Gata, IndaloDive">
+<meta name="author" content="IndaloDive">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="theme-color" content="#FBFAF7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#06070c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#03101a">
 <meta name="geo.region" content="ES-AL">
 <meta name="geo.placename" content="Almería">
-<meta name="geo.position" content="36.8381;-2.4597">
-<meta name="ICBM" content="36.8381, -2.4597">
-<link rel="canonical" href="https://magia-fit-almeria.vercel.app/">
-<link rel="alternate" hreflang="es-es" href="https://magia-fit-almeria.vercel.app/">
-<link rel="icon" href="assets/img/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<link rel="canonical" href="https://indalodive.vercel.app/">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
-<meta property="og:site_name" content="Magia Fit Almería">
-<meta property="og:title" content="Gimnasio en Almería | Magia Fit · Transformaciones reales">
-<meta property="og:description" content="Entrena en el gimnasio de Almería donde los resultados se ven. Planes personalizados, seguimiento real y 142 reseñas de 5 estrellas. Agenda tu llamada gratuita.">
-<meta property="og:url" content="https://magia-fit-almeria.vercel.app/">
-<meta property="og:image" content="https://magia-fit-almeria.vercel.app/assets/img/og-cover.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Gimnasio en Almería | Magia Fit">
-<meta name="twitter:description" content="Transformaciones reales en Almería. Entrenamiento personal, comunidad y 142 reseñas de 5 estrellas. Agenda tu llamada gratuita.">
-<meta name="twitter:image" content="https://magia-fit-almeria.vercel.app/assets/img/og-cover.jpg">
+<meta property="og:site_name" content="IndaloDive">
+<meta property="og:title" content="IndaloDive | Buceo en Almería">
+<meta property="og:description" content="Bautismos, cursos e inmersiones guiadas. Todos los enlaces de @indalodive en un solo sitio.">
+<meta property="og:url" content="https://indalodive.vercel.app/">
+<meta property="og:image" content="https://indalodive.vercel.app/assets/img/og-cover.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IndaloDive | Buceo en Almería">
+<meta name="twitter:description" content="Bautismos, cursos e inmersiones guiadas. Todos los enlaces de @indalodive en un solo sitio.">
+<meta name="twitter:image" content="https://indalodive.vercel.app/assets/img/og-cover.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<!-- ══ PRELOADER ══ -->
-<div class="preloader" id="preloader" aria-hidden="true">
-  <div class="preloader__inner">
-    <img src="assets/img/logo.png" alt="" width="84" height="90" class="preloader__logo">
-    <div class="preloader__bar"><span></span></div>
-    <p class="preloader__txt">CARGANDO TU MEJOR VERSIÓN</p>
-  </div>
-</div>
+<!-- ══ FONDO ══ -->
+<div class="agua" aria-hidden="true"></div>
+<div class="rayos" aria-hidden="true"></div>
+<canvas id="burbujas" aria-hidden="true"></canvas>
 
-<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<!-- ══ ICONOS ══ -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="tr" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></g>
+  </defs>
+  <symbol id="i-burbuja" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+    <circle cx="9.5" cy="14" r="5"/><circle cx="17" cy="7.5" r="3"/><circle cx="19.5" cy="16.5" r="1.6"/>
+  </symbol>
+  <symbol id="i-bombona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="7" y="6" width="10" height="15" rx="4"/><path d="M10 6V4h4v2"/><path d="M12 2v2"/><path d="M9 11h6"/>
+  </symbol>
+  <symbol id="i-olas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 7.5c1.7-1.6 3.3-1.6 5 0s3.3 1.6 5 0 3.3-1.6 5 0 3.3 1.6 5 0"/>
+    <path d="M2 12.5c1.7-1.6 3.3-1.6 5 0s3.3 1.6 5 0 3.3-1.6 5 0 3.3 1.6 5 0"/>
+    <path d="M2 17.5c1.7-1.6 3.3-1.6 5 0s3.3 1.6 5 0 3.3-1.6 5 0 3.3 1.6 5 0"/>
+  </symbol>
+  <symbol id="i-camara" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2.5" y="6.5" width="19" height="13" rx="3.5"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5 9.4 4h5.2l1.4 2.5"/>
+  </symbol>
+  <symbol id="i-tienda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 8h15l-1.2 11.2a2 2 0 0 1-2 1.8H7.7a2 2 0 0 1-2-1.8Z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/>
+  </symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.5 11.6c0 4.5-3.8 8.1-8.5 8.1-1.4 0-2.8-.3-4-.9L3 20l1.3-4.6a7.9 7.9 0 0 1-1.3-4.4C3 7.1 6.8 3.5 11.5 3.5h1c4 .3 7.6 3.6 8 7.6Z"/>
+    <path d="M9.4 8.6c.3-.1.6 0 .8.3l.8 1.3c.1.3.1.6-.1.8l-.5.5c.5 1 1.3 1.8 2.3 2.3l.5-.5c.2-.2.5-.3.8-.1l1.3.8c.3.2.4.5.3.8-.3.8-1.1 1.3-2 1.2-2.9-.4-5.2-2.7-5.6-5.6-.1-.9.5-1.6 1.4-1.8Z"/>
+  </symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-mapa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 10.2c0 5-7 11.3-7 11.3S5 15.2 5 10.2a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.6"/>
+  </symbol>
+  <symbol id="i-calendario" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="5" width="17" height="16" rx="3.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>
+  </symbol>
+  <symbol id="i-correo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2.5" y="5" width="19" height="14" rx="3.5"/><path d="m3.5 7.5 7.3 5.2a2 2 0 0 0 2.4 0l7.3-5.2"/>
+  </symbol>
+  <symbol id="i-flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 17 17 7M9 7h8v8"/>
+  </symbol>
+  <symbol id="i-izq" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5 8 12l6.5 7"/></symbol>
+  <symbol id="i-der" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5 16 12l-6.5 7"/></symbol>
+  <symbol id="i-compartir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 15V3.5M8.5 7 12 3.5 15.5 7"/><path d="M5 13v5.5A2.5 2.5 0 0 0 7.5 21h9a2.5 2.5 0 0 0 2.5-2.5V13"/>
+  </symbol>
+</svg>
 
-<!-- ══ HEADER ══ -->
+<a class="saltar" href="#enlaces">Ir a los enlaces</a>
+
+<!-- ══ CABECERA ══ -->
 <header class="header" id="header">
   <div class="container header__inner">
-    <a class="brand" href="#inicio" aria-label="Magia Fit Almería — Inicio">
-      <img src="assets/img/logo.png" alt="Logo de Magia Fit Almería" width="43" height="46">
-      <span class="brand__text"><strong>MAGIA FIT</strong><em>ALMERÍA</em></span>
+    <a class="brand" href="#inicio" aria-label="IndaloDive, inicio">
+      <img src="assets/img/logo.svg" alt="" width="40" height="40">
+      <span class="brand__texto">IndaloDive<em id="brandUbicacion">Buceo</em></span>
     </a>
-
-    <nav class="nav" id="nav" aria-label="Navegación principal">
-      <a href="#transformaciones">Transformaciones</a>
-      <a href="#metodo">Método</a>
-      <a href="#instagram">Instagram</a>
-      <a href="#tarifas">Tarifas</a>
-      <a href="#faq">Dudas</a>
-      <a href="#agenda" class="nav__cta">Agendar llamada</a>
+    <nav class="nav" aria-label="Principal">
+      <div class="nav__links" id="navLinks">
+        <a href="#enlaces">Enlaces</a>
+        <a href="#galeria">Galería</a>
+        <a href="#sobre">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <a class="btn btn--primario" id="ctaHeader" href="#contacto">Reservar</a>
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú"><span></span></button>
     </nav>
-
-    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </header>
 
-<main id="contenido">
+<!-- ══ MEDIDOR DE PROFUNDIDAD ══ -->
+<aside class="medidor" id="medidor" aria-hidden="true">
+  <span>0 m</span>
+  <div class="medidor__barra"></div>
+  <span class="medidor__valor" id="medidorValor">0 m</span>
+</aside>
 
-<!-- ══ HERO ══ -->
-<section class="hero" id="inicio">
-  <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-  <div class="hero__veil" aria-hidden="true"></div>
-  <div class="container hero__inner">
-    <p class="hero__eyebrow reveal"><span class="dot"></span> Gimnasio &amp; entrenamiento personal en Almería</p>
+<main id="inicio">
 
-    <h1 class="hero__title reveal">
-      No es suerte.<br>
-      Es <span class="grad">magia</span> que se<br>
-      <span class="type" id="typewriter" aria-live="polite"></span>
-    </h1>
-
-    <p class="hero__sub reveal">
-      El gimnasio de Almería donde tu cuerpo deja de ser un propósito y se convierte en un resultado.
-      Entrenamiento diseñado para ti, seguimiento de verdad y una comunidad que no te deja abandonar.
-    </p>
-
-    <div class="hero__cta reveal">
-      <a href="#agenda" class="btn btn--gold magnetic" data-track="hero-agenda">
-        <span>Agendar llamada gratuita</span>
-      </a>
-      <a href="#" class="btn btn--ghost magnetic" data-wa="Hola, quiero información sobre el gimnasio y las tarifas 💪" data-track="hero-wa">
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2s0-.4.1-.6l.5-.6c.1-.2.2-.3.3-.5s0-.4 0-.5c-.1-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.5 1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2"/></svg>
-        <span>Hablar por WhatsApp</span>
-      </a>
-    </div>
-
-    <ul class="hero__stats reveal" aria-label="Datos de Magia Fit Almería">
-      <li><b class="count" data-to="100" data-suffix="+">0</b><span>Transformaciones acompañadas</span></li>
-      <li><b class="count" data-to="8" data-suffix="">0</b><span>Años de experiencia</span></li>
-      <li><b>5,0 ★</b><span><em class="count" data-to="142">0</em> reseñas de 5 estrellas en Google</span></li>
-      <li><b>24 h</b><span>Seguimiento con tu coach</span></li>
-    </ul>
-
-    <a href="#metodo" class="hero__scroll" aria-label="Bajar a la siguiente sección"><span></span>Desliza</a>
-  </div>
-</section>
-
-<!-- ══ MARQUEE FRASES ══ -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>DISCIPLINA &gt; MOTIVACIÓN</span><i>✦</i>
-    <span>TU ÚNICO RIVAL ERES TÚ AYER</span><i>✦</i>
-    <span>EL CAMBIO EMPIEZA CUANDO DEJAS DE ESPERAR</span><i>✦</i>
-    <span>SIN EXCUSAS, SOLO REPETICIONES</span><i>✦</i>
-    <span>HAZLO POR LA PERSONA QUE SERÁS EN 6 MESES</span><i>✦</i>
-    <span>DISCIPLINA &gt; MOTIVACIÓN</span><i>✦</i>
-    <span>TU ÚNICO RIVAL ERES TÚ AYER</span><i>✦</i>
-    <span>EL CAMBIO EMPIEZA CUANDO DEJAS DE ESPERAR</span><i>✦</i>
-    <span>SIN EXCUSAS, SOLO REPETICIONES</span><i>✦</i>
-    <span>HAZLO POR LA PERSONA QUE SERÁS EN 6 MESES</span><i>✦</i>
-  </div>
-</div>
-
-<!-- ══ TRANSFORMACIONES ══ -->
-<section class="section" id="transformaciones">
-  <div class="container">
-    <header class="sec-head reveal">
-      <p class="kicker">Resultados que se ven</p>
-      <h2>Transformaciones <span class="grad">reales</span> en Almería</h2>
-      <p class="sec-sub">Resultados medidos de socios reales del gimnasio. Ningún filtro entrena por ti.</p>
-    </header>
-
-    <div class="casos">
-      <figure class="caso glass reveal caso--top">
-        <div class="caso__img"><img src="assets/img/transformaciones/01-menos-100kg.jpg" alt="Transformación de un socio de Magia Fit Almería: 100 kg de grasa menos en 2 años" width="900" height="1125" loading="lazy"></div>
-        <figcaption>
-          <span class="caso__tiempo">2 años</span>
-          <h3>Pérdida de grasa</h3>
-          <p class="caso__cifra"><b>−100 kg</b> de grasa</p>
-        </figcaption>
-      </figure>
-      <figure class="caso glass reveal">
-        <div class="caso__img"><img src="assets/img/transformaciones/02-recomposicion-4-meses.jpg" alt="Recomposición corporal de un socio de Magia Fit Almería en 4 meses: 9 kg menos de grasa y 2,5 kg más de músculo" width="900" height="1125" loading="lazy"></div>
-        <figcaption>
-          <span class="caso__tiempo">4 meses</span>
-          <h3>Recomposición corporal</h3>
-          <p class="caso__cifra"><b>−9 kg / +2,5 kg</b> de grasa y de músculo</p>
-        </figcaption>
-      </figure>
-      <figure class="caso glass reveal">
-        <div class="caso__img"><img src="assets/img/transformaciones/03-recomposicion-3-meses.jpg" alt="Recomposición corporal de una socia de Magia Fit Almería en 3 meses: 8 kg menos de grasa y 2 kg más de músculo" width="900" height="1125" loading="lazy"></div>
-        <figcaption>
-          <span class="caso__tiempo">3 meses</span>
-          <h3>Recomposición corporal</h3>
-          <p class="caso__cifra"><b>−8 kg / +2 kg</b> de grasa y de músculo</p>
-        </figcaption>
-      </figure>
-    </div>
-
-    <p class="note reveal">Resultados de socios reales del gimnasio, publicados con su consentimiento.
-       Cada cuerpo y cada punto de partida son distintos: en la llamada te decimos qué es realista en tu caso.</p>
-
-    <p class="quote reveal">“El cuerpo logra lo que la mente cree. <span class="grad">Nosotros ponemos el plan.</span>”</p>
-
-    <div class="center reveal">
-      <a href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener" class="btn btn--ghost magnetic">Ver más transformaciones en Instagram</a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ MÉTODO ══ -->
-<section class="section section--alt" id="metodo">
-  <div class="container">
-    <header class="sec-head reveal">
-      <p class="kicker">El método Magia Fit</p>
-      <h2>Aquí no se entrena a ciegas.<br><span class="grad">Se entrena con plan.</span></h2>
-      <p class="sec-sub">Cuatro pasos que convierten “algún día” en una fecha en el calendario.</p>
-    </header>
-
-    <ol class="steps">
-      <li class="step glass reveal" style="--d:0ms">
-        <span class="step__n">01</span>
-        <h3>Diagnóstico real</h3>
-        <p>Analizamos composición corporal, historial, lesiones, horarios y hábitos. Sin plan copiado: tu punto de partida es único.</p>
-      </li>
-      <li class="step glass reveal" style="--d:90ms">
-        <span class="step__n">02</span>
-        <h3>Plan a tu medida</h3>
-        <p>Entrenamiento diseñado para tu objetivo y tu vida real. Si no encaja contigo, no funciona.</p>
-      </li>
-      <li class="step glass reveal" style="--d:180ms">
-        <span class="step__n">03</span>
-        <h3>Ejecución guiada</h3>
-        <p>Técnica corregida, cargas progresivas y un coach que te escribe cuando fallas dos días seguidos.</p>
-      </li>
-      <li class="step glass reveal" style="--d:270ms">
-        <span class="step__n">04</span>
-        <h3>Resultado medido</h3>
-        <p>Revisión cada 30 días con fotos, medidas y números. Lo que se mide, se transforma.</p>
-      </li>
-    </ol>
-
-    <div class="features">
-      <article class="feature glass reveal"><h3>🔥 Entrenamiento personal</h3><p>Sesiones 1 a 1 en Almería con seguimiento constante de técnica y progresión de cargas.</p></article>
-      <article class="feature glass reveal"><h3>🩺 Readaptación de lesiones</h3><p>¿Molestias de rodilla, hombro o espalda? Adaptamos el plan para que sigas entrenando con cabeza.</p></article>
-      <article class="feature glass reveal"><h3>📱 Seguimiento 24/7</h3><p>Tu coach a un mensaje de distancia. Dudas resueltas el mismo día.</p></article>
-      <article class="feature glass reveal"><h3>⚡ Clases dirigidas</h3><p>Fuerza, HIIT, movilidad y core en grupos reducidos para no perder la técnica.</p></article>
-      <article class="feature glass reveal"><h3>🏆 Comunidad élite</h3><p>Entrena rodeado de gente que también decidió dejar de posponerlo.</p></article>
-      <article class="feature glass reveal"><h3>💻 Modalidad online</h3><p>¿Vives fuera de Almería o viajas? Tu plan te sigue allá donde vayas.</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ══ INSTAGRAM ══ -->
-<section class="section" id="instagram">
-  <div class="container">
-    <header class="sec-head reveal">
-      <p class="kicker">Directo desde el gimnasio</p>
-      <h2>Síguenos en <span class="grad">@magiafitalmeria</span></h2>
-      <p class="sec-sub">Entrenos, motivación diaria y transformaciones que empezaron con un simple mensaje.</p>
-      <a class="ig-btn magnetic" href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 2c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1m0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8m0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.6-2.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>
-        <span>Ver perfil de Instagram</span>
-      </a>
-    </header>
-
-    <div class="ig-grid" id="igGrid">
-      <a class="ig-card reveal" href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener">
-        <img src="assets/img/instagram/01-analizamos.jpg" alt="Entrenador de Magia Fit corrigiendo la técnica de un socio en el gimnasio de Almería" width="900" height="1125" loading="lazy">
-        <span class="ig-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 2c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1.1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1m0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8m0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.6-2.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg></span>
-        <span class="ig-card__over">Ver en Instagram</span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener">
-        <img src="assets/img/instagram/02-hacerlo-bien.jpg" alt="Entrenador personal supervisando un press inclinado en Magia Fit Almería" width="900" height="1125" loading="lazy">
-        <span class="ig-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 2c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1.1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1m0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8m0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.6-2.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg></span>
-        <span class="ig-card__over">Ver en Instagram</span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener">
-        <img src="assets/img/instagram/03-esto-es-magiafit.jpg" alt="Sesión de entrenamiento personal en las instalaciones de Magia Fit Almería" width="900" height="1125" loading="lazy">
-        <span class="ig-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 2c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1.1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1m0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8m0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.6-2.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg></span>
-        <span class="ig-card__over">Ver en Instagram</span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener">
-        <img src="assets/img/instagram/06-numeros.jpg" alt="Datos de Magia Fit Almería: más de 100 transformaciones, 8 años de experiencia y 5,0 estrellas en Google" width="900" height="1125" loading="lazy">
-        <span class="ig-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 2c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1.1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1m0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8m0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.6-2.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg></span>
-        <span class="ig-card__over">Ver en Instagram</span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener">
-        <img src="assets/img/instagram/07-salud-lesiones.jpg" alt="Entrenamiento de salud y readaptación de lesiones en Magia Fit Almería" width="900" height="1125" loading="lazy">
-        <span class="ig-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 2c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1.1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1m0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8m0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.6-2.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg></span>
-        <span class="ig-card__over">Ver en Instagram</span>
-      </a>
-      <a class="ig-card reveal" href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener">
-        <img src="assets/img/instagram/11-siete-meses.jpg" alt="Entrenador personal de Magia Fit acompañando a tres socios durante sus series" width="900" height="1125" loading="lazy">
-        <span class="ig-card__ig" aria-hidden="true"><svg viewBox="0 0 24 24" width="17" height="17"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 2c-3.1 0-3.5 0-4.7.1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1.1-.3.3-.8.3-1.7.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-.9-.2-1.4-.3-1.7-.2-.4-.4-.7-.7-1-.3-.3-.6-.5-1-.7-.3-.1-.8-.3-1.7-.3-1.2-.1-1.6-.1-4.7-.1m0 3.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8m0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.6-2.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg></span>
-        <span class="ig-card__over">Ver en Instagram</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ TARIFAS ══ -->
-<section class="section section--alt" id="tarifas">
-  <div class="container">
-    <header class="sec-head reveal">
-      <p class="kicker">Tarifas</p>
-      <h2>Elige <span class="grad">cuántas horas</span> quieres entrenar</h2>
-      <p class="sec-sub">Entrenamiento en <b>grupo reducido de 4 a 6 personas</b>, con tu entrenador encima
-        en cada serie. Precio cerrado cada 4 semanas.</p>
-    </header>
-
-    <div class="plans" id="plans"><!-- generado por JS desde config.js --></div>
-
-    <h3 class="sub-head reveal">¿Prefieres otra fórmula?</h3>
-    <div class="extras-grid" id="complementos"><!-- generado por JS desde config.js --></div>
-
-    <p class="note reveal">✨ <b>La primera valoración es gratuita.</b> Analizamos tu punto de partida y te
-      decimos qué opción encaja contigo, sin compromiso.</p>
-  </div>
-</section>
-
-<!-- ══ SEO LOCAL ══ -->
-<section class="section" id="almeria">
-  <div class="container seo-block">
-    <div class="reveal">
-      <h2>Tu gimnasio en <span class="grad">Almería</span>, pensado para gente con prisa y objetivos claros</h2>
-      <p>Buscar un <strong>gimnasio en Almería</strong> es fácil; encontrar uno donde alguien te mire a los ojos y te diga qué hacer, no tanto. En <strong>Magia Fit Almería</strong> unimos <strong>entrenamiento personal</strong>, <strong>readaptación de lesiones</strong> y seguimiento real para que dejes de dar vueltas por la sala sin saber si lo estás haciendo bien.</p>
-      <p>Da igual si tu objetivo es <strong>perder grasa</strong>, <strong>ganar masa muscular</strong>, recuperar la forma después de una lesión o simplemente volver a sentirte fuerte: diseñamos el plan alrededor de tu horario, no al revés. Trabajamos con socios de toda la provincia y también en <strong>modalidad online</strong> para quien entrena fuera de la ciudad.</p>
-      <h3>Zonas desde las que entrenan nuestros socios</h3>
-      <ul class="chips" id="zonas"></ul>
-      <h3>¿Qué te llevas al entrar?</h3>
-      <ul class="ticks">
-        <li>Valoración inicial con medición de composición corporal.</li>
-        <li>Plan de entrenamiento 100 % personalizado.</li>
-        <li>Corrección técnica en cada ejercicio, desde el primer día.</li>
-        <li>Revisión de resultados cada 30 días con datos, no con sensaciones.</li>
-        <li>Un equipo que te escribe si desapareces. Eso también es entrenar.</li>
-      </ul>
-    </div>
-    <aside class="seo-card glass reveal">
-      <h3>Magia Fit Almería</h3>
-      <dl>
-        <dt>Dirección</dt><dd id="napDireccion">Almería, España</dd>
-        <dt>Teléfono / WhatsApp</dt><dd><a id="napTel" href="#">+34 637 254 347</a></dd>
-        <dt>Horario</dt><dd id="napHorario"></dd>
-        <dt>Instagram</dt><dd><a href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener">@magiafitalmeria</a></dd>
-      </dl>
-      <a class="btn btn--gold btn--full magnetic" href="#agenda">Agendar mi llamada</a>
-    </aside>
-  </div>
-</section>
-
-<!-- ══ FAQ ══ -->
-<section class="section section--alt" id="faq">
-  <div class="container container--narrow">
-    <header class="sec-head reveal">
-      <p class="kicker">Resolvemos dudas</p>
-      <h2>Preguntas <span class="grad">frecuentes</span></h2>
-      <p class="sec-sub">¿No está la tuya? Pregúntale a <b>MAGI</b>, nuestro asistente, abajo a la derecha.</p>
-    </header>
-
-    <div class="faq" id="faq-list">
-      <details class="faq__i reveal"><summary>¿Cuánto cuesta entrenar en Magia Fit Almería?</summary><div><p>El entrenamiento en grupo reducido va desde <b>88 € cada 4 semanas</b> (2 h por semana) hasta <b>160 €</b> (5 h por semana). También hay bonos de sesiones sueltas, plan online y masaje deportivo. Lo tienes todo en la <a href="#tarifas">sección de tarifas</a>.</p></div></details>
-      <details class="faq__i reveal"><summary>¿Cuánta gente hay en cada grupo?</summary><div><p>Entre <b>4 y 6 personas</b>. Lo justo para que el entrenador pueda corregirte a ti, no para llenar la sala.</p></div></details>
-      <details class="faq__i reveal"><summary>¿Puedo probar antes de apuntarme?</summary><div><p>Sí. La <b>primera valoración es gratuita</b>: analizamos tu punto de partida y te contamos exactamente cómo sería tu plan.</p></div></details>
-      <details class="faq__i reveal"><summary>Nunca he pisado un gimnasio, ¿es para mí?</summary><div><p>Especialmente para ti. Empezamos por técnica y progresión suave, con un coach al lado corrigiendo cada movimiento. Aquí nadie te va a mirar raro.</p></div></details>
-      <details class="faq__i reveal"><summary>¿Qué valoración tenéis?</summary><div><p><b>5,0 estrellas</b> de media con <b>142 reseñas</b> en Google. Puedes leerlas todas antes de decidirte.</p></div></details>
-      <details class="faq__i reveal"><summary>¿En cuánto tiempo se ven resultados?</summary><div><p>Con constancia, los primeros cambios de fuerza y energía llegan en 3-4 semanas; los cambios visibles suelen notarse a partir de la semana 8-12.</p></div></details>
-      <details class="faq__i reveal"><summary>¿Entrenáis también online?</summary><div><p>Sí. Si vives fuera de Almería o viajas mucho, trabajamos con planes online con seguimiento por vídeo y revisiones periódicas.</p></div></details>
-      <details class="faq__i reveal"><summary>¿Cómo reservo mi llamada?</summary><div><p>Rellena el <a href="#agenda">formulario de agenda</a> y te llamamos, o escríbenos directamente por WhatsApp al <a id="faqTel" href="#">+34 637 254 347</a>.</p></div></details>
-    </div>
-  </div>
-</section>
-
-<!-- ══ AGENDA / CTA FINAL ══ -->
-<section class="section cta-final" id="agenda">
-  <div class="container container--narrow">
-    <header class="sec-head reveal">
-      <p class="kicker">Último paso</p>
-      <h2>Agenda tu <span class="grad">llamada gratuita</span> de 15 minutos</h2>
-      <p class="sec-sub">Sin compromiso y sin venta agresiva: te escuchamos, te decimos qué haríamos contigo y tú decides.</p>
-    </header>
-
-    <form class="booking glass reveal" id="booking" novalidate>
-      <div class="booking__steps" aria-hidden="true">
-        <span class="is-on"></span><span></span><span></span>
+  <!-- ══ HÉROE ══ -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__avatar">
+        <img src="assets/img/avatar.svg" alt="Foto de perfil de IndaloDive" width="112" height="112" id="heroAvatar">
       </div>
+      <a class="hero__usuario" id="heroUsuario" href="https://www.instagram.com/indalodive/" target="_blank" rel="noopener">
+        <svg aria-hidden="true" width="16" height="16"><use href="#i-instagram"/></svg>@indalodive
+      </a>
+      <h1 class="hero__titulo" id="heroTitulo">El azul <span class="grad">empieza aquí</span></h1>
+      <p class="hero__sub" id="heroSub">Inmersiones, cursos y equipo. Todos mis enlaces, en un solo sitio.</p>
+      <div class="hero__acciones">
+        <a class="btn btn--primario" href="#enlaces">Ver todos los enlaces</a>
+        <a class="btn btn--fantasma" id="heroInstagram" href="https://www.instagram.com/indalodive/" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-instagram"/></svg>Seguir en Instagram
+        </a>
+      </div>
+      <ul class="hero__cifras" id="heroCifras"></ul>
+    </div>
+    <div class="hero__scroll" aria-hidden="true">Desciende</div>
+  </section>
 
-      <fieldset class="bstep is-on" data-step="1">
-        <legend>1. ¿Cuál es tu objetivo?</legend>
-        <div class="opts" role="group">
-          <label><input type="radio" name="objetivo" value="Perder grasa" required><span>🔥 Perder grasa</span></label>
-          <label><input type="radio" name="objetivo" value="Ganar masa muscular"><span>💪 Ganar músculo</span></label>
-          <label><input type="radio" name="objetivo" value="Recomposición corporal"><span>⚡ Recomposición</span></label>
-          <label><input type="radio" name="objetivo" value="Salud y hábitos"><span>🧘 Salud y hábitos</span></label>
-        </div>
-        <button type="button" class="btn btn--gold btn--full nextStep">Siguiente</button>
-      </fieldset>
+  <!-- ══ ENLACES ══ -->
+  <section class="seccion" id="enlaces">
+    <div class="container">
+      <div class="centro revelar">
+        <span class="eyebrow">Enlaces</span>
+        <h2 class="titulo">Todo lo que puedes <span class="grad">reservar</span></h2>
+        <p class="entradilla">Elige el plan y te llevo directo a la reserva. Si tienes dudas, escríbeme y lo vemos.</p>
+      </div>
+      <div class="filtros revelar" id="filtros" role="tablist" aria-label="Filtrar enlaces por tipo"></div>
+      <div class="enlaces" id="listaEnlaces"></div>
+      <p class="centro galeria__nota" style="margin-top:1.6rem" id="sinResultados" hidden>No hay nada en esta categoría todavía.</p>
+    </div>
+  </section>
 
-      <fieldset class="bstep" data-step="2">
-        <legend>2. ¿Cuándo te viene bien que te llamemos?</legend>
-        <div class="opts" role="group">
-          <label><input type="radio" name="franja" value="Mañanas (9:00-13:00)" required><span>🌅 Mañanas</span></label>
-          <label><input type="radio" name="franja" value="Tardes (16:00-20:00)"><span>🌆 Tardes</span></label>
-          <label><input type="radio" name="franja" value="Noches (20:00-22:00)"><span>🌙 Noches</span></label>
-          <label><input type="radio" name="franja" value="Cuanto antes"><span>⚡ Cuanto antes</span></label>
-        </div>
-        <div class="row2">
-          <button type="button" class="btn btn--ghost prevStep">Atrás</button>
-          <button type="button" class="btn btn--gold nextStep">Siguiente</button>
-        </div>
-      </fieldset>
+  <!-- ══ GALERÍA ══ -->
+  <section class="seccion" id="galeria">
+    <div class="container">
+      <div class="centro revelar">
+        <span class="eyebrow">Instagram</span>
+        <h2 class="titulo">Lo último <span class="grad">bajo el agua</span></h2>
+        <p class="entradilla" id="galeriaEntradilla">Cada salida, cada fondo y cada bicho que se deja ver, en @indalodive.</p>
+      </div>
+      <div class="galeria revelar" id="listaGaleria" style="margin-top:2.6rem"></div>
+      <div class="galeria__pie revelar">
+        <a class="btn btn--fantasma" id="galeriaCta" href="https://www.instagram.com/indalodive/" target="_blank" rel="noopener">
+          <svg aria-hidden="true"><use href="#i-instagram"/></svg>Ver el perfil completo
+        </a>
+        <p class="galeria__nota" id="galeriaNota"></p>
+      </div>
+    </div>
+  </section>
 
-      <fieldset class="bstep" data-step="3">
-        <legend>3. ¿Dónde te llamamos?</legend>
-        <div class="fields">
-          <label class="field"><span>Nombre</span><input type="text" name="nombre" autocomplete="given-name" placeholder="Tu nombre" required></label>
-          <label class="field"><span>Teléfono</span><input type="tel" name="telefono" autocomplete="tel" placeholder="600 000 000" required></label>
-          <label class="field field--full"><span>Cuéntanos algo más <em>(opcional)</em></span><textarea name="mensaje" rows="3" placeholder="Ej.: entreno 3 días, tengo una lesión de hombro…"></textarea></label>
-          <label class="check field--full"><input type="checkbox" name="rgpd" required><span>Acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y que Magia Fit me contacte.</span></label>
-        </div>
-        <p class="formerr" id="formErr" role="alert" hidden></p>
-        <div class="row2">
-          <button type="button" class="btn btn--ghost prevStep">Atrás</button>
-          <button type="submit" class="btn btn--gold">Reservar mi llamada</button>
-        </div>
-        <p class="booking__foot">Al enviar se abre WhatsApp con tu solicitud ya escrita. Confirmamos la hora en minutos.</p>
-      </fieldset>
-    </form>
+  <!-- ══ SOBRE ══ -->
+  <section class="seccion" id="sobre">
+    <div class="container sobre">
+      <div class="revelar">
+        <span class="eyebrow">Sobre mí</span>
+        <h2 class="titulo" id="sobreTitulo">Bajo la superficie</h2>
+        <p class="entradilla" id="sobreTexto"></p>
+      </div>
+      <ul class="puntos revelar" id="sobrePuntos"></ul>
+    </div>
+  </section>
 
-    <p class="or reveal">o si lo prefieres, <a href="#" data-wa="Hola, quiero agendar una llamada con Magia Fit Almería 📞">escríbenos directamente por WhatsApp</a></p>
-  </div>
-</section>
+  <!-- ══ CONTACTO ══ -->
+  <section class="seccion" id="contacto">
+    <div class="container">
+      <div class="cta revelar">
+        <span class="eyebrow">Contacto</span>
+        <h2 class="titulo">¿Nos vemos en el <span class="grad">agua</span>?</h2>
+        <p class="entradilla centro">Cuéntame qué te apetece hacer y te propongo fecha, punto de inmersión y plan.</p>
+        <div class="cta__acciones">
+          <a class="btn btn--wa" id="ctaWhatsapp" href="#" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>Escribir por WhatsApp
+          </a>
+          <a class="btn btn--fantasma" id="ctaEmail" href="#">
+            <svg aria-hidden="true"><use href="#i-correo"/></svg><span id="ctaEmailTexto">Correo</span>
+          </a>
+          <button class="btn btn--fantasma" id="ctaCompartir">
+            <svg aria-hidden="true"><use href="#i-compartir"/></svg>Compartir esta página
+          </button>
+        </div>
+        <div class="cta__datos">
+          <span id="datoUbicacion"></span>
+          <a id="datoTelefono" href="#"></a>
+          <a id="datoMapa" href="#" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
-<!-- ══ FOOTER ══ -->
+<!-- ══ PIE ══ -->
 <footer class="footer">
-  <div class="container footer__grid">
-    <div>
+  <div class="container">
+    <div class="footer__inner">
       <a class="brand" href="#inicio">
-        <img src="assets/img/logo.png" alt="Magia Fit Almería" width="43" height="46">
-        <span class="brand__text"><strong>MAGIA FIT</strong><em>ALMERÍA</em></span>
+        <img src="assets/img/logo.svg" alt="" width="36" height="36">
+        <span class="brand__texto">IndaloDive<em id="footerUbicacion"></em></span>
       </a>
-      <p class="footer__claim">Gimnasio y entrenamiento personal en Almería. Tu transformación empieza hoy.</p>
-      <div class="socials">
-        <a href="https://www.instagram.com/magiafitalmeria/" target="_blank" rel="noopener" aria-label="Instagram de Magia Fit Almería">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2m0 5.4a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8m0 2a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8m5.6-2.6a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>
-        </a>
-        <a href="#" data-wa="Hola 👋" aria-label="WhatsApp de Magia Fit Almería">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2m4.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2s0-.4.1-.6l.5-.6.3-.5c0-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.5 1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5 2 .9 2.8.9 3.7.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4z"/></svg>
-        </a>
+      <div class="redes" id="redes"></div>
+      <div class="footer__legal">
+        <span>© <span id="anio"></span> IndaloDive</span>
+        <a href="aviso-legal.html">Aviso legal</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="cookies.html">Cookies</a>
       </div>
     </div>
-
-    <nav aria-label="Enlaces del pie">
-      <h3>Navegación</h3>
-      <a href="#transformaciones">Transformaciones</a><a href="#metodo">Método</a>
-      <a href="#instagram">Instagram</a><a href="#tarifas">Tarifas</a><a href="#faq">Preguntas frecuentes</a>
-    </nav>
-
-    <div>
-      <h3>Servicios en Almería</h3>
-      <ul class="footer__list" id="footerServicios"></ul>
-    </div>
-
-    <div>
-      <h3>Contacto</h3>
-      <p id="footerNap"></p>
-      <a class="btn btn--gold btn--sm magnetic" href="#agenda">Agendar llamada</a>
-    </div>
-  </div>
-  <div class="container footer__bottom">
-    <p>© <span id="year"></span> Magia Fit Almería. Todos los derechos reservados.</p>
-    <p><a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a></p>
+    <p class="footer__aviso" id="footerAviso"></p>
   </div>
 </footer>
 
-<!-- ══ WHATSAPP FLOTANTE ══ -->
-<a class="wa-float" href="#" data-wa="Hola, vengo de la web y quiero información 💪" aria-label="Escribir por WhatsApp">
-  <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2m4.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2s0-.4.1-.6l.5-.6.3-.5c0-.2 0-.4-.1-.5-.1-.2-.7-1.6-.9-2.2-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.5 1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5 2 .9 2.8.9 3.7.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4z"/></svg>
-  <span class="wa-float__pulse" aria-hidden="true"></span>
-</a>
-
-<!-- ══ CHATBOT MAGI ══ -->
-<div class="bot" id="bot">
-  <button class="bot__fab" id="botFab" aria-expanded="false" aria-controls="botPanel" aria-label="Abrir asistente virtual MAGI">
-    <svg class="bot__ico-open" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 2a2 2 0 0 1 2 2v1h3a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-2.6l-3.1 2.8a.6.6 0 0 1-1-.45V18H7a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h3V4a2 2 0 0 1 2-2m-2.5 8.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m5 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg>
-    <svg class="bot__ico-close" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7l1.4-1.4 6.3 6.3 6.3-6.3z"/></svg>
-    <span class="bot__badge" id="botBadge">1</span>
-  </button>
-
-  <section class="bot__panel" id="botPanel" role="dialog" aria-modal="false" aria-label="Asistente virtual MAGI de Magia Fit" hidden>
-    <header class="bot__head">
-      <img src="assets/img/logo.png" alt="" width="37" height="40">
-      <div>
-        <b>MAGI · Asistente Magia Fit</b>
-        <span><i class="online"></i> Responde al instante</span>
-      </div>
-      <button class="bot__min" id="botMin" aria-label="Cerrar asistente">✕</button>
-    </header>
-    <div class="bot__log" id="botLog" role="log" aria-live="polite"></div>
-    <div class="bot__quick" id="botQuick"></div>
-    <form class="bot__form" id="botForm">
-      <input id="botInput" type="text" autocomplete="off" placeholder="Escribe tu duda… (tarifas, horarios, prueba)" aria-label="Escribe tu pregunta">
-      <button type="submit" aria-label="Enviar">
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M3.4 20.4 21 12 3.4 3.6 3.4 10.2 15.6 12 3.4 13.8z"/></svg>
-      </button>
-    </form>
-  </section>
+<!-- ══ VISOR DE FOTOS ══ -->
+<div class="visor" id="visor" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button class="visor__cerrar" id="visorCerrar" aria-label="Cerrar">✕</button>
+  <button class="visor__nav visor__nav--prev" id="visorPrev" aria-label="Anterior"><svg aria-hidden="true"><use href="#i-izq"/></svg></button>
+  <button class="visor__nav visor__nav--sig" id="visorSig" aria-label="Siguiente"><svg aria-hidden="true"><use href="#i-der"/></svg></button>
+  <figure class="visor__figura">
+    <img id="visorImg" src="" alt="">
+    <figcaption class="visor__pie" id="visorPie"></figcaption>
+  </figure>
+  <span class="visor__contador" id="visorContador"></span>
 </div>
 
-<!-- ══ DATOS ESTRUCTURADOS (SEO) ══ -->
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@graph": [
+  "@context":"https://schema.org",
+  "@graph":[
     {
-      "@type": ["HealthAndBeautyBusiness", "ExerciseGym", "LocalBusiness"],
-      "@id": "https://magia-fit-almeria.vercel.app/#gimnasio",
-      "name": "Magia Fit Almería",
-      "alternateName": "Magia Fit",
-      "description": "Gimnasio y centro de entrenamiento personal en Almería especializado en pérdida de grasa, ganancia de masa muscular, recomposición corporal y readaptación de lesiones.",
-      "url": "https://magia-fit-almeria.vercel.app/",
-      "logo": "https://magia-fit-almeria.vercel.app/assets/img/logo.png",
-      "image": "https://magia-fit-almeria.vercel.app/assets/img/og-cover.jpg",
-      "telephone": "+34637254347",
-      "email": "magiafitalmeria2017@gmail.com",
-      "priceRange": "€€",
-      "currenciesAccepted": "EUR",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Almería",
-        "addressRegion": "Almería",
-        "postalCode": "04001",
-        "addressCountry": "ES"
-      },
-      "geo": { "@type": "GeoCoordinates", "latitude": 36.8381, "longitude": -2.4597 },
-      "areaServed": [
-        {"@type":"City","name":"Almería"},
-        {"@type":"City","name":"Roquetas de Mar"},
-        {"@type":"City","name":"El Ejido"},
-        {"@type":"City","name":"Huércal de Almería"},
-        {"@type":"City","name":"Vícar"},
-        {"@type":"City","name":"Aguadulce"}
-      ],
-      "sameAs": ["https://www.instagram.com/magiafitalmeria/"],
-      "openingHoursSpecification": [
-        {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"07:00","closes":"22:00"},
-        {"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday"],"opens":"09:00","closes":"14:00"}
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Servicios de Magia Fit Almería",
-        "itemListElement": [
-          {"@type":"Offer","name":"Grupo reducido BASIC","priceCurrency":"EUR","price":"88","description":"2 horas por semana en grupo reducido de 4 a 6 personas, cada 4 semanas."},
-          {"@type":"Offer","name":"Grupo reducido STANDARD","priceCurrency":"EUR","price":"129","description":"3 horas por semana en grupo reducido de 4 a 6 personas, cada 4 semanas."},
-          {"@type":"Offer","name":"Grupo reducido STANDARD +","priceCurrency":"EUR","price":"150","description":"4 horas por semana en grupo reducido de 4 a 6 personas, cada 4 semanas."},
-          {"@type":"Offer","name":"Grupo reducido PREMIUM","priceCurrency":"EUR","price":"160","description":"5 horas por semana en grupo reducido de 4 a 6 personas, cada 4 semanas."},
-          {"@type":"Offer","name":"Bono de 5 sesiones","priceCurrency":"EUR","price":"200","description":"Bono de 5 sesiones de entrenamiento."},
-          {"@type":"Offer","name":"Bono de 10 sesiones","priceCurrency":"EUR","price":"370","description":"Bono de 10 sesiones de entrenamiento."},
-          {"@type":"Offer","name":"Entrenamiento online","priceCurrency":"EUR","price":"180","description":"12 semanas de entrenamiento online con 15 minutos de videollamada semanal."},
-          {"@type":"Offer","name":"Masaje deportivo","priceCurrency":"EUR","price":"35","description":"Sesión de una hora de masaje deportivo específico. Bonos de 5 sesiones por 150 € y de 10 por 280 €."}
-        ]
-      },
-      "potentialAction": {
-        "@type": "ReserveAction",
-        "name": "Agendar llamada gratuita",
-        "target": "https://magia-fit-almeria.vercel.app/#agenda"
-      }
+      "@type":"Organization",
+      "@id":"https://indalodive.vercel.app/#organizacion",
+      "name":"IndaloDive",
+      "url":"https://indalodive.vercel.app/",
+      "logo":"https://indalodive.vercel.app/assets/img/logo.svg",
+      "image":"https://indalodive.vercel.app/assets/img/og-cover.png",
+      "description":"Bautismos de buceo, cursos de certificación e inmersiones guiadas en Almería.",
+      "areaServed":{"@type":"Place","name":"Almería, España"},
+      "sameAs":["https://www.instagram.com/indalodive/"]
     },
     {
-      "@type": "WebSite",
-      "@id": "https://magia-fit-almeria.vercel.app/#web",
-      "url": "https://magia-fit-almeria.vercel.app/",
-      "name": "Magia Fit Almería",
-      "inLanguage": "es-ES",
-      "publisher": {"@id": "https://magia-fit-almeria.vercel.app/#gimnasio"}
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://magia-fit-almeria.vercel.app/#faq",
-      "mainEntity": [
-        {"@type":"Question","name":"¿Cuánto cuesta entrenar en Magia Fit Almería?","acceptedAnswer":{"@type":"Answer","text":"El entrenamiento en grupo reducido de 4 a 6 personas cuesta desde 88 € cada 4 semanas por 2 horas semanales hasta 160 € por 5 horas semanales. También hay bonos de sesiones desde 200 €, plan online de 12 semanas por 180 € y masaje deportivo desde 35 €."}},
-        {"@type":"Question","name":"¿Cuántas personas hay en cada grupo?","acceptedAnswer":{"@type":"Answer","text":"Los grupos de Magia Fit Almería son reducidos, de 4 a 6 personas, para que el entrenador pueda corregir la técnica de cada socio."}},
-        {"@type":"Question","name":"¿Puedo probar el gimnasio antes de apuntarme?","acceptedAnswer":{"@type":"Answer","text":"Sí. La primera valoración es gratuita: se analiza el punto de partida y se explica el plan sin compromiso."}},
-        {"@type":"Question","name":"¿Qué valoración tiene Magia Fit Almería?","acceptedAnswer":{"@type":"Answer","text":"Magia Fit Almería tiene una media de 5,0 estrellas con 142 reseñas en Google."}},
-        {"@type":"Question","name":"¿En cuánto tiempo se ven resultados?","acceptedAnswer":{"@type":"Answer","text":"Con constancia, los cambios de fuerza y energía llegan en 3-4 semanas y los cambios visibles suelen notarse entre la semana 8 y la 12."}},
-        {"@type":"Question","name":"¿Magia Fit ofrece entrenamiento online?","acceptedAnswer":{"@type":"Answer","text":"Sí, ofrecemos planes online con seguimiento por vídeo para quienes viven fuera de Almería o viajan con frecuencia."}}
-      ]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type":"ListItem","position":1,"name":"Inicio","item":"https://magia-fit-almeria.vercel.app/"},
-        {"@type":"ListItem","position":2,"name":"Tarifas","item":"https://magia-fit-almeria.vercel.app/#tarifas"},
-        {"@type":"ListItem","position":3,"name":"Agendar llamada","item":"https://magia-fit-almeria.vercel.app/#agenda"}
-      ]
+      "@type":"WebSite",
+      "@id":"https://indalodive.vercel.app/#web",
+      "url":"https://indalodive.vercel.app/",
+      "name":"IndaloDive",
+      "inLanguage":"es-ES",
+      "publisher":{"@id":"https://indalodive.vercel.app/#organizacion"}
     }
   ]
 }
 </script>
 
 <script src="assets/js/config.js"></script>
+<script src="assets/js/feed.js"></script>
 <script src="assets/js/main.js" defer></script>
-<script src="assets/js/chatbot.js" defer></script>
 </body>
 </html>
